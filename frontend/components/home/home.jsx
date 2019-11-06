@@ -3,12 +3,18 @@ import GreetingContainer from '../greeting/greeting_container';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-
+    debugger
     return (
         <div className="home">
-            <GreetingContainer/>
+            yo
         </div>
+
     );
 }
-
-export default Home;
+    
+    export default Home;
+    // <div className="home">
+    //     {/* <GreetingContainer/> */}
+    //     yooooooooooo
+    // </div>
+    

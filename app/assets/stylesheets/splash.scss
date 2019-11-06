@@ -60,21 +60,40 @@
     flex-direction: row;
     justify-content: space-around;
 }
-
-.testimonial-dean{
-    height: 340px;
-    width: 340px;
-    background-image: url('testimonial-dean.png')
+.testimonial-item{
+    width: 300px;
+    color: white;
+    font-family: 'Roboto';
+    line-height: 1.4;
+    
+}
+.testimonial-dean-image{
+    height: 300px;
+    width: 300px;
+    background-image: url('testimonial-dean.png');
+    background-size: cover;
 }
 
-.testimonial-anderson-paak{
-    height: 340px;
-    width: 340px;
-    background-image: url('testimonial-anderson-paak.png')
+.testimonial-anderson-paak-image{
+    height: 300px;
+    width: 300px;
+    background-image: url('testimonial-anderson-paak.png');
+    background-size: cover;
 }
 
-.testimonial-tokimonsta{
-    height: 340px;
-    width: 340px;
-    background-image: url('testimonial-tokimonsta.png')
+.testimonial-tokimonsta-image{
+    height: 300px;
+    width: 300px;
+    background-image: url('testimonial-tokimonsta-3.png');
+    background-size: cover;
+}
+
+.testimonial-item p{
+    padding-bottom: 5px;
+}
+
+.testimonial-author{
+    color: #ACACAC;
+    text-decoration: none;
+    font-size: 16px;
 }

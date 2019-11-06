@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const root = document.getElementById("root");
-  
+    debugger
     window.getState = store.getState;
     window.dispatch = store.dispatch;
   
