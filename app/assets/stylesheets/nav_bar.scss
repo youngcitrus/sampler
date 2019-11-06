@@ -1,0 +1,58 @@
+#nav-logo{
+    height: 50px;
+    padding-top: 8px;
+    padding-left: 8px;
+}
+
+.nav-bar{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    font-size: 25px;
+    text-decoration: none;
+    background-color: black;
+    font-family: 'Roboto';
+    vertical-align: center;
+    padding-bottom:0;
+    z-index: 10;
+}
+
+.nav-home-link{
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto'
+}
+
+.left-nav-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.right-nav-div{
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-login{
+    padding-right: 10px;
+    text-decoration: none;
+    color: white;
+}
+            
+.nav-signup{
+    text-decoration: none;
+    padding: 8px 18px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;               
+}
+
+.nav-signup-span{
+    padding-right: 15px;
+}

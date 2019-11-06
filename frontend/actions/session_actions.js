@@ -5,7 +5,8 @@ import {
   export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
   export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
   export const RECEIVE_ERROR = "RECEIVE_ERROR";
-  
+  export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
   const receiveCurrentUser = user => ({
     type: RECEIVE_CURRENT_USER,
     user
@@ -19,6 +20,9 @@ import {
     type: RECEIVE_ERROR,
     errors
   });
+
+  
+
   // this takes an array
   
   export const createNewUser = formUser => dispatch => signup(formUser)
@@ -35,3 +39,7 @@ import {
     .then(() => dispatch(logoutCurrentUser()),
     errors => dispatch(receiveErrors(errors))
     );
+
+  export const clearErrors = () => ({
+      type: CLEAR_ERRORS
+  });

@@ -1,0 +1,80 @@
+.splash-top{
+    color: white;
+    font-family: 'Roboto';
+    background-image: url('main-splash-2.png');
+    height: 800px;
+    background-size: cover;
+
+}
+
+.splash-top h1{
+    font-size: 85px;
+    width: 500px;
+    position: relative;
+    top: 100px;
+    left: 50px;
+}
+
+.splash-top p{
+    position: relative;
+    top: 125px;
+    width: 400px;
+    left: 50px;
+    font-size: 20px;
+    line-height: 1.4;
+};
+
+.splash-signup-link{
+    position: relative;
+    left: 50px;
+    top: 170px;
+    text-decoration: none;
+    padding: 12px 22px;
+    color: white;
+    background-color: blue;
+    border-radius: 20px;  
+}
+
+.featured-in{
+    height: 55px;
+    background-image: url('featured-in.png');
+    background-repeat: no-repeat;
+    background-size: 900px;
+    background-position: center;
+    background-color: #3F3F3F;
+}
+
+.testimonials-container{
+    background-color: #282828;
+}
+
+.testimonials-container h1{
+    color: white;
+    font-family: 'Roboto';
+    font-size: 2.25rem;
+    padding: 20px 50px;
+}
+
+.testimonials{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.testimonial-dean{
+    height: 340px;
+    width: 340px;
+    background-image: url('testimonial-dean.png')
+}
+
+.testimonial-anderson-paak{
+    height: 340px;
+    width: 340px;
+    background-image: url('testimonial-anderson-paak.png')
+}
+
+.testimonial-tokimonsta{
+    height: 340px;
+    width: 340px;
+    background-image: url('testimonial-tokimonsta.png')
+}
