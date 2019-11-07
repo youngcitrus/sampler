@@ -662,17 +662,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var SessionForm =
+var SignupForm =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(SessionForm, _React$Component);
+  _inherits(SignupForm, _React$Component);
 
-  function SessionForm(props) {
+  function SignupForm(props) {
     var _this;
 
-    _classCallCheck(this, SessionForm);
+    _classCallCheck(this, SignupForm);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SessionForm).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SignupForm).call(this, props));
     _this.state = {
       username: "",
       email: "",
@@ -683,7 +683,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(SessionForm, [{
+  _createClass(SignupForm, [{
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clearErrors();
@@ -775,10 +775,10 @@ function (_React$Component) {
     }
   }]);
 
-  return SessionForm;
+  return SignupForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (SessionForm);
+/* harmony default export */ __webpack_exports__["default"] = (SignupForm);
 
 /***/ }),
 
@@ -819,7 +819,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["createNewUser"])(user));
     },
     demoLogin: function demoLogin() {
-      return dispatch(loginUser({
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginUser"])({
         username: 'DemoUser',
         password: '123456'
       }));
