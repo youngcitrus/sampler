@@ -6,15 +6,10 @@ const Home = () => {
     debugger
     return (
         <div className="home">
-            yo
+            <GreetingContainer/>
         </div>
 
     );
 }
     
     export default Home;
-    // <div className="home">
-    //     {/* <GreetingContainer/> */}
-    //     yooooooooooo
-    // </div>
-    

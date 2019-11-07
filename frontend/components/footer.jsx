@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Footer = () => (
-    <div>
-        Footer here
+    <div className='footer'>
+        <div>Contact</div>
     </div>
 )
 
