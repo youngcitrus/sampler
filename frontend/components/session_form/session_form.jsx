@@ -31,10 +31,23 @@ class SessionForm extends React.Component {
   }
 
   handleDemoLogin(e) {
-    // window.setTimeout(this.setState({username: 'Justin'}), 1000);
-    // window.setTimeout(this.setState({password: '123456'}), 200);
-    // this.props.demoLogin();
-  }
+    e.preventDefault();
+    let user = 'Justin'.split("");
+    let email = 'justinhaison@gmail.com'.split("");
+    let password = 'password'.split("");
+
+    const typeChar = (input, field) => {
+        if (input.length > 0){
+            let char = input.shift();
+            this.setState(({[field]: this.state[field] + char}),
+                () => setTimeout(()=> typeChar(input, field), 25))
+        }
+    }
+
+    typeChar(user, 'username');
+    setTimeout(()=>typeChar(password, 'password'), 300);
+    setTimeout(()=>this.props.demoLogin(), 500);
+}
 
   renderErrors() {
     if (this.props.errors.length === 0) return null;

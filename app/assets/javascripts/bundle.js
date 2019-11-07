@@ -557,9 +557,33 @@ function (_React$Component) {
     }
   }, {
     key: "handleDemoLogin",
-    value: function handleDemoLogin(e) {// window.setTimeout(this.setState({username: 'Justin'}), 1000);
-      // window.setTimeout(this.setState({password: '123456'}), 200);
-      // this.props.demoLogin();
+    value: function handleDemoLogin(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var user = 'Justin'.split("");
+      var email = 'justinhaison@gmail.com'.split("");
+      var password = 'password'.split("");
+
+      var typeChar = function typeChar(input, field) {
+        if (input.length > 0) {
+          var _char = input.shift();
+
+          _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
+            return setTimeout(function () {
+              return typeChar(input, field);
+            }, 25);
+          });
+        }
+      };
+
+      typeChar(user, 'username');
+      setTimeout(function () {
+        return typeChar(password, 'password');
+      }, 300);
+      setTimeout(function () {
+        return _this3.props.demoLogin();
+      }, 500);
     }
   }, {
     key: "renderErrors",
