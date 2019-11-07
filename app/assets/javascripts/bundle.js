@@ -573,42 +573,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var message = null;
-      var emailInput = null;
-
-      if (this.props.formType === 'sign up') {
-        emailInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: this.state.email,
-          onChange: this.update('email'),
-          placeholder: "Email"
-        }));
-        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "login-message"
-        }, "Already a member? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
-        }, "Log in"));
-      }
-
-      var demoUser = null;
-
-      if (this.props.formType === 'login') {
-        demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "demo-user-button-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "demo-user-button",
-          onClick: this.handleDemoLogin
-        }, "Login as Demo User"));
-        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sign-up-message-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sign-up-message"
-        }, "Don't have an account yet? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/signup",
-          className: "sign-up-message-link"
-        }, "Sign Up Now")));
-      }
-
+      var demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-user-button-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-user-button",
+        onClick: this.handleDemoLogin
+      }, "Login as Demo User"));
+      var message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "login-message-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "login-message"
+      }, "Don't have an account yet? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/signup",
+        className: "login-message-link"
+      }, "Sign Up Now")));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -744,43 +722,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var message = null;
-      var emailInput = null;
-
-      if (this.props.formType === 'sign up') {
-        emailInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: this.state.email,
-          onChange: this.update('email'),
-          placeholder: "Email",
-          className: "signup-input"
-        }));
-        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "login-message"
-        }, "Already a member? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
-        }, "Log in"));
-      }
-
-      var demoUser = null;
-
-      if (this.props.formType === 'login') {
-        demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "demo-user-button-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "demo-user-button",
-          onClick: this.handleDemoLogin
-        }, "Login as Demo User"));
-        message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sign-up-message-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "sign-up-message"
-        }, "Don't have an account yet? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/signup",
-          className: "sign-up-message-link"
-        }, "Sign Up Now")));
-      }
-
+      var message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-message-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-message"
+      }, "Already a member? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/login",
+        className: "signup-message-link"
+      }, "Log in")));
+      var demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-user-button-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-user-button",
+        onClick: this.handleDemoLogin
+      }, "Login as Demo User"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -800,7 +755,13 @@ function (_React$Component) {
         onChange: this.update('username'),
         placeholder: "Username",
         className: "signup-input"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), emailInput, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        onChange: this.update('email'),
+        placeholder: "Email",
+        className: "signup-input"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
         onChange: this.update('password'),

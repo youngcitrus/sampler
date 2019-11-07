@@ -48,42 +48,18 @@ class SessionForm extends React.Component {
     }
 
     render() {
-      let message = null;
-      let emailInput = null;
 
-      if (this.props.formType === 'sign up'){
-        emailInput = (
-          <div>
-              <input type="text"
-                     value={this.state.email}
-                     onChange={this.update('email')}
-                     placeholder='Email'
-                     className='signup-input'
-                  />
-          </div>
-        )
-        message = (
-          <div className='login-message'>
-            Already a member? <Link to='/login'>Log in</Link>
-          </div>
-        )
-      }
-
-      let demoUser = null;
-      if (this.props.formType === 'login'){
-        demoUser = (
-          <div className='demo-user-button-container'>
-            <button className='demo-user-button' onClick={this.handleDemoLogin}>Login as Demo User</button>
-          </div>
+        const message = (
+            <div className='signup-message-container'>
+                <div className='signup-message'>Already a member? <Link to='/login' className='signup-message-link'>Log in</Link></div>
+            </div>
         )
 
-        message = (
-          <div className='sign-up-message-container'>
-            <div className='sign-up-message'>Don't have an account yet? <Link to='/signup' className='sign-up-message-link'>Sign Up Now</Link></div>
-          </div>
+        const demoUser = (
+            <div className='demo-user-button-container'>
+              <button className='demo-user-button' onClick={this.handleDemoLogin}>Login as Demo User</button>
+            </div>
         )
-        
-      }
 
       
 
@@ -94,7 +70,7 @@ class SessionForm extends React.Component {
                 <br/>
                 {this.renderErrors()} <br/>
                 <form onSubmit={this.handleSubmit}>
-                  <div className='signup-form-items'>  
+                    <div className='signup-form-items'>  
                    
                         <input type="text"
                                 value={this.state.username}
@@ -105,7 +81,14 @@ class SessionForm extends React.Component {
                         />
                     
                     <br/>
-                    {emailInput}
+                    
+                        <input type="text"
+                                value={this.state.email}
+                                onChange={this.update('email')}
+                                placeholder='Email'
+                                className='signup-input'
+                            />
+                    <br/>
                     
                         <input type="password"
                                 value={this.state.password}

@@ -44,3 +44,25 @@
     color: white;
     border-radius: 20px;
 }
+
+.signup-submit:hover{
+    cursor: pointer;
+}
+
+.signup-message-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.signup-message{
+    color: #ADADAD;
+    font-family: 'Roboto';
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.signup-message-link{
+    color: white;
+    text-decoration: none;
+}
