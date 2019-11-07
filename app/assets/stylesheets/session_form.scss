@@ -1,0 +1,106 @@
+.session-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.session-form{
+    background-color: #2b2b2b;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 345px;
+    margin: 0 auto;
+    border-radius: 10px;
+
+}
+
+.session-form-items{
+    height: 225px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 26px 20px 20px 20px;
+}
+
+.session-input{
+    font-family: 'Roboto';
+    font-size: 15px;
+    padding: 7px;
+    border-radius: 2px;
+    
+}
+
+.form-icon-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+#form-icon{
+    height: 75px;
+    width: 75px;
+}
+
+.login-submit{
+    background-color:rgb(8, 56, 250);
+    border-color:rgb(8, 56, 250);
+    color: white;
+    border-radius: 20px;
+}
+
+.login-submit:hover{
+    cursor: pointer;
+}
+
+.demo-user-button-container{
+    margin: 0 auto;
+    background-color: rgb(8, 56, 250);
+    border-color: rgb(8, 56, 250);
+    width: 300px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.demo-user-button{
+    background-color: rgb(8, 56, 250);
+    border-color: rgb(8, 56, 250);
+    color: white;
+    font-family: 'Roboto';
+    font-size: 14.5px;
+    padding: 7px;
+    
+}
+
+.demo-user-button:hover{
+    cursor: pointer;
+}
+
+.sign-up-message-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.sign-up-message{
+    color: #ADADAD;
+    font-family: 'Roboto';
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.sign-up-message-link{
+    color: white;
+    text-decoration: none;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SessionForm extends React.Component {
     
@@ -13,6 +14,10 @@ class SessionForm extends React.Component {
       this.handleDemoLogin = this.handleDemoLogin.bind(this);
     }
     
+    componentWillUnmount(){
+      this.props.clearErrors();
+    }
+
     update(field) {
         return e => this.setState({
           [field]: e.currentTarget.value
@@ -43,17 +48,22 @@ class SessionForm extends React.Component {
     }
 
     render() {
-      
+      let message = null;
       let emailInput = null;
+
       if (this.props.formType === 'sign up'){
         emailInput = (
           <div>
-            <label>Email:<br/>
               <input type="text"
                      value={this.state.email}
                      onChange={this.update('email')}
+                     placeholder='Email'
                   />
-            </label>
+          </div>
+        )
+        message = (
+          <div className='login-message'>
+            Already a member? <Link to='/login'>Log in</Link>
           </div>
         )
       }
@@ -61,36 +71,54 @@ class SessionForm extends React.Component {
       let demoUser = null;
       if (this.props.formType === 'login'){
         demoUser = (
-          <div>
-            <button type='button' onClick={this.handleDemoLogin}>Login as Demo User</button>
+          <div className='demo-user-button-container'>
+            <button className='demo-user-button' onClick={this.handleDemoLogin}>Login as Demo User</button>
           </div>
         )
+
+        message = (
+          <div className='sign-up-message-container'>
+            <div className='sign-up-message'>Don't have an account yet? <Link to='/signup' className='sign-up-message-link'>Sign Up Now</Link></div>
+          </div>
+        )
+        
       }
 
-      return (
-          <div>
-              Welcome to Sampler!
-              Please {this.props.formType} or {this.props.navLink} <br/>
-              {this.renderErrors()} <br/>
-              <form onSubmit={this.handleSubmit}>
-                  <label>Username:<br/>
-                      <input type="text"
-                              value={this.state.username}
-                              onChange={this.update('username')}
-                      />
-                  </label>
-                  <br/>
-                  {emailInput}
-                  <label>Password:<br/>
-                      <input type="password"
-                              value={this.state.password}
-                              onChange={this.update('password')}
-                      />
-                  </label>
-                  <input type="submit" value={this.props.formType}/>
-                  {demoUser}
-              </form>
+      
 
+      return (
+          <div className='session-page'>
+            <div className='form-icon-container'><img src="Sampler_Icon_Main_Cutout.png" id='form-icon'/></div>
+            <div className='session-form'>
+                <br/>
+                {this.renderErrors()} <br/>
+                <form onSubmit={this.handleSubmit}>
+                  <div className='session-form-items'>  
+                   
+                        <input type="text"
+                                value={this.state.username}
+                                onChange={this.update('username')}
+                                placeholder='Username'
+                                className='session-input'
+                        
+                        />
+                    
+                    <br/>
+                    
+                        <input type="password"
+                                value={this.state.password}
+                                onChange={this.update('password')}
+                                placeholder='Password'
+                                className='session-input'
+                        />
+                    <br/>
+                    <input type="submit" className='login-submit session-input' value='Log in'/>
+                    {demoUser}<br/>
+                    <div>{message}</div>
+                  </div>
+                </form>
+              
+            </div>
           </div>
       );
     }
