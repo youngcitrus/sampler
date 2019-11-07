@@ -564,8 +564,11 @@ function (_React$Component) {
     key: "renderErrors",
     value: function renderErrors() {
       if (this.props.errors.length === 0) return null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.responseJSON.map(function (error, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-errors"
+      }, this.props.errors.responseJSON.map(function (error, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "error",
           key: "error-".concat(i)
         }, error);
       }));
@@ -594,9 +597,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "Sampler_Icon_Main_Cutout.png",
         id: "form-icon"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), this.renderErrors(), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors(), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form-items"
@@ -713,8 +716,11 @@ function (_React$Component) {
     key: "renderErrors",
     value: function renderErrors() {
       if (this.props.errors.length === 0) return null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.responseJSON.map(function (error, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-errors"
+      }, this.props.errors.responseJSON.map(function (error, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "error",
           key: "error-".concat(i)
         }, error);
       }));
@@ -743,9 +749,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "Sampler_Icon_Main_Cutout.png",
         id: "form-icon"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), this.renderErrors(), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors(), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-form-items"

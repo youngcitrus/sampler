@@ -69,3 +69,18 @@
     color: white;
     text-decoration: none;
 }
+
+.signup-errors{
+    padding-top: 5px;
+    margin: 0 auto;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.error{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

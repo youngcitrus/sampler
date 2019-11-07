@@ -37,13 +37,13 @@ class SignupForm extends React.Component {
     renderErrors() {
         if (this.props.errors.length === 0) return null;
         return(
-          <ul>
+          <div className='signup-errors'>
             {this.props.errors.responseJSON.map((error, i) => (
-              <li key={`error-${i}`}>
+              <p className='error' key={`error-${i}`}>
                 {error}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
         );
     }
 
@@ -66,9 +66,9 @@ class SignupForm extends React.Component {
       return (
           <div className='signup-page'>
             <div className='form-icon-container'><img src="Sampler_Icon_Main_Cutout.png" id='form-icon'/></div>
+            {this.renderErrors()} <br/>
             <div className='signup-form'>
                 <br/>
-                {this.renderErrors()} <br/>
                 <form onSubmit={this.handleSubmit}>
                     <div className='signup-form-items'>  
                    
@@ -102,7 +102,7 @@ class SignupForm extends React.Component {
                     <div>{message}</div>
                   </div>
                 </form>
-              
+                
             </div>
           </div>
       );
