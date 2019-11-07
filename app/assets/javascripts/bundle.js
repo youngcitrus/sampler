@@ -467,7 +467,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     demoLogin: function demoLogin() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginUser"])({
-        username: 'DemoUser',
+        username: 'Justin',
         password: '123456'
       }));
     }
@@ -557,8 +557,9 @@ function (_React$Component) {
     }
   }, {
     key: "handleDemoLogin",
-    value: function handleDemoLogin(e) {
-      this.props.demoLogin();
+    value: function handleDemoLogin(e) {// window.setTimeout(this.setState({username: 'Justin'}), 1000);
+      // window.setTimeout(this.setState({password: '123456'}), 200);
+      // this.props.demoLogin();
     }
   }, {
     key: "renderErrors",
@@ -710,7 +711,35 @@ function (_React$Component) {
   }, {
     key: "handleDemoLogin",
     value: function handleDemoLogin(e) {
-      this.props.demoLogin();
+      var _this3 = this;
+
+      e.preventDefault();
+      var user = 'Justin'.split("");
+      var email = 'justinhaison@gmail.com'.split("");
+      var password = 'password'.split("");
+
+      var typeChar = function typeChar(input, field) {
+        if (input.length > 0) {
+          var _char = input.shift();
+
+          _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
+            return setTimeout(function () {
+              return typeChar(input, field);
+            }, 25);
+          });
+        }
+      };
+
+      typeChar(user, 'username');
+      setTimeout(function () {
+        return typeChar(email, 'email');
+      }, 200);
+      setTimeout(function () {
+        return typeChar(password, 'password');
+      }, 900);
+      setTimeout(function () {
+        return _this3.props.demoLogin();
+      }, 1200);
     }
   }, {
     key: "renderErrors",
@@ -741,7 +770,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-user-button",
         onClick: this.handleDemoLogin
-      }, "Login as Demo User"));
+      }, "Sign up as Demo User"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -826,7 +855,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     demoLogin: function demoLogin() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginUser"])({
-        username: 'DemoUser',
+        username: 'Justin',
         password: '123456'
       }));
     }
