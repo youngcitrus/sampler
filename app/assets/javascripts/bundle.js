@@ -526,7 +526,6 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SessionForm).call(this, props));
     _this.state = {
       username: "",
-      email: "",
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -561,26 +560,42 @@ function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      var user = 'Justin'.split("");
-      var email = 'justinhaison@gmail.com'.split("");
-      var password = 'password'.split("");
+      var demoButton = document.getElementById("demo-button");
+      var loginButton = document.getElementById("login-button");
+      var signupLink = document.getElementById("signup-link");
+      demoButton.setAttribute("disabled", "disabled");
+      loginButton.setAttribute("disabled", "disabled");
+      signupLink.classList.add("disable-link");
+      var inputs = document.getElementsByClassName('session-input');
+      Array.from(inputs).forEach(function (input) {
+        input.setAttribute("disabled", "disabled");
+      });
 
-      var typeChar = function typeChar(input, field) {
-        if (input.length > 0) {
-          var _char = input.shift();
+      var autoFill = function autoFill() {
+        var typeChar = function typeChar(input, field) {
+          if (input.length > 0) {
+            var _char = input.shift();
 
-          _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
-            return setTimeout(function () {
-              return typeChar(input, field);
-            }, 25);
-          });
-        }
+            _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
+              return setTimeout(function () {
+                return typeChar(input, field);
+              }, 25);
+            });
+          }
+        };
+
+        var user = 'Justin'.split("");
+        var password = 'password'.split("");
+        typeChar(user, 'username');
+        setTimeout(function () {
+          return typeChar(password, 'password');
+        }, 300);
       };
 
-      typeChar(user, 'username');
-      setTimeout(function () {
-        return typeChar(password, 'password');
-      }, 300);
+      this.setState({
+        username: "",
+        password: ""
+      }, autoFill);
       setTimeout(function () {
         return _this3.props.demoLogin();
       }, 500);
@@ -604,13 +619,15 @@ function (_React$Component) {
       var demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-user-button-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "demo-button",
         className: "demo-user-button",
         onClick: this.handleDemoLogin
       }, "Login as Demo User"));
       var message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-message-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "login-message"
+        className: "login-message",
+        id: "signup-link"
       }, "Don't have an account yet? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup",
         className: "login-message-link"
@@ -632,7 +649,7 @@ function (_React$Component) {
         type: "text",
         value: this.state.username,
         onChange: this.update('username'),
-        placeholder: "Username",
+        placeholder: "Username or Email",
         className: "session-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
@@ -642,6 +659,7 @@ function (_React$Component) {
         className: "session-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
+        id: "login-button",
         className: "login-submit session-input",
         value: "Log in"
       }), demoUser, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, message)))));
@@ -738,29 +756,46 @@ function (_React$Component) {
       var _this3 = this;
 
       e.preventDefault();
-      var user = 'Justin'.split("");
-      var email = 'justinhaison@gmail.com'.split("");
-      var password = 'password'.split("");
+      var demoButton = document.getElementById("demo-button");
+      var signupButton = document.getElementById("signup-button");
+      var loginLink = document.getElementById("login-link");
+      demoButton.setAttribute("disabled", "disabled");
+      signupButton.setAttribute("disabled", "disabled");
+      loginLink.classList.add("disable-link");
+      var inputs = document.getElementsByClassName('signup-input');
+      Array.from(inputs).forEach(function (input) {
+        input.setAttribute("disabled", "disabled");
+      });
 
-      var typeChar = function typeChar(input, field) {
-        if (input.length > 0) {
-          var _char = input.shift();
+      var autoFill = function autoFill() {
+        var typeChar = function typeChar(input, field) {
+          if (input.length > 0) {
+            var _char = input.shift();
 
-          _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
-            return setTimeout(function () {
-              return typeChar(input, field);
-            }, 25);
-          });
-        }
+            _this3.setState(_defineProperty({}, field, _this3.state[field] + _char), function () {
+              return setTimeout(function () {
+                return typeChar(input, field);
+              }, 25);
+            });
+          }
+        };
+
+        var user = 'Justin'.split("");
+        var email = 'justinhaison@gmail.com'.split("");
+        var password = 'password'.split("");
+        typeChar(user, 'username');
+        setTimeout(function () {
+          return typeChar(email, 'email');
+        }, 200);
+        setTimeout(function () {
+          return typeChar(password, 'password');
+        }, 900);
       };
 
-      typeChar(user, 'username');
-      setTimeout(function () {
-        return typeChar(email, 'email');
-      }, 200);
-      setTimeout(function () {
-        return typeChar(password, 'password');
-      }, 900);
+      this.setState({
+        username: "",
+        password: ""
+      }, autoFill);
       setTimeout(function () {
         return _this3.props.demoLogin();
       }, 1200);
@@ -784,6 +819,7 @@ function (_React$Component) {
       var message = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-message-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "login-link",
         className: "signup-message"
       }, "Already a member? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login",
@@ -792,6 +828,7 @@ function (_React$Component) {
       var demoUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-user-button-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "demo-button",
         className: "demo-user-button",
         onClick: this.handleDemoLogin
       }, "Sign up as Demo User"));
@@ -828,6 +865,7 @@ function (_React$Component) {
         className: "signup-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
+        id: "signup-button",
         className: "signup-submit",
         value: "Sign up"
       }), demoUser, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, message)))));

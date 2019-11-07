@@ -23,8 +23,9 @@ class User < ApplicationRecord
 
     #associations go here
 
-    def self.find_by_credentials(username, password)
-        user = User.find_by(username: username)
+    def self.find_by_credentials(input, password)
+        user = User.find_by(username: input);
+        user ||= User.find_by(email: input);
         if user && user.is_password?(password)
           user
         else

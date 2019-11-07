@@ -7,7 +7,6 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: "",
-      email: "",
       password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,21 +30,36 @@ class SessionForm extends React.Component {
   }
 
   handleDemoLogin(e) {
-    e.preventDefault();
-    let user = 'Justin'.split("");
-    let email = 'justinhaison@gmail.com'.split("");
-    let password = 'password'.split("");
 
-    const typeChar = (input, field) => {
-        if (input.length > 0){
-            let char = input.shift();
-            this.setState(({[field]: this.state[field] + char}),
-                () => setTimeout(()=> typeChar(input, field), 25))
-        }
+    e.preventDefault();
+    const demoButton = document.getElementById("demo-button");
+    const loginButton = document.getElementById("login-button");
+    const signupLink = document.getElementById("signup-link");
+    demoButton.setAttribute("disabled", "disabled");
+    loginButton.setAttribute("disabled", "disabled");
+    signupLink.classList.add("disable-link");
+
+    const inputs = document.getElementsByClassName('session-input');
+    Array.from(inputs).forEach(input=>{
+      input.setAttribute("disabled", "disabled");
+    });
+
+    const autoFill = () => {
+      const typeChar = (input, field) => {
+          if (input.length > 0){
+              let char = input.shift();
+              this.setState(({[field]: this.state[field] + char}),
+                  () => setTimeout(()=> typeChar(input, field), 25))
+          }
+      }
+      let user = 'Justin'.split("");
+      let password = 'password'.split("");
+      
+      typeChar(user, 'username');
+      setTimeout(()=>typeChar(password, 'password'), 300);
     }
 
-    typeChar(user, 'username');
-    setTimeout(()=>typeChar(password, 'password'), 300);
+    this.setState({username: "", password: ""}, autoFill);
     setTimeout(()=>this.props.demoLogin(), 500);
 }
 
@@ -65,13 +79,13 @@ class SessionForm extends React.Component {
   render() {
     const demoUser = (
       <div className='demo-user-button-container'>
-        <button className='demo-user-button' onClick={this.handleDemoLogin}>Login as Demo User</button>
+        <button id='demo-button' className='demo-user-button' onClick={this.handleDemoLogin}>Login as Demo User</button>
       </div>
     )
 
     const message = (
       <div className='login-message-container'>
-        <div className='login-message'>Don't have an account yet? <Link to='/signup' className='login-message-link'>Sign Up Now</Link></div>
+        <div className='login-message' id='signup-link'>Don't have an account yet? <Link to='/signup' className='login-message-link'>Sign Up Now</Link></div>
       </div>
     )
 
@@ -87,7 +101,7 @@ class SessionForm extends React.Component {
                       <input type="text"
                               value={this.state.username}
                               onChange={this.update('username')}
-                              placeholder='Username'
+                              placeholder='Username or Email'
                               className='session-input'              
                       />                    
                   <br/>                 
@@ -98,7 +112,7 @@ class SessionForm extends React.Component {
                               className='session-input'
                       />
                   <br/>
-                  <input type="submit" className='login-submit session-input' value='Log in'/>
+                  <input type="submit" id='login-button' className='login-submit session-input' value='Log in'/>
                   {demoUser}
                   <br/>
                   <div>{message}</div>

@@ -32,22 +32,38 @@ class SignupForm extends React.Component {
 
     handleDemoLogin(e) {
         e.preventDefault();
-        let user = 'Justin'.split("");
-        let email = 'justinhaison@gmail.com'.split("");
-        let password = 'password'.split("");
+        const demoButton = document.getElementById("demo-button");
+        const signupButton = document.getElementById("signup-button");
+        const loginLink = document.getElementById("login-link");
+        demoButton.setAttribute("disabled", "disabled");
+        signupButton.setAttribute("disabled", "disabled");
+        loginLink.classList.add("disable-link");
 
-        const typeChar = (input, field) => {
-            if (input.length > 0){
-                let char = input.shift();
-                this.setState(({[field]: this.state[field] + char}),
-                    () => setTimeout(()=> typeChar(input, field), 25))
-            }
+        const inputs = document.getElementsByClassName('signup-input');
+        Array.from(inputs).forEach(input=>{
+          input.setAttribute("disabled", "disabled");
+        });
+
+        const autoFill = () => {
+          const typeChar = (input, field) => {
+              if (input.length > 0){
+                  let char = input.shift();
+                  this.setState(({[field]: this.state[field] + char}),
+                      () => setTimeout(()=> typeChar(input, field), 25))
+              }
+          }
+          let user = 'Justin'.split("");
+          let email = 'justinhaison@gmail.com'.split("");
+          let password = 'password'.split("");
+          
+          typeChar(user, 'username');
+          setTimeout(()=>typeChar(email, 'email'), 200);
+          setTimeout(()=>typeChar(password, 'password'), 900);
         }
-
-        typeChar(user, 'username');
-        setTimeout(()=>typeChar(email, 'email'), 200);
-        setTimeout(()=>typeChar(password, 'password'), 900);
+        
+        this.setState({username: "", password: ""}, autoFill);
         setTimeout(()=>this.props.demoLogin(), 1200);
+        
     }
 
     renderErrors() {
@@ -67,13 +83,13 @@ class SignupForm extends React.Component {
 
         const message = (
             <div className='signup-message-container'>
-                <div className='signup-message'>Already a member? <Link to='/login' className='signup-message-link'>Log in</Link></div>
+                <div id='login-link' className='signup-message'>Already a member? <Link to='/login' className='signup-message-link'>Log in</Link></div>
             </div>
         )
 
         const demoUser = (
             <div className='demo-user-button-container'>
-              <button className='demo-user-button' onClick={this.handleDemoLogin}>Sign up as Demo User</button>
+              <button id='demo-button' className='demo-user-button' onClick={this.handleDemoLogin}>Sign up as Demo User</button>
             </div>
         )
 
@@ -103,6 +119,7 @@ class SignupForm extends React.Component {
                                 onChange={this.update('email')}
                                 placeholder='Email'
                                 className='signup-input'
+                                
                             />
                     <br/>
                     
@@ -113,7 +130,7 @@ class SignupForm extends React.Component {
                                 className='signup-input'
                         />
                     <br/>
-                    <input type="submit" className='signup-submit' value='Sign up'/>
+                    <input type="submit" id='signup-button' className='signup-submit' value='Sign up'/>
                     {demoUser}<br/>
                     <div>{message}</div>
                   </div>
