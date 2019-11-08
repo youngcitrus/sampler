@@ -484,7 +484,7 @@ function (_React$Component) {
         container: '#audio-container',
         backend: 'MediaElement'
       });
-      Spectrum.load('./sample.wav');
+      Spectrum.load('https://drive.google.com/file/d/1Q26ywAp573dPmiBbx2la-HQVNbTcLSVe/view?usp=sharing');
     }
   }, {
     key: "render",
@@ -33718,7 +33718,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

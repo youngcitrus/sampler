@@ -8,7 +8,7 @@ class SampleTest extends React.Component{
             container: '#audio-container',
             backend: 'MediaElement'
         });
-        Spectrum.load('./sample.wav');
+        Spectrum.load('https://drive.google.com/file/d/1Q26ywAp573dPmiBbx2la-HQVNbTcLSVe/view?usp=sharing');
     }
 
     render (){
