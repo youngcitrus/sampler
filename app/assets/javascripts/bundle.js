@@ -485,65 +485,43 @@ function (_React$Component) {
       var waveform = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create(_defineProperty({
         container: '#audio-container',
         backend: 'MediaElement',
-        progressColor: '#03a9f4',
+        progressColor: '#3134FF',
         cursorWidth: 0,
         height: 30,
-        barWidth: 3,
+        barWidth: 2,
         barGap: 0,
         normalize: 1
       }, "backend", 'MediaElement'));
-      var buttons = {
-        play: document.getElementById('btn-play'),
-        pause: document.getElementById('btn-pause'),
-        stop: document.getElementById('btn-stop')
-      };
-      buttons.play.addEventListener("click", function () {
-        waveform.play();
-        buttons.stop.disabled = false;
-        buttons.pause.disabled = false;
-        buttons.play.disabled = true;
-      }, false);
-      buttons.pause.addEventListener("click", function () {
-        waveform.pause();
-        buttons.pause.disabled = true;
-        buttons.play.disabled = false;
-      }, false);
-      buttons.stop.addEventListener("click", function () {
-        waveform.stop();
-        buttons.pause.disabled = true;
-        buttons.play.disabled = false;
-        buttons.stop.disabled = true;
+      var playButton = document.getElementById('btn-play');
+      playButton.addEventListener("click", function () {
+        if (playButton.getAttribute('playing') === 'false') {
+          waveform.play();
+          playButton.setAttribute('playing', 'true');
+        } else if (playButton.getAttribute('playing') === 'true') {
+          waveform.pause();
+          playButton.setAttribute('playing', 'false');
+        }
       }, false);
       waveform.on('ready', function () {
-        buttons.play.disabled = false;
+        playButton.disabled = false;
       });
       waveform.on('finish', function () {
-        buttons.play.disabled = false;
+        playButton.setAttribute('playing', 'false');
       });
-      waveform.load("http://localhost:8080/samples/guitar_picked_chord.mp3");
+      waveform.load("http://localhost:8080/samples/guitar_picked_chord_2.mp3");
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "audio-container"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "audio-player"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "btn-play",
-        value: "Play"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        id: "btn-pause",
-        value: "Pause",
-        disabled: "disabled"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        id: "btn-stop",
-        value: "Stop",
-        disabled: "disabled"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Testing"));
+        disabled: "disabled",
+        playing: "false"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "audio-container"
+      }));
     }
   }]);
 
