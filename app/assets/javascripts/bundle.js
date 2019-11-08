@@ -447,6 +447,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wavesurfer_js__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -480,18 +482,68 @@ function (_React$Component) {
   _createClass(SampleTest, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var Spectrum = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create({
+      var waveform = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create(_defineProperty({
         container: '#audio-container',
-        backend: 'MediaElement'
+        backend: 'MediaElement',
+        progressColor: '#03a9f4',
+        cursorWidth: 0,
+        height: 30,
+        barWidth: 3,
+        barGap: 0,
+        normalize: 1
+      }, "backend", 'MediaElement'));
+      var buttons = {
+        play: document.getElementById('btn-play'),
+        pause: document.getElementById('btn-pause'),
+        stop: document.getElementById('btn-stop')
+      };
+      buttons.play.addEventListener("click", function () {
+        waveform.play();
+        buttons.stop.disabled = false;
+        buttons.pause.disabled = false;
+        buttons.play.disabled = true;
+      }, false);
+      buttons.pause.addEventListener("click", function () {
+        waveform.pause();
+        buttons.pause.disabled = true;
+        buttons.play.disabled = false;
+      }, false);
+      buttons.stop.addEventListener("click", function () {
+        waveform.stop();
+        buttons.pause.disabled = true;
+        buttons.play.disabled = false;
+        buttons.stop.disabled = true;
+      }, false);
+      waveform.on('ready', function () {
+        buttons.play.disabled = false;
       });
-      Spectrum.load('https://drive.google.com/file/d/1Q26ywAp573dPmiBbx2la-HQVNbTcLSVe/view?usp=sharing');
+      waveform.on('finish', function () {
+        buttons.play.disabled = false;
+      });
+      waveform.load("http://localhost:8080/samples/guitar_picked_chord.mp3");
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "audio-container"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Testing"));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        id: "btn-play",
+        value: "Play"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        id: "btn-pause",
+        value: "Pause",
+        disabled: "disabled"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        id: "btn-stop",
+        value: "Stop",
+        disabled: "disabled"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Testing"));
     }
   }]);
 
@@ -33718,7 +33770,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
