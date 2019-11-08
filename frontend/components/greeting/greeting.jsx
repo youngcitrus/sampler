@@ -4,13 +4,6 @@ import Footer from '../footer'
 import NavBar from '../navbar';
 
 const Greeting = ({ user, logoutUser}) => {
-    // const links = () => (
-    //   <div className="login-signup">
-    //     <Link to="/signup">Sign Up!</Link> <br/>
-    //     <Link to="/login">Log In!</Link>
-    //   </div>
-    // );
-
     const splash = () =>(
       <div>
         <header>
@@ -53,8 +46,15 @@ const Greeting = ({ user, logoutUser}) => {
 
     const welcome = () => (
       <div>
-        Welcome, {user.username}!<br/>
-        <button onClick={logoutUser}>Logout</button>
+        <header>
+          <NavBar/>
+        </header>
+        <div className='welcome-page'>
+          <div className='welcome-banner'>
+            Welcome, {user.username}!<br/>
+            <button onClick={logoutUser}>Logout</button>
+          </div>    
+        </div>
       </div>
     );
 

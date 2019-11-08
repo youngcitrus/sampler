@@ -257,12 +257,6 @@ var Greeting = function Greeting(_ref) {
   var user = _ref.user,
       logoutUser = _ref.logoutUser;
 
-  // const links = () => (
-  //   <div className="login-signup">
-  //     <Link to="/signup">Sign Up!</Link> <br/>
-  //     <Link to="/login">Log In!</Link>
-  //   </div>
-  // );
   var splash = function splash() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "splash"
@@ -305,9 +299,13 @@ var Greeting = function Greeting(_ref) {
   };
 
   var welcome = function welcome() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Welcome, ", user.username, "!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "welcome-page"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "welcome-banner"
+    }, "Welcome, ", user.username, "!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: logoutUser
-    }, "Logout"));
+    }, "Logout"))));
   };
 
   return user ? welcome() : splash();
@@ -468,7 +466,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     demoLogin: function demoLogin() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginUser"])({
         username: 'Justin',
-        password: '123456'
+        password: 'password'
       }));
     }
   };
@@ -918,7 +916,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     demoLogin: function demoLogin() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["loginUser"])({
         username: 'Justin',
-        password: '123456'
+        password: 'password'
       }));
     }
   };

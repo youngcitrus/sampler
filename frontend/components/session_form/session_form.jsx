@@ -30,7 +30,6 @@ class SessionForm extends React.Component {
   }
 
   handleDemoLogin(e) {
-
     e.preventDefault();
     const demoButton = document.getElementById("demo-button");
     const loginButton = document.getElementById("login-button");
