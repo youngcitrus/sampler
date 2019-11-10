@@ -486,6 +486,11 @@ function (_React$Component) {
   _createClass(SampleTest, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.renderWaveform();
+    }
+  }, {
+    key: "renderWaveform",
+    value: function renderWaveform() {
       var wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create(_defineProperty({
         container: '#audio-container',
         backend: 'MediaElement',

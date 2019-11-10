@@ -8,6 +8,10 @@ class SampleTest extends React.Component{
         
     }
     componentDidMount(){
+        this.renderWaveform();
+    }
+
+    renderWaveform(){
         const wavesurfer = WaveSurfer.create({
             container: '#audio-container',
             backend: 'MediaElement',
