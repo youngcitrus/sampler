@@ -44,7 +44,7 @@ class SampleTest extends React.Component{
             playButton.setAttribute('playing', 'false');
         });
 
-        wavesurfer.load("https://sampler-dev.s3-us-west-1.amazonaws.com/cute_chords.mp3");
+        // wavesurfer.load("https://sampler-dev.s3-us-west-1.amazonaws.com/cute_chords.mp3");
     }
 
     render (){
