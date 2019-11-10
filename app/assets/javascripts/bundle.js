@@ -473,16 +473,20 @@ var SampleTest =
 function (_React$Component) {
   _inherits(SampleTest, _React$Component);
 
-  function SampleTest() {
+  function SampleTest(props) {
+    var _this;
+
     _classCallCheck(this, SampleTest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SampleTest).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SampleTest).call(this, props));
+    _this.waveform = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(SampleTest, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var waveform = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create(_defineProperty({
+      var wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_1___default.a.create(_defineProperty({
         container: '#audio-container',
         backend: 'MediaElement',
         progressColor: '#3134FF',
@@ -495,25 +499,26 @@ function (_React$Component) {
       var playButton = document.getElementById('btn-play');
       playButton.addEventListener("click", function () {
         if (playButton.getAttribute('playing') === 'false') {
-          waveform.play();
+          wavesurfer.play();
           playButton.setAttribute('playing', 'true');
         } else if (playButton.getAttribute('playing') === 'true') {
-          waveform.pause();
+          wavesurfer.pause();
           playButton.setAttribute('playing', 'false');
         }
       }, false);
-      waveform.on('ready', function () {
+      wavesurfer.on('ready', function () {
         playButton.disabled = false;
       });
-      waveform.on('finish', function () {
+      wavesurfer.on('finish', function () {
         playButton.setAttribute('playing', 'false');
       });
-      waveform.load("http://localhost:8080/samples/guitar_picked_chord_2.mp3");
+      wavesurfer.load("http://localhost:8080/samples/fb-vocal-ensemble-b-major.mp3");
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.waveform.current,
         className: "audio-player"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "btn-play",

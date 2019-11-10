@@ -2,8 +2,13 @@ import React from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
 class SampleTest extends React.Component{
+    constructor(props){
+        super(props);
+        this.waveform = React.createRef();
+        
+    }
     componentDidMount(){
-        const waveform = WaveSurfer.create({
+        const wavesurfer = WaveSurfer.create({
             container: '#audio-container',
             backend: 'MediaElement',
             progressColor: '#3134FF',
@@ -19,29 +24,29 @@ class SampleTest extends React.Component{
 
         playButton.addEventListener("click", () => {
             if (playButton.getAttribute('playing') === 'false'){
-                waveform.play();
+                wavesurfer.play();
                 playButton.setAttribute('playing', 'true');
             } else if (playButton.getAttribute('playing') === 'true' ){
-                waveform.pause();
+                wavesurfer.pause();
                 playButton.setAttribute('playing', 'false');
             }
         }, false);
 
-        waveform.on('ready', ()=>{
+        wavesurfer.on('ready', ()=>{
             playButton.disabled = false;
         });
 
-        waveform.on('finish', ()=>{
+        wavesurfer.on('finish', ()=>{
             playButton.setAttribute('playing', 'false');
         });
 
-        waveform.load("http://localhost:8080/samples/guitar_picked_chord_2.mp3");
+        wavesurfer.load("http://localhost:8080/samples/fb-vocal-ensemble-b-major.mp3");
     }
 
     render (){
 
         return(
-            <div className='audio-player'>
+            <div ref={this.waveform.current} className='audio-player'>
                 <div id="btn-play" disabled="disabled" playing="false"/>
                 <div id='audio-container'></div> 
             </div>
