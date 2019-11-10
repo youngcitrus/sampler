@@ -512,7 +512,7 @@ function (_React$Component) {
       wavesurfer.on('finish', function () {
         playButton.setAttribute('playing', 'false');
       });
-      wavesurfer.load("http://localhost:8080/samples/fb-vocal-ensemble-b-major.mp3");
+      wavesurfer.load("https://sampler-dev.s3-us-west-1.amazonaws.com/cute_chords.mp3");
     }
   }, {
     key: "render",

@@ -23,6 +23,8 @@ class User < ApplicationRecord
 
     #associations go here
 
+    has_one_attached :profile_photo
+
     def self.find_by_credentials(input, password)
         user = User.find_by(username: input);
         user ||= User.find_by(email: input);
