@@ -22880,3 +22880,10 @@ Processing by StaticPagesController#root as HTML
 Completed 200 OK in 84ms (Views: 79.3ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for ::1 at 2019-11-10 17:00:19 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 99ms (Views: 92.2ms | ActiveRecord: 0.0ms)
+
+
