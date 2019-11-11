@@ -2,4 +2,8 @@
     json.set! sample_pack.id do
         json.extract! sample_pack, :name, :description
     end
+    
+    sample_pack.samples.each do |sample|
+        json.extract! sample, :name, :pack_id
+    end
 end
