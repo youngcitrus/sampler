@@ -7,7 +7,7 @@ export default (state = {}, action) => {
       case RECEIVE_ALL_PACKS:
         return Object.assign({}, action.packs);
       case RECEIVE_PACK:
-        return { [action.pack.id]: action.pack };
+        return action.pack;
       default:
         return state;
     }

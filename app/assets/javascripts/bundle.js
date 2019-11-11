@@ -90,19 +90,22 @@
 /*!********************************************!*\
   !*** ./frontend/actions/sample_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_ALL_PACKS, RECEIVE_PACK, requestAllPacks, requestPack */
+/*! exports provided: RECEIVE_ALL_PACKS, RECEIVE_PACK, RECEIVE_SAMPLES, requestAllPacks, requestPack, requestSamples */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_PACKS", function() { return RECEIVE_ALL_PACKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PACK", function() { return RECEIVE_PACK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SAMPLES", function() { return RECEIVE_SAMPLES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAllPacks", function() { return requestAllPacks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestPack", function() { return requestPack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestSamples", function() { return requestSamples; });
 /* harmony import */ var _util_sample_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/sample_util */ "./frontend/util/sample_util.js");
 
 var RECEIVE_ALL_PACKS = "RECEIVE_ALL_PACKS";
 var RECEIVE_PACK = "RECEIVE_PACK";
+var RECEIVE_SAMPLES = "RECEIVE_SAMPLES";
 
 var receiveAllPacks = function receiveAllPacks(packs) {
   return {
@@ -116,7 +119,11 @@ var receivePack = function receivePack(pack) {
     type: RECEIVE_PACK,
     pack: pack
   };
-};
+}; // const receiveSamples = samples => ({
+//     type: RECEIVE_SAMPLES,
+//     samples
+// })
+
 
 var requestAllPacks = function requestAllPacks() {
   return function (dispatch) {
@@ -128,8 +135,13 @@ var requestAllPacks = function requestAllPacks() {
 var requestPack = function requestPack(packId) {
   return function (dispatch) {
     return _util_sample_util__WEBPACK_IMPORTED_MODULE_0__["fetchSamplePack"](packId).then(function (pack) {
-      return dispatch(receivePack(pack));
+      dispatch(receivePack(pack));
     });
+  };
+};
+var requestSamples = function requestSamples(samples) {
+  return function (dispatch) {
+    return _util_sample_util__WEBPACK_IMPORTED_MODULE_0__["fetchSamples"];
   };
 };
 
@@ -988,12 +1000,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _sample_pack_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sample_pack_reducer */ "./frontend/reducers/sample_pack_reducer.js");
+/* harmony import */ var _samples_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./samples_reducer */ "./frontend/reducers/samples_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  samplePacks: _sample_pack_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  samplePacks: _sample_pack_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  samples: _samples_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -1070,8 +1085,6 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/sample_actions */ "./frontend/actions/sample_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1083,7 +1096,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return Object.assign({}, action.packs);
 
     case _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PACK"]:
-      return _defineProperty({}, action.pack.id, action.pack);
+      return action.pack;
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/samples_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/samples_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/sample_actions */ "./frontend/actions/sample_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SAMPLES"]:
+      var newState = Object.assign({}, state);
+      return Object.assign(newState, action.samples);
 
     default:
       return state;
@@ -1238,6 +1279,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.requestAllPacks = _actions_sample_actions__WEBPACK_IMPORTED_MODULE_4__["requestAllPacks"];
+  window.requestPack = _actions_sample_actions__WEBPACK_IMPORTED_MODULE_4__["requestPack"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);

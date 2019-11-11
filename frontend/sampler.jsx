@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root'
 
-import {requestAllPacks} from './actions/sample_actions';
+import {requestAllPacks, requestPack} from './actions/sample_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     window.requestAllPacks = requestAllPacks;
+    window.requestPack = requestPack;
   
     ReactDOM.render(<Root store={store}/>, root);
 });
