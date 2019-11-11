@@ -244,7 +244,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/test",
+    component: _sample_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -40005,7 +40009,7 @@ function valueEqual(a, b) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * wavesurfer.js 3.2.0 (2019-10-25)
+ * wavesurfer.js 2.2.1 (2019-03-18)
  * https://github.com/katspaugh/wavesurfer.js
  * @license BSD-3-Clause
  */
@@ -40183,399 +40187,6 @@ module.exports = debounce;
 
 /***/ }),
 
-/***/ "./src/drawer.canvasentry.js":
-/*!***********************************!*\
-  !*** ./src/drawer.canvasentry.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _style = _interopRequireDefault(__webpack_require__(/*! ./util/style */ "./src/util/style.js"));
-
-var _getId = _interopRequireDefault(__webpack_require__(/*! ./util/get-id */ "./src/util/get-id.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/**
- * The `CanvasEntry` class represents an element consisting of a wave `canvas`
- * and an (optional) progress wave `canvas`.
- *
- * The `MultiCanvas` renderer uses one or more `CanvasEntry` instances to
- * render a waveform, depending on the zoom level.
- */
-var CanvasEntry =
-/*#__PURE__*/
-function () {
-  function CanvasEntry() {
-    _classCallCheck(this, CanvasEntry);
-
-    /**
-     * The wave node
-     *
-     * @type {HTMLCanvasElement}
-     */
-    this.wave = null;
-    /**
-     * The wave canvas rendering context
-     *
-     * @type {CanvasRenderingContext2D}
-     */
-
-    this.waveCtx = null;
-    /**
-     * The (optional) progress wave node
-     *
-     * @type {HTMLCanvasElement}
-     */
-
-    this.progress = null;
-    /**
-     * The (optional) progress wave canvas rendering context
-     *
-     * @type {CanvasRenderingContext2D}
-     */
-
-    this.progressCtx = null;
-    /**
-     * Start of the area the canvas should render, between 0 and 1
-     *
-     * @type {number}
-     * @private
-     */
-
-    this.start = 0;
-    /**
-     * End of the area the canvas should render, between 0 and 1
-     *
-     * @type {number}
-     * @private
-     */
-
-    this.end = 1;
-    /**
-     * Unique identifier for this entry
-     *
-     * @type {string}
-     */
-
-    this.id = (0, _getId.default)(this.constructor.name.toLowerCase() + '_');
-  }
-  /**
-   * Store the wave canvas element and create the 2D rendering context
-   *
-   * @param {HTMLCanvasElement} element The wave `canvas` element.
-   */
-
-
-  _createClass(CanvasEntry, [{
-    key: "initWave",
-    value: function initWave(element) {
-      this.wave = element;
-      this.waveCtx = this.wave.getContext('2d');
-    }
-    /**
-     * Store the progress wave canvas element and create the 2D rendering
-     * context
-     *
-     * @param {HTMLCanvasElement} element The progress wave `canvas` element.
-     */
-
-  }, {
-    key: "initProgress",
-    value: function initProgress(element) {
-      this.progress = element;
-      this.progressCtx = this.progress.getContext('2d');
-    }
-    /**
-     * Update the dimensions
-     *
-     * @param {number} elementWidth Width of the entry
-     * @param {number} totalWidth Total width of the multi canvas renderer
-     * @param {number} width The new width of the element
-     * @param {number} height The new height of the element
-     */
-
-  }, {
-    key: "updateDimensions",
-    value: function updateDimensions(elementWidth, totalWidth, width, height) {
-      // where the canvas starts and ends in the waveform, represented as a
-      // decimal between 0 and 1
-      this.start = this.wave.offsetLeft / totalWidth || 0;
-      this.end = this.start + elementWidth / totalWidth; // set wave canvas dimensions
-
-      this.wave.width = width;
-      this.wave.height = height;
-      var elementSize = {
-        width: elementWidth + 'px'
-      };
-      (0, _style.default)(this.wave, elementSize);
-
-      if (this.hasProgressCanvas) {
-        // set progress canvas dimensions
-        this.progress.width = width;
-        this.progress.height = height;
-        (0, _style.default)(this.progress, elementSize);
-      }
-    }
-    /**
-     * Clear the wave and progress rendering contexts
-     */
-
-  }, {
-    key: "clearWave",
-    value: function clearWave() {
-      // wave
-      this.waveCtx.clearRect(0, 0, this.waveCtx.canvas.width, this.waveCtx.canvas.height); // progress
-
-      if (this.hasProgressCanvas) {
-        this.progressCtx.clearRect(0, 0, this.progressCtx.canvas.width, this.progressCtx.canvas.height);
-      }
-    }
-    /**
-     * Set the fill styles for wave and progress
-     *
-     * @param {string} waveColor Fill color for the wave canvas
-     * @param {?string} progressColor Fill color for the progress canvas
-     */
-
-  }, {
-    key: "setFillStyles",
-    value: function setFillStyles(waveColor, progressColor) {
-      this.waveCtx.fillStyle = waveColor;
-
-      if (this.hasProgressCanvas) {
-        this.progressCtx.fillStyle = progressColor;
-      }
-    }
-    /**
-     * Draw a rectangle for wave and progress
-     *
-     * @param {number} x X start position
-     * @param {number} y Y start position
-     * @param {number} width Width of the rectangle
-     * @param {number} height Height of the rectangle
-     * @param {number} radius Radius of the rectangle
-     */
-
-  }, {
-    key: "fillRects",
-    value: function fillRects(x, y, width, height, radius) {
-      this.fillRectToContext(this.waveCtx, x, y, width, height, radius);
-
-      if (this.hasProgressCanvas) {
-        this.fillRectToContext(this.progressCtx, x, y, width, height, radius);
-      }
-    }
-    /**
-     * Draw the actual rectangle on a `canvas` element
-     *
-     * @private
-     * @param {CanvasRenderingContext2D} ctx Rendering context of target canvas
-     * @param {number} x X start position
-     * @param {number} y Y start position
-     * @param {number} width Width of the rectangle
-     * @param {number} height Height of the rectangle
-     * @param {number} radius Radius of the rectangle
-     */
-
-  }, {
-    key: "fillRectToContext",
-    value: function fillRectToContext(ctx, x, y, width, height, radius) {
-      if (!ctx) {
-        return;
-      }
-
-      if (radius) {
-        this.drawRoundedRect(ctx, x, y, width, height, radius);
-      } else {
-        ctx.fillRect(x, y, width, height);
-      }
-    }
-    /**
-     * Draw a rounded rectangle on Canvas
-     *
-     * @private
-     * @param {CanvasRenderingContext2D} ctx Canvas context
-     * @param {number} x X-position of the rectangle
-     * @param {number} y Y-position of the rectangle
-     * @param {number} width Width of the rectangle
-     * @param {number} height Height of the rectangle
-     * @param {number} radius Radius of the rectangle
-     *
-     * @return {void}
-     * @example drawRoundedRect(ctx, 50, 50, 5, 10, 3)
-     */
-
-  }, {
-    key: "drawRoundedRect",
-    value: function drawRoundedRect(ctx, x, y, width, height, radius) {
-      if (height === 0) {
-        return;
-      } // peaks are float values from -1 to 1. Use absolute height values in
-      // order to correctly calculate rounded rectangle coordinates
-
-
-      if (height < 0) {
-        height *= -1;
-        y -= height;
-      }
-
-      ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
-      ctx.closePath();
-      ctx.fill();
-    }
-    /**
-     * Render the actual wave and progress lines
-     *
-     * @param {number[]} peaks Array with peaks data
-     * @param {number} absmax Maximum peak value (absolute)
-     * @param {number} halfH Half the height of the waveform
-     * @param {number} offsetY Offset to the top
-     * @param {number} start The x-offset of the beginning of the area that
-     * should be rendered
-     * @param {number} end The x-offset of the end of the area that
-     * should be rendered
-     */
-
-  }, {
-    key: "drawLines",
-    value: function drawLines(peaks, absmax, halfH, offsetY, start, end) {
-      this.drawLineToContext(this.waveCtx, peaks, absmax, halfH, offsetY, start, end);
-
-      if (this.hasProgressCanvas) {
-        this.drawLineToContext(this.progressCtx, peaks, absmax, halfH, offsetY, start, end);
-      }
-    }
-    /**
-     * Render the actual waveform line on a `canvas` element
-     *
-     * @private
-     * @param {CanvasRenderingContext2D} ctx Rendering context of target canvas
-     * @param {number[]} peaks Array with peaks data
-     * @param {number} absmax Maximum peak value (absolute)
-     * @param {number} halfH Half the height of the waveform
-     * @param {number} offsetY Offset to the top
-     * @param {number} start The x-offset of the beginning of the area that
-     * should be rendered
-     * @param {number} end The x-offset of the end of the area that
-     * should be rendered
-     */
-
-  }, {
-    key: "drawLineToContext",
-    value: function drawLineToContext(ctx, peaks, absmax, halfH, offsetY, start, end) {
-      if (!ctx) {
-        return;
-      }
-
-      var length = peaks.length / 2;
-      var first = Math.round(length * this.start); // use one more peak value to make sure we join peaks at ends -- unless,
-      // of course, this is the last canvas
-
-      var last = Math.round(length * this.end) + 1;
-      var canvasStart = first;
-      var canvasEnd = last;
-      var scale = this.wave.width / (canvasEnd - canvasStart - 1); // optimization
-
-      var halfOffset = halfH + offsetY;
-      var absmaxHalf = absmax / halfH;
-      ctx.beginPath();
-      ctx.moveTo((canvasStart - first) * scale, halfOffset);
-      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart] || 0) / absmaxHalf));
-      var i, peak, h;
-
-      for (i = canvasStart; i < canvasEnd; i++) {
-        peak = peaks[2 * i] || 0;
-        h = Math.round(peak / absmaxHalf);
-        ctx.lineTo((i - first) * scale + this.halfPixel, halfOffset - h);
-      } // draw the bottom edge going backwards, to make a single
-      // closed hull to fill
-
-
-      var j = canvasEnd - 1;
-
-      for (j; j >= canvasStart; j--) {
-        peak = peaks[2 * j + 1] || 0;
-        h = Math.round(peak / absmaxHalf);
-        ctx.lineTo((j - first) * scale + this.halfPixel, halfOffset - h);
-      }
-
-      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart + 1] || 0) / absmaxHalf));
-      ctx.closePath();
-      ctx.fill();
-    }
-    /**
-     * Destroys this entry
-     */
-
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      this.waveCtx = null;
-      this.wave = null;
-      this.progressCtx = null;
-      this.progress = null;
-    }
-    /**
-     * Return image data of the wave `canvas` element
-     *
-     * When using a `type` of `'blob'`, this will return a `Promise` that
-     * resolves with a `Blob` instance.
-     *
-     * @param {string} format='image/png' An optional value of a format type.
-     * @param {number} quality=0.92 An optional value between 0 and 1.
-     * @param {string} type='dataURL' Either 'dataURL' or 'blob'.
-     * @return {string|Promise} When using the default `'dataURL'` `type` this
-     * returns a data URL. When using the `'blob'` `type` this returns a
-     * `Promise` that resolves with a `Blob` instance.
-     */
-
-  }, {
-    key: "getImage",
-    value: function getImage(format, quality, type) {
-      var _this = this;
-
-      if (type === 'blob') {
-        return new Promise(function (resolve) {
-          _this.wave.toBlob(resolve, format, quality);
-        });
-      } else if (type === 'dataURL') {
-        return this.wave.toDataURL(format, quality);
-      }
-    }
-  }]);
-
-  return CanvasEntry;
-}();
-
-exports.default = CanvasEntry;
-module.exports = exports.default;
-
-/***/ }),
-
 /***/ "./src/drawer.js":
 /*!***********************!*\
   !*** ./src/drawer.js ***!
@@ -40593,9 +40204,7 @@ exports.default = void 0;
 
 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -40750,7 +40359,7 @@ function (_util$Observer) {
       this.wrapper.addEventListener('click', function (e) {
         var scrollbarHeight = _this2.wrapper.offsetHeight - _this2.wrapper.clientHeight;
 
-        if (scrollbarHeight !== 0) {
+        if (scrollbarHeight != 0) {
           // scrollbar is visible.  Check if click was on it
           var bbox = _this2.wrapper.getBoundingClientRect();
 
@@ -40764,11 +40373,6 @@ function (_util$Observer) {
           _this2.fireEvent('click', e, _this2.handleEvent(e));
         }
       });
-      this.wrapper.addEventListener('dblclick', function (e) {
-        if (_this2.params.interact) {
-          _this2.fireEvent('dblclick', e);
-        }
-      });
       this.wrapper.addEventListener('scroll', function (e) {
         return _this2.fireEvent('scroll', e);
       });
@@ -40776,8 +40380,8 @@ function (_util$Observer) {
     /**
      * Draw peaks on the canvas
      *
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
-     * for split channel rendering
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
+     * rendering
      * @param {number} length The width of the area that should be drawn
      * @param {number} start The x-offset of the beginning of the area that
      * should be rendered
@@ -40841,11 +40445,8 @@ function (_util$Observer) {
 
 
       if (!immediate && -half <= offset && offset < half) {
-        // set rate at which waveform is centered
-        var rate = this.params.autoCenterRate; // make rate depend on width of view and length of waveform
-
-        rate /= half;
-        rate *= maxScroll;
+        // we'll limit the "re-center" rate.
+        var rate = 5;
         offset = Math.max(-rate, Math.min(rate, offset));
         target = scrollLeft + offset;
       } // limit target to valid range (0 to maxScroll)
@@ -40860,7 +40461,7 @@ function (_util$Observer) {
     /**
      * Get the current scroll position in pixels
      *
-     * @return {number} Horizontal scroll position in pixels
+     * @return {number}
      */
 
   }, {
@@ -40887,7 +40488,7 @@ function (_util$Observer) {
     /**
      * Get the width of the container
      *
-     * @return {number} The width of the container
+     * @return {number}
      */
 
   }, {
@@ -40898,8 +40499,7 @@ function (_util$Observer) {
     /**
      * Set the width of the container
      *
-     * @param {number} width The new width of the container
-     * @return {boolean} Whether the width of the container was updated or not
+     * @param {number} width
      */
 
   }, {
@@ -40927,8 +40527,7 @@ function (_util$Observer) {
     /**
      * Set the height of the container
      *
-     * @param {number} height The new height of the container.
-     * @return {boolean} Whether the height of the container was updated or not
+     * @param {number} height
      */
 
   }, {
@@ -40962,7 +40561,7 @@ function (_util$Observer) {
 
         if (this.params.scrollParent && this.params.autoCenter) {
           var newPos = ~~(this.wrapper.scrollWidth * _progress);
-          this.recenterOnPosition(newPos, this.params.autoCenterImmediately);
+          this.recenterOnPosition(newPos);
         }
 
         this.updateProgress(pos);
@@ -41009,7 +40608,7 @@ function (_util$Observer) {
      * Draw a waveform with bars
      *
      * @abstract
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for split channel
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
      * rendering
      * @param {number} channelIndex The index of the current channel. Normally
      * should be 0
@@ -41026,7 +40625,7 @@ function (_util$Observer) {
      * Draw a waveform
      *
      * @abstract
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for split channel
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
      * rendering
      * @param {number} channelIndex The index of the current channel. Normally
      * should be 0
@@ -41087,11 +40686,7 @@ var _drawer = _interopRequireDefault(__webpack_require__(/*! ./drawer */ "./src/
 
 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
 
-var _drawer2 = _interopRequireDefault(__webpack_require__(/*! ./drawer.canvasentry */ "./src/drawer.canvasentry.js"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41114,11 +40709,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 /**
- * MultiCanvas renderer for wavesurfer. Is currently the default and sole
- * builtin renderer.
- *
- * A `MultiCanvas` consists of one or more `CanvasEntry` instances, depending
- * on the zoom level.
+ * @typedef {Object} CanvasEntry
+ * @private
+ * @property {HTMLElement} wave The wave node
+ * @property {CanvasRenderingContext2D} waveCtx The canvas rendering context
+ * @property {?HTMLElement} progress The progress wave node
+ * @property {?CanvasRenderingContext2D} progressCtx The progress wave canvas
+ * rendering context
+ * @property {?number} start Start of the area the canvas should render, between 0 and 1
+ * @property {?number} end End of the area the canvas should render, between 0 and 1
+ */
+
+/**
+ * MultiCanvas renderer for wavesurfer. Is currently the default and sole built
+ * in renderer.
  */
 var MultiCanvas =
 /*#__PURE__*/
@@ -41150,7 +40754,6 @@ function (_Drawer) {
     /**
      * Whether or not the progress wave is rendered. If the `waveColor`
      * and `progressColor` are the same color it is not.
-     *
      * @type {boolean}
      */
 
@@ -41162,43 +40765,14 @@ function (_Drawer) {
 
     _this.halfPixel = 0.5 / params.pixelRatio;
     /**
-     * List of `CanvasEntry` instances.
-     *
      * @private
      * @type {Array}
      */
 
     _this.canvases = [];
-    /**
-     * @private
-     * @type {HTMLElement}
-     */
+    /** @private */
 
     _this.progressWave = null;
-    /**
-     * Class used to generate entries.
-     *
-     * @private
-     * @type {function}
-     */
-
-    _this.EntryClass = _drawer2.default;
-    /**
-     * Overlap added between entries to prevent vertical white stripes
-     * between `canvas` elements.
-     *
-     * @type {number}
-     */
-
-    _this.overlap = 2 * Math.ceil(params.pixelRatio / 2);
-    /**
-     * The radius of the wave bars. Makes bars rounded
-     *
-     * @private
-     * @type {number}
-     */
-
-    _this.barRadius = params.barRadius || 0;
     return _this;
   }
   /**
@@ -41238,7 +40812,7 @@ function (_Drawer) {
       this.updateCursor();
     }
     /**
-     * Update cursor style
+     * Update cursor style from params.
      */
 
   }, {
@@ -41258,28 +40832,30 @@ function (_Drawer) {
     value: function updateSize() {
       var _this2 = this;
 
-      var totalWidth = Math.round(this.width / this.params.pixelRatio);
-      var requiredCanvases = Math.ceil(totalWidth / (this.maxCanvasElementWidth + this.overlap)); // add required canvases
+      var totalWidth = Math.round(this.width / this.params.pixelRatio); // No need more canvas if it's only for 2 peaks (there the same for overlaps !)
+
+      var requiredCanvases = Math.ceil(totalWidth / (this.maxCanvasElementWidth + 2));
 
       while (this.canvases.length < requiredCanvases) {
         this.addCanvas();
-      } // remove older existing canvases, if any
-
+      }
 
       while (this.canvases.length > requiredCanvases) {
         this.removeCanvas();
       }
 
-      var canvasWidth = this.maxCanvasWidth + this.overlap;
-      var lastCanvas = this.canvases.length - 1;
       this.canvases.forEach(function (entry, i) {
-        if (i == lastCanvas) {
-          canvasWidth = _this2.width - _this2.maxCanvasWidth * lastCanvas;
+        // Add some overlap to prevent vertical white stripes, keep the
+        // width even for simplicity
+        var canvasWidth = _this2.maxCanvasWidth + 2 * Math.ceil(_this2.params.pixelRatio / 2);
+
+        if (i == _this2.canvases.length - 1) {
+          canvasWidth = _this2.width - _this2.maxCanvasWidth * (_this2.canvases.length - 1);
         }
 
         _this2.updateDimensions(entry, canvasWidth, _this2.height);
 
-        entry.clearWave();
+        _this2.clearWaveForEntry(entry);
       });
     }
     /**
@@ -41291,12 +40867,9 @@ function (_Drawer) {
   }, {
     key: "addCanvas",
     value: function addCanvas() {
-      var entry = new this.EntryClass();
-      entry.hasProgressCanvas = this.hasProgressCanvas;
-      entry.halfPixel = this.halfPixel;
-      var leftOffset = this.maxCanvasElementWidth * this.canvases.length; // wave
-
-      entry.initWave(this.wrapper.appendChild(this.style(document.createElement('canvas'), {
+      var entry = {};
+      var leftOffset = this.maxCanvasElementWidth * this.canvases.length;
+      entry.wave = this.wrapper.appendChild(this.style(document.createElement('canvas'), {
         position: 'absolute',
         zIndex: 2,
         left: leftOffset + 'px',
@@ -41304,22 +40877,24 @@ function (_Drawer) {
         bottom: 0,
         height: '100%',
         pointerEvents: 'none'
-      }))); // progress
+      }));
+      entry.waveCtx = entry.wave.getContext('2d');
 
       if (this.hasProgressCanvas) {
-        entry.initProgress(this.progressWave.appendChild(this.style(document.createElement('canvas'), {
+        entry.progress = this.progressWave.appendChild(this.style(document.createElement('canvas'), {
           position: 'absolute',
           left: leftOffset + 'px',
           top: 0,
           bottom: 0,
           height: '100%'
-        })));
+        }));
+        entry.progressCtx = entry.progress.getContext('2d');
       }
 
       this.canvases.push(entry);
     }
     /**
-     * Pop single canvas from the list
+     * Pop one canvas from the list
      *
      * @private
      */
@@ -41327,27 +40902,18 @@ function (_Drawer) {
   }, {
     key: "removeCanvas",
     value: function removeCanvas() {
-      var lastEntry = this.canvases[this.canvases.length - 1]; // wave
-
-      lastEntry.wave.parentElement.removeChild(lastEntry.wave); // progress
+      var lastEntry = this.canvases.pop();
+      lastEntry.wave.parentElement.removeChild(lastEntry.wave);
 
       if (this.hasProgressCanvas) {
         lastEntry.progress.parentElement.removeChild(lastEntry.progress);
-      } // cleanup
-
-
-      if (lastEntry) {
-        lastEntry.destroy();
-        lastEntry = null;
       }
-
-      this.canvases.pop();
     }
     /**
      * Update the dimensions of a canvas element
      *
      * @private
-     * @param {CanvasEntry} entry Target entry
+     * @param {CanvasEntry} entry
      * @param {number} width The new width of the element
      * @param {number} height The new height of the element
      */
@@ -41356,43 +40922,74 @@ function (_Drawer) {
     key: "updateDimensions",
     value: function updateDimensions(entry, width, height) {
       var elementWidth = Math.round(width / this.params.pixelRatio);
-      var totalWidth = Math.round(this.width / this.params.pixelRatio); // update canvas dimensions
+      var totalWidth = Math.round(this.width / this.params.pixelRatio); // Where the canvas starts and ends in the waveform, represented as a
+      // decimal between 0 and 1.
 
-      entry.updateDimensions(elementWidth, totalWidth, width, height); // style element
-
+      entry.start = entry.waveCtx.canvas.offsetLeft / totalWidth || 0;
+      entry.end = entry.start + elementWidth / totalWidth;
+      entry.waveCtx.canvas.width = width;
+      entry.waveCtx.canvas.height = height;
+      this.style(entry.waveCtx.canvas, {
+        width: elementWidth + 'px'
+      });
       this.style(this.progressWave, {
         display: 'block'
       });
+
+      if (this.hasProgressCanvas) {
+        entry.progressCtx.canvas.width = width;
+        entry.progressCtx.canvas.height = height;
+        this.style(entry.progressCtx.canvas, {
+          width: elementWidth + 'px'
+        });
+      }
     }
     /**
-     * Clear the whole multi-canvas
+     * Clear the whole waveform
      */
 
   }, {
     key: "clearWave",
     value: function clearWave() {
+      var _this3 = this;
+
       this.canvases.forEach(function (entry) {
-        return entry.clearWave();
+        return _this3.clearWaveForEntry(entry);
       });
+    }
+    /**
+     * Clear one canvas
+     *
+     * @private
+     * @param {CanvasEntry} entry
+     */
+
+  }, {
+    key: "clearWaveForEntry",
+    value: function clearWaveForEntry(entry) {
+      entry.waveCtx.clearRect(0, 0, entry.waveCtx.canvas.width, entry.waveCtx.canvas.height);
+
+      if (this.hasProgressCanvas) {
+        entry.progressCtx.clearRect(0, 0, entry.progressCtx.canvas.width, entry.progressCtx.canvas.height);
+      }
     }
     /**
      * Draw a waveform with bars
      *
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
-     * for split channel rendering
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
+     * rendering
      * @param {number} channelIndex The index of the current channel. Normally
      * should be 0. Must be an integer.
      * @param {number} start The x-offset of the beginning of the area that
      * should be rendered
      * @param {number} end The x-offset of the end of the area that should be
      * rendered
-     * @returns {void}
      */
 
   }, {
     key: "drawBars",
     value: function drawBars(peaks, channelIndex, start, end) {
-      var _this3 = this;
+      var _this4 = this;
 
       return this.prepareDraw(peaks, channelIndex, start, end, function (_ref) {
         var absmax = _ref.absmax,
@@ -41411,40 +41008,39 @@ function (_Drawer) {
 
         var peakIndexScale = hasMinVals ? 2 : 1;
         var length = peaks.length / peakIndexScale;
-        var bar = _this3.params.barWidth * _this3.params.pixelRatio;
-        var gap = _this3.params.barGap === null ? Math.max(_this3.params.pixelRatio, ~~(bar / 2)) : Math.max(_this3.params.pixelRatio, _this3.params.barGap * _this3.params.pixelRatio);
+        var bar = _this4.params.barWidth * _this4.params.pixelRatio;
+        var gap = _this4.params.barGap === null ? Math.max(_this4.params.pixelRatio, ~~(bar / 2)) : Math.max(_this4.params.pixelRatio, _this4.params.barGap * _this4.params.pixelRatio);
         var step = bar + gap;
-        var scale = length / _this3.width;
+        var scale = length / _this4.width;
         var first = start;
         var last = end;
-        var i = first;
+        var i;
 
-        for (i; i < last; i += step) {
+        for (i = first; i < last; i += step) {
           var peak = peaks[Math.floor(i * scale * peakIndexScale)] || 0;
           var h = Math.round(peak / absmax * halfH);
 
-          _this3.fillRect(i + _this3.halfPixel, halfH - h + offsetY, bar + _this3.halfPixel, h * 2, _this3.barRadius);
+          _this4.fillRect(i + _this4.halfPixel, halfH - h + offsetY, bar + _this4.halfPixel, h * 2);
         }
       });
     }
     /**
      * Draw a waveform
      *
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
-     * for split channel rendering
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
+     * rendering
      * @param {number} channelIndex The index of the current channel. Normally
      * should be 0
      * @param {number?} start The x-offset of the beginning of the area that
      * should be rendered (If this isn't set only a flat line is rendered)
      * @param {number?} end The x-offset of the end of the area that should be
      * rendered
-     * @returns {void}
      */
 
   }, {
     key: "drawWave",
     value: function drawWave(peaks, channelIndex, start, end) {
-      var _this4 = this;
+      var _this5 = this;
 
       return this.prepareDraw(peaks, channelIndex, start, end, function (_ref2) {
         var absmax = _ref2.absmax,
@@ -41457,9 +41053,9 @@ function (_Drawer) {
         if (!hasMinVals) {
           var reflectedPeaks = [];
           var len = peaks.length;
-          var i = 0;
+          var i;
 
-          for (i; i < len; i++) {
+          for (i = 0; i < len; i++) {
             reflectedPeaks[2 * i] = peaks[i];
             reflectedPeaks[2 * i + 1] = -peaks[i];
           }
@@ -41470,18 +41066,18 @@ function (_Drawer) {
 
 
         if (start !== undefined) {
-          _this4.drawLine(peaks, absmax, halfH, offsetY, start, end);
-        } // always draw a median line
+          _this5.drawLine(peaks, absmax, halfH, offsetY, start, end);
+        } // Always draw a median line
 
 
-        _this4.fillRect(0, halfH + offsetY - _this4.halfPixel, _this4.width, _this4.halfPixel, _this4.barRadius);
+        _this5.fillRect(0, halfH + offsetY - _this5.halfPixel, _this5.width, _this5.halfPixel);
       });
     }
     /**
      * Tell the canvas entries to render their portion of the waveform
      *
      * @private
-     * @param {number[]} peaks Peaks data
+     * @param {number[]} peaks Peak data
      * @param {number} absmax Maximum peak value (absolute)
      * @param {number} halfH Half the height of the waveform
      * @param {number} offsetY Offset to the top
@@ -41494,79 +41090,139 @@ function (_Drawer) {
   }, {
     key: "drawLine",
     value: function drawLine(peaks, absmax, halfH, offsetY, start, end) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.canvases.forEach(function (entry) {
-        _this5.setFillStyles(entry);
+        _this6.setFillStyles(entry);
 
-        entry.drawLines(peaks, absmax, halfH, offsetY, start, end);
+        _this6.drawLineToContext(entry, entry.waveCtx, peaks, absmax, halfH, offsetY, start, end);
+
+        _this6.drawLineToContext(entry, entry.progressCtx, peaks, absmax, halfH, offsetY, start, end);
       });
     }
     /**
-     * Draw a rectangle on the multi-canvas
+     * Render the actual waveform line on a canvas
      *
-     * @param {number} x X-position of the rectangle
-     * @param {number} y Y-position of the rectangle
-     * @param {number} width Width of the rectangle
-     * @param {number} height Height of the rectangle
-     * @param {number} radius Radius of the rectangle
+     * @private
+     * @param {CanvasEntry} entry
+     * @param {Canvas2DContextAttributes} ctx Essentially `entry.[wave|progress]Ctx`
+     * @param {number[]} peaks
+     * @param {number} absmax Maximum peak value (absolute)
+     * @param {number} halfH Half the height of the waveform
+     * @param {number} offsetY Offset to the top
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that
+     * should be rendered
+     */
+
+  }, {
+    key: "drawLineToContext",
+    value: function drawLineToContext(entry, ctx, peaks, absmax, halfH, offsetY, start, end) {
+      if (!ctx) {
+        return;
+      }
+
+      var length = peaks.length / 2;
+      var first = Math.round(length * entry.start); // Use one more peak value to make sure we join peaks at ends -- unless,
+      // of course, this is the last canvas.
+
+      var last = Math.round(length * entry.end) + 1;
+      var canvasStart = first;
+      var canvasEnd = last;
+      var i;
+      var j;
+      var scale = entry.progress.width / (canvasEnd - canvasStart - 1); // optimization
+
+      var halfOffset = halfH + offsetY;
+      var absmaxHalf = absmax / halfH;
+      ctx.beginPath();
+      ctx.moveTo((canvasStart - first) * scale, halfOffset);
+      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart] || 0) / absmaxHalf));
+
+      for (i = canvasStart; i < canvasEnd; i++) {
+        var peak = peaks[2 * i] || 0;
+        var h = Math.round(peak / absmaxHalf);
+        ctx.lineTo((i - first) * scale + this.halfPixel, halfOffset - h);
+      } // Draw the bottom edge going backwards, to make a single
+      // closed hull to fill.
+
+
+      for (j = canvasEnd - 1; j >= canvasStart; j--) {
+        var _peak = peaks[2 * j + 1] || 0;
+
+        var _h = Math.round(_peak / absmaxHalf);
+
+        ctx.lineTo((j - first) * scale + this.halfPixel, halfOffset - _h);
+      }
+
+      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart + 1] || 0) / absmaxHalf));
+      ctx.closePath();
+      ctx.fill();
+    }
+    /**
+     * Draw a rectangle on the waveform
+     *
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
      */
 
   }, {
     key: "fillRect",
-    value: function fillRect(x, y, width, height, radius) {
+    value: function fillRect(x, y, width, height) {
       var startCanvas = Math.floor(x / this.maxCanvasWidth);
       var endCanvas = Math.min(Math.ceil((x + width) / this.maxCanvasWidth) + 1, this.canvases.length);
-      var i = startCanvas;
+      var i;
 
-      for (i; i < endCanvas; i++) {
+      for (i = startCanvas; i < endCanvas; i++) {
         var entry = this.canvases[i];
         var leftOffset = i * this.maxCanvasWidth;
         var intersection = {
           x1: Math.max(x, i * this.maxCanvasWidth),
           y1: y,
-          x2: Math.min(x + width, i * this.maxCanvasWidth + entry.wave.width),
+          x2: Math.min(x + width, i * this.maxCanvasWidth + entry.waveCtx.canvas.width),
           y2: y + height
         };
 
         if (intersection.x1 < intersection.x2) {
           this.setFillStyles(entry);
-          entry.fillRects(intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1, radius);
+          this.fillRectToContext(entry.waveCtx, intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1);
+          this.fillRectToContext(entry.progressCtx, intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1);
         }
       }
     }
     /**
-     * Performs preparation tasks and calculations which are shared by `drawBars`
-     * and `drawWave`
+     * Performs preparation tasks and calculations which are shared by drawBars and drawWave
      *
      * @private
-     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for
-     * split channel rendering
+     * @param {number[]|number[][]} peaks Can also be an array of arrays for split channel
+     * rendering
      * @param {number} channelIndex The index of the current channel. Normally
      * should be 0
      * @param {number?} start The x-offset of the beginning of the area that
-     * should be rendered. If this isn't set only a flat line is rendered
+     * should be rendered (If this isn't set only a flat line is rendered)
      * @param {number?} end The x-offset of the end of the area that should be
      * rendered
-     * @param {function} fn The render function to call, e.g. `drawWave`
-     * @returns {void}
+     * @param {function} fn The render function to call
      */
 
   }, {
     key: "prepareDraw",
     value: function prepareDraw(peaks, channelIndex, start, end, fn) {
-      var _this6 = this;
+      var _this7 = this;
 
       return util.frame(function () {
         // Split channels and call this function with the channelIndex set
         if (peaks[0] instanceof Array) {
           var channels = peaks;
 
-          if (_this6.params.splitChannels) {
-            _this6.setHeight(channels.length * _this6.params.height * _this6.params.pixelRatio);
+          if (_this7.params.splitChannels) {
+            _this7.setHeight(channels.length * _this7.params.height * _this7.params.pixelRatio);
 
             return channels.forEach(function (channelPeaks, i) {
-              return _this6.prepareDraw(channelPeaks, i, start, end, fn);
+              return _this7.prepareDraw(channelPeaks, i, start, end, fn);
             });
           }
 
@@ -41576,9 +41232,9 @@ function (_Drawer) {
         // set
 
 
-        var absmax = 1 / _this6.params.barHeight;
+        var absmax = 1 / _this7.params.barHeight;
 
-        if (_this6.params.normalize) {
+        if (_this7.params.normalize) {
           var max = util.max(peaks);
           var min = util.min(peaks);
           absmax = -min > max ? -min : max;
@@ -41589,7 +41245,7 @@ function (_Drawer) {
         var hasMinVals = [].some.call(peaks, function (val) {
           return val < 0;
         });
-        var height = _this6.params.height * _this6.params.pixelRatio;
+        var height = _this7.params.height * _this7.params.pixelRatio;
         var offsetY = height * channelIndex || 0;
         var halfH = height / 2;
         return fn({
@@ -41603,50 +41259,61 @@ function (_Drawer) {
       })();
     }
     /**
+     * Draw the actual rectangle on a canvas
+     *
+     * @private
+     * @param {Canvas2DContextAttributes} ctx
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
+     */
+
+  }, {
+    key: "fillRectToContext",
+    value: function fillRectToContext(ctx, x, y, width, height) {
+      if (!ctx) {
+        return;
+      }
+
+      ctx.fillRect(x, y, width, height);
+    }
+    /**
      * Set the fill styles for a certain entry (wave and progress)
      *
      * @private
-     * @param {CanvasEntry} entry Target entry
+     * @param {CanvasEntry} entry
      */
 
   }, {
     key: "setFillStyles",
     value: function setFillStyles(entry) {
-      entry.setFillStyles(this.params.waveColor, this.params.progressColor);
+      entry.waveCtx.fillStyle = this.params.waveColor;
+
+      if (this.hasProgressCanvas) {
+        entry.progressCtx.fillStyle = this.params.progressColor;
+      }
     }
     /**
-     * Return image data of the multi-canvas
+     * Return image data of the waveform
      *
-     * When using a `type` of `'blob'`, this will return a `Promise`.
-     *
-     * @param {string} format='image/png' An optional value of a format type.
+     * @param {string} type='image/png' An optional value of a format type.
      * @param {number} quality=0.92 An optional value between 0 and 1.
-     * @param {string} type='dataURL' Either 'dataURL' or 'blob'.
-     * @return {string|string[]|Promise} When using the default `'dataURL'`
-     * `type` this returns a single data URL or an array of data URLs,
-     * one for each canvas. When using the `'blob'` `type` this returns a
-     * `Promise` that resolves with an array of `Blob` instances, one for each
-     * canvas.
+     * @return {string|string[]} images A data URL or an array of data URLs
      */
 
   }, {
     key: "getImage",
-    value: function getImage(format, quality, type) {
-      if (type === 'blob') {
-        return Promise.all(this.canvases.map(function (entry) {
-          return entry.getImage(format, quality, type);
-        }));
-      } else if (type === 'dataURL') {
-        var images = this.canvases.map(function (entry) {
-          return entry.getImage(format, quality, type);
-        });
-        return images.length > 1 ? images : images[0];
-      }
+    value: function getImage(type, quality) {
+      var images = this.canvases.map(function (entry) {
+        return entry.wave.toDataURL(type, quality);
+      });
+      return images.length > 1 ? images : images[0];
     }
     /**
      * Render the new progress
      *
-     * @param {number} position X-offset of progress position in pixels
+     * @param {number} position X-Offset of progress position in pixels
      */
 
   }, {
@@ -41662,134 +41329,6 @@ function (_Drawer) {
 }(_drawer.default);
 
 exports.default = MultiCanvas;
-module.exports = exports.default;
-
-/***/ }),
-
-/***/ "./src/mediaelement-webaudio.js":
-/*!**************************************!*\
-  !*** ./src/mediaelement-webaudio.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _mediaelement = _interopRequireDefault(__webpack_require__(/*! ./mediaelement */ "./src/mediaelement.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-/**
- * MediaElementWebAudio backend: allows to load audio as HTML5 audio tag and use it with WebAudio API.
- * Setting the MediaElementWebAudio backend, there is the possibility to load audio of big dimensions, using the WebAudio API features.
- * The audio to load is an HTML5 audio tag, so you have to use the same methods of MediaElement backend for loading and playback.
- * In this way, the audio resource is not loaded entirely from server, but in ranges, since you load an HTML5 audio tag.
- * In this way, filters and other functionalities can be performed like with WebAudio backend, but without decoding
- * internally audio data, that caused crashing of the browser. You have to give also peaks, so the audio data are not decoded.
- *
- * @since 3.2.0
- */
-var MediaElementWebAudio =
-/*#__PURE__*/
-function (_MediaElement) {
-  _inherits(MediaElementWebAudio, _MediaElement);
-
-  /**
-   * Construct the backend
-   *
-   * @param {WavesurferParams} params Wavesurfer parameters
-   */
-  function MediaElementWebAudio(params) {
-    var _this;
-
-    _classCallCheck(this, MediaElementWebAudio);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaElementWebAudio).call(this, params));
-    /** @private */
-
-    _this.params = params;
-    /** @private */
-
-    _this.sourceMediaElement = null;
-    return _this;
-  }
-  /**
-   * Initialise the backend, called in `wavesurfer.createBackend()`
-   */
-
-
-  _createClass(MediaElementWebAudio, [{
-    key: "init",
-    value: function init() {
-      this.setPlaybackRate(this.params.audioRate);
-      this.createTimer();
-      this.createVolumeNode();
-      this.createScriptNode();
-      this.createAnalyserNode();
-    }
-    /**
-     * Private method called by both `load` (from url)
-     * and `loadElt` (existing media element) methods.
-     *
-     * @param {HTMLMediaElement} media HTML5 Audio or Video element
-     * @param {number[]|Number.<Array[]>} peaks Array of peak data
-     * @private
-     */
-
-  }, {
-    key: "_load",
-    value: function _load(media, peaks) {
-      _get(_getPrototypeOf(MediaElementWebAudio.prototype), "_load", this).call(this, media, peaks);
-
-      this.createMediaElementSource(media);
-    }
-    /**
-     * Create MediaElementSource node
-     *
-     * @since 3.2.0
-     * @param {HTMLMediaElement} mediaElement HTML5 Audio to load
-     */
-
-  }, {
-    key: "createMediaElementSource",
-    value: function createMediaElementSource(mediaElement) {
-      this.sourceMediaElement = this.ac.createMediaElementSource(mediaElement);
-      this.sourceMediaElement.connect(this.analyser);
-    }
-  }]);
-
-  return MediaElementWebAudio;
-}(_mediaelement.default);
-
-exports.default = MediaElementWebAudio;
 module.exports = exports.default;
 
 /***/ }),
@@ -41813,9 +41352,7 @@ var _webaudio = _interopRequireDefault(__webpack_require__(/*! ./webaudio */ "./
 
 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41852,7 +41389,7 @@ function (_WebAudio) {
   /**
    * Construct the backend
    *
-   * @param {WavesurferParams} params Wavesurfer parameters
+   * @param {WavesurferParams} params
    */
   function MediaElement(params) {
     var _this;
@@ -41862,12 +41399,9 @@ function (_WebAudio) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaElement).call(this, params));
     /** @private */
 
-    _this.params = params;
-    /**
-     * Initially a dummy media element to catch errors. Once `_load` is
-     * called, this will contain the actual `HTMLMediaElement`.
-     * @private
-     */
+    _this.params = params; // Dummy media to catch errors
+
+    /** @private */
 
     _this.media = {
       currentTime: 0,
@@ -41895,16 +41429,10 @@ function (_WebAudio) {
     _this.volume = 1;
     /** @private */
 
-    _this.isMuted = false;
-    /** @private */
-
     _this.buffer = null;
     /** @private */
 
     _this.onPlayEnd = null;
-    /** @private */
-
-    _this.mediaListeners = {};
     return _this;
   }
   /**
@@ -41919,84 +41447,33 @@ function (_WebAudio) {
       this.createTimer();
     }
     /**
-     * Attach event listeners to media element.
-     */
-
-  }, {
-    key: "_setupMediaListeners",
-    value: function _setupMediaListeners() {
-      var _this2 = this;
-
-      this.mediaListeners.error = function () {
-        _this2.fireEvent('error', 'Error loading media element');
-      };
-
-      this.mediaListeners.canplay = function () {
-        _this2.fireEvent('canplay');
-      };
-
-      this.mediaListeners.ended = function () {
-        _this2.fireEvent('finish');
-      }; // listen to and relay play, pause and seeked events to enable
-      // playback control from the external media element
-
-
-      this.mediaListeners.play = function () {
-        _this2.fireEvent('play');
-      };
-
-      this.mediaListeners.pause = function () {
-        _this2.fireEvent('pause');
-      };
-
-      this.mediaListeners.seeked = function (event) {
-        _this2.fireEvent('seek');
-      };
-
-      this.mediaListeners.volumechange = function (event) {
-        _this2.isMuted = _this2.media.muted;
-
-        if (_this2.isMuted) {
-          _this2.volume = 0;
-        } else {
-          _this2.volume = _this2.media.volume;
-        }
-
-        _this2.fireEvent('volume');
-      }; // reset event listeners
-
-
-      Object.keys(this.mediaListeners).forEach(function (id) {
-        _this2.media.removeEventListener(id, _this2.mediaListeners[id]);
-
-        _this2.media.addEventListener(id, _this2.mediaListeners[id]);
-      });
-    }
-    /**
      * Create a timer to provide a more precise `audioprocess` event.
+     *
+     * @private
      */
 
   }, {
     key: "createTimer",
     value: function createTimer() {
-      var _this3 = this;
+      var _this2 = this;
 
       var onAudioProcess = function onAudioProcess() {
-        if (_this3.isPaused()) {
+        if (_this2.isPaused()) {
           return;
         }
 
-        _this3.fireEvent('audioprocess', _this3.getCurrentTime()); // Call again in the next frame
+        _this2.fireEvent('audioprocess', _this2.getCurrentTime()); // Call again in the next frame
 
 
-        util.frame(onAudioProcess)();
+        var requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+        requestAnimationFrame(onAudioProcess);
       };
 
       this.on('play', onAudioProcess); // Update the progress one more time to prevent it from being stuck in
       // case of lower framerates
 
       this.on('pause', function () {
-        _this3.fireEvent('audioprocess', _this3.getCurrentTime());
+        _this2.fireEvent('audioprocess', _this2.getCurrentTime());
       });
     }
     /**
@@ -42005,10 +41482,8 @@ function (_WebAudio) {
      *
      * @param {string} url Path to media file
      * @param {HTMLElement} container HTML element
-     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     * @param {number[]|number[][]} peaks Array of peak data
      * @param {string} preload HTML 5 preload attribute value
-     * @throws Will throw an error if the `url` argument is not a valid media
-     * element.
      */
 
   }, {
@@ -42034,7 +41509,7 @@ function (_WebAudio) {
      * Load existing media element.
      *
      * @param {HTMLMediaElement} elt HTML5 Audio or Video element
-     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     * @param {number[]|number[][]} peaks Array of peak data
      */
 
   }, {
@@ -42046,26 +41521,21 @@ function (_WebAudio) {
       this._load(elt, peaks);
     }
     /**
-     * Method called by both `load` (from url)
-     * and `loadElt` (existing media element) methods.
+     * Private method called by both load (from url)
+     * and loadElt (existing media element).
      *
      * @param {HTMLMediaElement} media HTML5 Audio or Video element
-     * @param {number[]|Number.<Array[]>} peaks Array of peak data
-     * @throws Will throw an error if the `media` argument is not a valid media
-     * element.
+     * @param {number[]|number[][]} peaks Array of peak data
      * @private
      */
 
   }, {
     key: "_load",
     value: function _load(media, peaks) {
-      // verify media element is valid
-      if (!(media instanceof HTMLMediaElement) || typeof media.addEventListener === 'undefined') {
-        throw new Error('media parameter is not a valid media element');
-      } // load must be called manually on iOS, otherwise peaks won't draw
+      var _this3 = this;
+
+      // load must be called manually on iOS, otherwise peaks won't draw
       // until a user interaction triggers load --> 'ready' event
-
-
       if (typeof media.load == 'function') {
         // Resets the media element and restarts the media resource. Any
         // pending events are discarded. How much media data is fetched is
@@ -42073,21 +41543,34 @@ function (_WebAudio) {
         media.load();
       }
 
+      media.addEventListener('error', function () {
+        _this3.fireEvent('error', 'Error loading media element');
+      });
+      media.addEventListener('canplay', function () {
+        _this3.fireEvent('canplay');
+      });
+      media.addEventListener('ended', function () {
+        _this3.fireEvent('finish');
+      }); // Listen to and relay play and pause events to enable
+      // playback control from the external media element
+
+      media.addEventListener('play', function () {
+        _this3.fireEvent('play');
+      });
+      media.addEventListener('pause', function () {
+        _this3.fireEvent('pause');
+      });
       this.media = media;
-
-      this._setupMediaListeners();
-
       this.peaks = peaks;
       this.onPlayEnd = null;
       this.buffer = null;
-      this.isMuted = media.muted;
       this.setPlaybackRate(this.playbackRate);
       this.setVolume(this.volume);
     }
     /**
      * Used by `wavesurfer.isPlaying()` and `wavesurfer.playPause()`
      *
-     * @return {boolean} Media paused or not
+     * @return {boolean}
      */
 
   }, {
@@ -42098,7 +41581,7 @@ function (_WebAudio) {
     /**
      * Used by `wavesurfer.getDuration()`
      *
-     * @return {number} Duration
+     * @return {number}
      */
 
   }, {
@@ -42121,7 +41604,7 @@ function (_WebAudio) {
      * Returns the current time in seconds relative to the audio-clip's
      * duration.
      *
-     * @return {number} Current time
+     * @return {number}
      */
 
   }, {
@@ -42132,7 +41615,7 @@ function (_WebAudio) {
     /**
      * Get the position from 0 to 1
      *
-     * @return {number} Current position
+     * @return {number}
      */
 
   }, {
@@ -42143,7 +41626,7 @@ function (_WebAudio) {
     /**
      * Get the audio source playback rate.
      *
-     * @return {number} Playback rate
+     * @return {number}
      */
 
   }, {
@@ -42154,7 +41637,7 @@ function (_WebAudio) {
     /**
      * Set the audio source playback rate.
      *
-     * @param {number} value Playback rate
+     * @param {number} value
      */
 
   }, {
@@ -42185,7 +41668,7 @@ function (_WebAudio) {
      * of a clip.
      * @param {number} end When to stop, relative to the beginning of a clip.
      * @emits MediaElement#play
-     * @return {Promise} Result
+     * @return {Promise}
      */
 
   }, {
@@ -42200,7 +41683,7 @@ function (_WebAudio) {
      * Pauses the loaded audio.
      *
      * @emits MediaElement#pause
-     * @return {Promise} Result
+     * @return {Promise}
      */
 
   }, {
@@ -42215,12 +41698,7 @@ function (_WebAudio) {
       this.clearPlayEnd();
       return promise;
     }
-    /**
-     * Set the play end
-     *
-     * @private
-     * @param {number} end Where to end
-     */
+    /** @private */
 
   }, {
     key: "setPlayEnd",
@@ -42254,7 +41732,7 @@ function (_WebAudio) {
      * @param {number} length How many subranges to break the waveform into.
      * @param {number} first First sample in the required range.
      * @param {number} last Last sample in the required range.
-     * @return {number[]|Number.<Array[]>} Array of 2*<length> peaks or array of
+     * @return {number[]|number[][]} Array of 2*<length> peaks or array of
      * arrays of peaks consisting of (max, min) values for each subrange.
      */
 
@@ -42271,8 +41749,6 @@ function (_WebAudio) {
      * Set the sink id for the media player
      *
      * @param {string} deviceId String value representing audio device id.
-     * @returns {Promise} A Promise that resolves to `undefined` when there
-     * are no errors.
      */
 
   }, {
@@ -42297,7 +41773,7 @@ function (_WebAudio) {
   }, {
     key: "getVolume",
     value: function getVolume() {
-      return this.volume;
+      return this.volume || this.media.volume;
     }
     /**
      * Set the audio volume
@@ -42308,11 +41784,8 @@ function (_WebAudio) {
   }, {
     key: "setVolume",
     value: function setVolume(value) {
-      this.volume = value; // no need to change when it's already at that volume
-
-      if (this.media.volume !== this.volume) {
-        this.media.volume = this.volume;
-      }
+      this.volume = value;
+      this.media.volume = this.volume;
     }
     /**
      * This is called when wavesurfer is destroyed
@@ -42322,17 +41795,8 @@ function (_WebAudio) {
   }, {
     key: "destroy",
     value: function destroy() {
-      var _this5 = this;
-
       this.pause();
       this.unAll();
-      this.destroyed = true; // cleanup media event listeners
-
-      Object.keys(this.mediaListeners).forEach(function (id) {
-        if (_this5.media) {
-          _this5.media.removeEventListener(id, _this5.mediaListeners[id]);
-        }
-      });
 
       if (this.params.removeMediaElementOnDestroy && this.media && this.media.parentNode) {
         this.media.parentNode.removeChild(this.media);
@@ -42416,7 +41880,7 @@ function () {
      * @param {number} length The length of the range
      * @param {number} start The x offset of the start of the range
      * @param {number} end The x offset of the end of the range
-     * @return {Number.<Array[]>} Array with arrays of numbers
+     * @return {number[][]}
      */
 
   }, {
@@ -42491,7 +41955,7 @@ function () {
     /**
      * For testing
      *
-     * @return {Number.<Array[]>} Array with arrays of numbers
+     * @return {number[][]}
      */
 
   }, {
@@ -42536,45 +42000,11 @@ var _observer = _interopRequireDefault(__webpack_require__(/*! ./observer */ "./
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Perform an ajax request using `XMLHttpRequest`.
+ * Perform an ajax request
  *
- * @deprecated Use `util.fetchFile` instead.
+ * @param {Options} options Description
  *
- * @param {Object} options AJAX options to use. See example below for options.
- * @returns {Observer} Observer instance
- * @example
- * // default options
- * let options = {
- *     method: 'GET',
- *     url: undefined,
- *     responseType: 'json',
- *     xhr: {}
- * };
- *
- * // override default options
- * options.url = '../media/demo.wav';
- * options.responseType = 'arraybuffer';
- * options.xhr = {
- *     requestHeaders: [
- *         {
- *             key: 'Authorization',
- *             value: 'my-token'
- *         }
- *     ],
- *     withCredentials: true
- * };
- *
- * // make ajax call
- * let ajaxCall = util.ajax(options);
- * ajaxCall.on('progress', e => {
- *     console.log('progress', e);
- * });
- * ajaxCall.on('success', (data, e) => {
- *     console.log('success!', data);
- * });
- * ajaxCall.on('error', e => {
- *     console.warn('ajax error: ' + e.target.statusText);
- * });
+ * @returns {Object} Observer instance
  */
 function ajax(options) {
   var instance = new _observer.default();
@@ -42669,259 +42099,6 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ "./src/util/fetch.js":
-/*!***************************!*\
-  !*** ./src/util/fetch.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = fetchFile;
-
-var _observer = _interopRequireDefault(__webpack_require__(/*! ./observer */ "./src/util/observer.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var ProgressHandler =
-/*#__PURE__*/
-function () {
-  /**
-   * Instantiate ProgressHandler
-   *
-   * @param {Observer} instance The `fetchFile` observer instance.
-   * @param {Number} contentLength Content length.
-   * @param {Response} response Response object.
-   */
-  function ProgressHandler(instance, contentLength, response) {
-    _classCallCheck(this, ProgressHandler);
-
-    this.instance = instance;
-    this.instance._reader = response.body.getReader();
-    this.total = parseInt(contentLength, 10);
-    this.loaded = 0;
-  }
-  /**
-   * A method that is called once, immediately after the `ReadableStream``
-   * is constructed.
-   *
-   * @param {ReadableStreamDefaultController} controller Controller instance
-   *     used to control the stream.
-   */
-
-
-  _createClass(ProgressHandler, [{
-    key: "start",
-    value: function start(controller) {
-      var _this = this;
-
-      var read = function read() {
-        // instance._reader.read() returns a promise that resolves
-        // when a value has been received
-        _this.instance._reader.read().then(function (_ref) {
-          var done = _ref.done,
-              value = _ref.value;
-
-          // result objects contain two properties:
-          // done  - true if the stream has already given you all its data.
-          // value - some data. Always undefined when done is true.
-          if (done) {
-            // ensure onProgress called when content-length=0
-            if (_this.total === 0) {
-              _this.instance.onProgress.call(_this.instance, {
-                loaded: _this.loaded,
-                total: _this.total,
-                lengthComputable: false
-              });
-            } // no more data needs to be consumed, close the stream
-
-
-            controller.close();
-            return;
-          }
-
-          _this.loaded += value.byteLength;
-
-          _this.instance.onProgress.call(_this.instance, {
-            loaded: _this.loaded,
-            total: _this.total,
-            lengthComputable: !(_this.total === 0)
-          }); // enqueue the next data chunk into our target stream
-
-
-          controller.enqueue(value);
-          read();
-        }).catch(function (error) {
-          controller.error(error);
-        });
-      };
-
-      read();
-    }
-  }]);
-
-  return ProgressHandler;
-}();
-/**
- * Load a file using `fetch`.
- *
- * @param {object} options Request options to use. See example below.
- * @returns {Observer} Observer instance
- * @example
- * // default options
- * let options = {
- *     url: undefined,
- *     method: 'GET',
- *     mode: 'cors',
- *     credentials: 'same-origin',
- *     cache: 'default',
- *     responseType: 'json',
- *     requestHeaders: [],
- *     redirect: 'follow',
- *     referrer: 'client'
- * };
- *
- * // override some options
- * options.url = '../media/demo.wav';
-
- * // available types: 'arraybuffer', 'blob', 'json' or 'text'
- * options.responseType = 'arraybuffer';
- *
- * // make fetch call
- * let request = util.fetchFile(options);
- *
- * // listen for events
- * request.on('progress', e => {
- *     console.log('progress', e);
- * });
- *
- * request.on('success', data => {
- *     console.log('success!', data);
- * });
- *
- * request.on('error', e => {
- *     console.warn('fetchFile error: ', e);
- * });
- */
-
-
-function fetchFile(options) {
-  if (!options) {
-    throw new Error('fetch options missing');
-  } else if (!options.url) {
-    throw new Error('fetch url missing');
-  }
-
-  var instance = new _observer.default();
-  var fetchHeaders = new Headers();
-  var fetchRequest = new Request(options.url); // add ability to abort
-
-  instance.controller = new AbortController(); // check if headers have to be added
-
-  if (options && options.requestHeaders) {
-    // add custom request headers
-    options.requestHeaders.forEach(function (header) {
-      fetchHeaders.append(header.key, header.value);
-    });
-  } // parse fetch options
-
-
-  var responseType = options.responseType || 'json';
-  var fetchOptions = {
-    method: options.method || 'GET',
-    headers: fetchHeaders,
-    mode: options.mode || 'cors',
-    credentials: options.credentials || 'same-origin',
-    cache: options.cache || 'default',
-    redirect: options.redirect || 'follow',
-    referrer: options.referrer || 'client',
-    signal: instance.controller.signal
-  };
-  fetch(fetchRequest, fetchOptions).then(function (response) {
-    // store response reference
-    instance.response = response;
-    var progressAvailable = true;
-
-    if (!response.body) {
-      // ReadableStream is not yet supported in this browser
-      // see https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
-      progressAvailable = false;
-    } // Server must send CORS header "Access-Control-Expose-Headers: content-length"
-
-
-    var contentLength = response.headers.get('content-length');
-
-    if (contentLength === null) {
-      // Content-Length server response header missing.
-      // Don't evaluate download progress if we can't compare against a total size
-      // see https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers
-      progressAvailable = false;
-    }
-
-    if (!progressAvailable) {
-      // not able to check download progress so skip it
-      return response;
-    } // fire progress event when during load
-
-
-    instance.onProgress = function (e) {
-      instance.fireEvent('progress', e);
-    };
-
-    return new Response(new ReadableStream(new ProgressHandler(instance, contentLength, response)), fetchOptions);
-  }).then(function (response) {
-    var errMsg;
-
-    if (response.ok) {
-      switch (responseType) {
-        case 'arraybuffer':
-          return response.arrayBuffer();
-
-        case 'json':
-          return response.json();
-
-        case 'blob':
-          return response.blob();
-
-        case 'text':
-          return response.text();
-
-        default:
-          errMsg = 'Unknown responseType: ' + responseType;
-          break;
-      }
-    }
-
-    if (!errMsg) {
-      errMsg = 'HTTP error status: ' + response.status;
-    }
-
-    throw new Error(errMsg);
-  }).then(function (response) {
-    instance.fireEvent('success', response);
-  }).catch(function (error) {
-    instance.fireEvent('error', error);
-  }); // return the fetch request
-
-  instance.fetchRequest = fetchRequest;
-  return instance;
-}
-
-module.exports = exports.default;
-
-/***/ }),
-
 /***/ "./src/util/frame.js":
 /*!***************************!*\
   !*** ./src/util/frame.js ***!
@@ -42983,20 +42160,10 @@ exports.default = getId;
 /**
  * Get a random prefixed ID
  *
- * @param {String} prefix Prefix to use. Default is `'wavesurfer_'`.
- * @returns {String} Random prefixed ID
- * @example
- * console.log(getId()); // logs 'wavesurfer_b5pors4ru6g'
- *
- * let prefix = 'foo-';
- * console.log(getId(prefix)); // logs 'foo-b5pors4ru6g'
+ * @returns {String} Random ID
  */
-function getId(prefix) {
-  if (prefix === undefined) {
-    prefix = 'wavesurfer_';
-  }
-
-  return prefix + Math.random().toString(32).substring(2);
+function getId() {
+  return 'wavesurfer_' + Math.random().toString(32).substring(2);
 }
 
 module.exports = exports.default;
@@ -43082,12 +42249,6 @@ Object.defineProperty(exports, "preventClick", {
     return _preventClick.default;
   }
 });
-Object.defineProperty(exports, "fetchFile", {
-  enumerable: true,
-  get: function get() {
-    return _fetch.default;
-  }
-});
 
 var _ajax = _interopRequireDefault(__webpack_require__(/*! ./ajax */ "./src/util/ajax.js"));
 
@@ -43110,8 +42271,6 @@ var _frame = _interopRequireDefault(__webpack_require__(/*! ./frame */ "./src/ut
 var _debounce = _interopRequireDefault(__webpack_require__(/*! debounce */ "./node_modules/debounce/index.js"));
 
 var _preventClick = _interopRequireDefault(__webpack_require__(/*! ./prevent-click */ "./src/util/prevent-click.js"));
-
-var _fetch = _interopRequireDefault(__webpack_require__(/*! ./fetch */ "./src/util/fetch.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43137,7 +42296,6 @@ exports.default = max;
  *
  * @param   {Array} values Array of numbers
  * @returns {Number} Largest number found
- * @example console.log(max([1, 2, 3])); // logs 3
  */
 function max(values) {
   var largest = -Infinity;
@@ -43172,8 +42330,7 @@ exports.default = min;
  * Get the smallest value
  *
  * @param   {Array} values Array of numbers
- * @returns {Number} Smallest number found
- * @example console.log(min([1, 2, 3])); // logs 1
+ * @returns {Number}       Smallest number found
  */
 function min(values) {
   var smallest = Number(Infinity);
@@ -43241,7 +42398,7 @@ function () {
    *
    * @param {string} event Name of the event to listen to
    * @param {function} fn The callback to trigger when the event is fired
-   * @return {ListenerDescriptor} The event descriptor
+   * @return {ListenerDescriptor}
    */
 
 
@@ -43315,7 +42472,7 @@ function () {
      *
      * @param {string} event The event to listen to
      * @param {function} handler The callback that is only to be called once
-     * @return {ListenerDescriptor} The event descriptor
+     * @return {ListenerDescriptor}
      */
 
   }, {
@@ -43387,22 +42544,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = preventClick;
 
-/**
- * Stops propagation of click event and removes event listener
- *
- * @private
- * @param {object} event The click event
- */
-function preventClickHandler(event) {
-  event.stopPropagation();
+function preventClickHandler(e) {
+  e.stopPropagation();
   document.body.removeEventListener('click', preventClickHandler, true);
 }
-/**
- * Starts listening for click event and prevent propagation
- *
- * @param {object} values Values
- */
-
 
 function preventClick(values) {
   document.body.addEventListener('click', preventClickHandler, true);
@@ -43427,13 +42572,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-/* eslint-disable valid-jsdoc */
-
 /**
- * Returns the `requestAnimationFrame` function for the browser, or a shim with
- * `setTimeout` if the function is not found
+ * Returns the requestAnimationFrame function for the browser, or a shim with
+ * setTimeout if none is found
  *
- * @return {function} Available `requestAnimationFrame` function for the browser
+ * @return {function}
  */
 var _default = (window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback, element) {
   return setTimeout(callback, 1000 / 60);
@@ -43505,13 +42648,9 @@ var _mediaelement = _interopRequireDefault(__webpack_require__(/*! ./mediaelemen
 
 var _peakcache = _interopRequireDefault(__webpack_require__(/*! ./peakcache */ "./src/peakcache.js"));
 
-var _mediaelementWebaudio = _interopRequireDefault(__webpack_require__(/*! ./mediaelement-webaudio */ "./src/mediaelement-webaudio.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -43558,28 +42697,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * @property {ScriptProcessorNode} audioScriptProcessor=null Use your own previously
  * initialized ScriptProcessorNode or leave blank.
  * @property {boolean} autoCenter=true If a scrollbar is present, center the
- * waveform on current progress
- * @property {number} autoCenterRate=5 If autoCenter is active, rate at which the
- * waveform is centered
- * @property {boolean} autoCenterImmediately=false If autoCenter is active, immediately
- * center waveform on current progress
- * @property {string} backend='WebAudio' `'WebAudio'|'MediaElement'|'MediaElementWebAudio'` In most cases
- * you don't have to set this manually. MediaElement is a fallback for unsupported browsers.
- * MediaElementWebAudio allows to use WebAudio API also with big audio files, loading audio like with
- * MediaElement backend (HTML5 audio tag). You have to use the same methods of MediaElement backend for loading and
- * playback, giving also peaks, so the audio data are not decoded. In this way you can use WebAudio features, like filters,
- * also with audio with big duration. For example:
- * ` wavesurfer.load(url | HTMLMediaElement, peaks, preload, duration);
- *   wavesurfer.play();
- *   wavesurfer.setFilter(customFilter);
- * `
+ * waveform around the progress
+ * @property {string} backend='WebAudio' `'WebAudio'|'MediaElement'` In most cases
+ * you don't have to set this manually. MediaElement is a fallback for
+ * unsupported browsers.
  * @property {string} backgroundColor=null Change background color of the
  * waveform container.
- * @property {number} barHeight=1 The height of the wave bars.
- * @property {number} barRadius=0 The radius of the wave bars. Makes bars rounded
+ * @property {number} barHeight=1 The height of the wave
  * @property {number} barGap=null The optional spacing between bars of the wave,
  * if not provided will be calculated in legacy format.
- * @property {number} barWidth=null Draw the waveform using bars.
  * @property {boolean} closeAudioContext=false Close and nullify all audio
  * contexts when the destroy method is called.
  * @property {!string|HTMLElement} container CSS selector or HTML element where
@@ -43607,10 +42733,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * even integer). If the waveform is longer than this value, additional canvases
  * will be used to render the waveform, which is useful for very large waveforms
  * that may be too wide for browsers to draw on a single canvas.
- * @property {boolean} mediaControls=false (Use with backend `MediaElement` or `MediaElementWebAudio`)
+ * @property {boolean} mediaControls=false (Use with backend `MediaElement`)
  * this enables the native controls for the media element
- * @property {string} mediaType='audio' (Use with backend `MediaElement` or `MediaElementWebAudio`)
- * `'audio'|'video'` ('video' only for `MediaElement`)
+ * @property {string} mediaType='audio' (Use with backend `MediaElement`)
+ * `'audio'|'video'`
  * @property {number} minPxPerSec=20 Minimum number of pixels per second of
  * audio.
  * @property {boolean} normalize=false If true, normalize by the maximum peak
@@ -43623,8 +42749,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * register during instantiation, they will be directly initialised unless they
  * are added with the `deferInit` property set to true.
  * @property {string} progressColor='#555' The fill color of the part of the
- * waveform behind the cursor. When `progressColor` and `waveColor` are the same
- * the progress wave is not rendered at all.
+ * waveform behind the cursor.
  * @property {boolean} removeMediaElementOnDestroy=true Set to false to keep the
  * media element in the DOM when the player is destroyed. This is useful when
  * reusing an existing media element via the `loadMediaElement` method.
@@ -43644,21 +42769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * the channels of the audio
  * @property {string} waveColor='#999' The fill color of the waveform after the
  * cursor.
- * @property {object} xhr={} XHR options. For example:
- * `let xhr = {
- *     cache: 'default',
- *     mode: 'cors',
- *     method: 'GET',
- *     credentials: 'same-origin',
- *     redirect: 'follow',
- *     referrer: 'client',
- *     headers: [
- *         {
- *             key: 'Authorization',
- *             value: 'my-token'
- *         }
- *     ]
- * };`
+ * @property {object} xhr={} XHR options.
  */
 
 /**
@@ -43698,9 +42809,8 @@ function () {
      * This function must be used to create a plugin definition which can be
      * used by wavesurfer to correctly instantiate the plugin.
      *
-     * It returns a `PluginDefinition` object representing the plugin.
-     *
-     * @param {Object} params={} The plugin params (specific to the plugin)
+     * @param  {Object} params={} The plugin params (specific to the plugin)
+     * @return {PluginDefinition} an object representing the plugin
      */
     value: function create(params) {}
     /**
@@ -43778,7 +42888,7 @@ function (_util$Observer) {
     /**
      * Instantiate this class, call its `init` function and returns it
      *
-     * @param {WavesurferParams} params The wavesurfer parameters
+     * @param {WavesurferParams} params
      * @return {Object} WaveSurfer instance
      * @example const wavesurfer = WaveSurfer.create(params);
      */
@@ -43803,7 +42913,7 @@ function (_util$Observer) {
    * @param {WavesurferParams} params Instantiation options for wavesurfer
    * @example
    * const wavesurfer = new WaveSurfer(params);
-   * @returns {this} Wavesurfer instance
+   * @returns {this}
    */
   function WaveSurfer(params) {
     var _this;
@@ -43821,12 +42931,9 @@ function (_util$Observer) {
       audioScriptProcessor: null,
       audioRate: 1,
       autoCenter: true,
-      autoCenterRate: 5,
-      autoCenterImmediately: false,
       backend: 'WebAudio',
       backgroundColor: null,
       barHeight: 1,
-      barRadius: 0,
       barGap: null,
       container: null,
       cursorColor: '#333',
@@ -43861,8 +42968,7 @@ function (_util$Observer) {
     };
     _this.backends = {
       MediaElement: _mediaelement.default,
-      WebAudio: _webaudio.default,
-      MediaElementWebAudio: _mediaelementWebaudio.default
+      WebAudio: _webaudio.default
     };
     _this.util = util;
     _this.params = util.extend({}, _this.defaultParams, params);
@@ -43930,7 +43036,7 @@ function (_util$Observer) {
      * @type {Observer}
      */
 
-    _this.currentRequest = null;
+    _this.currentAjax = null;
     /** @private */
 
     _this.arraybuffer = null;
@@ -43956,15 +43062,6 @@ function (_util$Observer) {
     /**
      * @private The uninitialised Backend class
      */
-    // Back compat
-
-    if (_this.params.backend == 'AudioElement') {
-      _this.params.backend = 'MediaElement';
-    }
-
-    if ((_this.params.backend == 'WebAudio' || _this.params.backend === 'MediaElementWebAudio') && !_webaudio.default.prototype.supportsWebAudio.call(null)) {
-      _this.params.backend = 'MediaElement';
-    }
 
     _this.Backend = _this.backends[_this.params.backend];
     /**
@@ -43975,12 +43072,7 @@ function (_util$Observer) {
     /** @private */
 
     _this.isDestroyed = false;
-    /**
-     * Get the current ready status.
-     *
-     * @example const isReady = wavesurfer.isReady;
-     * @return {boolean}
-     */
+    /** @private */
 
     _this.isReady = false; // responsive debounced event listener. If this.params.responsive is not
     // set, this is never called. Use 100ms or this.params.responsive as
@@ -44002,7 +43094,7 @@ function (_util$Observer) {
    * @example
    * var wavesurfer = new WaveSurfer(params);
    * wavesurfer.init();
-   * @return {this} The wavesurfer instance
+   * @return {this}
    */
 
 
@@ -44021,7 +43113,7 @@ function (_util$Observer) {
      *
      * @param {PluginDefinition[]} plugins An array of plugin definitions
      * @emits {WaveSurfer#plugins-registered} Called with the array of plugin definitions
-     * @return {this} The wavesurfer instance
+     * @return {this}
      */
 
   }, {
@@ -44045,24 +43137,12 @@ function (_util$Observer) {
       return this;
     }
     /**
-     * Get a map of plugin names that are currently initialised
-     *
-     * @example wavesurfer.getPlugins();
-     * @return {Object} Object with plugin names
-     */
-
-  }, {
-    key: "getActivePlugins",
-    value: function getActivePlugins() {
-      return this.initialisedPluginList;
-    }
-    /**
      * Add a plugin object to wavesurfer
      *
      * @param {PluginDefinition} plugin A plugin definition
      * @emits {WaveSurfer#plugin-added} Called with the name of the plugin that was added
      * @example wavesurfer.addPlugin(WaveSurfer.minimap());
-     * @return {this} The wavesurfer instance
+     * @return {this}
      */
 
   }, {
@@ -44111,7 +43191,7 @@ function (_util$Observer) {
      * @param {string} name A plugin name
      * @emits WaveSurfer#plugin-initialised
      * @example wavesurfer.initPlugin('minimap');
-     * @return {this} The wavesurfer instance
+     * @return {this}
      */
 
   }, {
@@ -44137,7 +43217,7 @@ function (_util$Observer) {
      * @param {string} name A plugin name
      * @emits WaveSurfer#plugin-destroyed
      * @example wavesurfer.destroyPlugin('minimap');
-     * @returns {this} The wavesurfer instance
+     * @returns {this}
      */
 
   }, {
@@ -44231,6 +43311,15 @@ function (_util$Observer) {
 
       if (this.backend) {
         this.backend.destroy();
+      } // Back compat
+
+
+      if (this.params.backend == 'AudioElement') {
+        this.params.backend = 'MediaElement';
+      }
+
+      if (this.params.backend == 'WebAudio' && !this.Backend.prototype.supportsWebAudio.call(null)) {
+        this.params.backend = 'MediaElement';
       }
 
       this.backend = new this.Backend(this.params);
@@ -44251,24 +43340,7 @@ function (_util$Observer) {
         _this6.drawer.progress(_this6.backend.getPlayedPercents());
 
         _this6.fireEvent('audioprocess', time);
-      }); // only needed for MediaElement and MediaElementWebAudio backend
-
-      if (this.params.backend === 'MediaElement' || this.params.backend === 'MediaElementWebAudio') {
-        this.backend.on('seek', function () {
-          _this6.drawer.progress(_this6.backend.getPlayedPercents());
-        });
-        this.backend.on('volume', function () {
-          var newVolume = _this6.getVolume();
-
-          _this6.fireEvent('volume', newVolume);
-
-          if (_this6.backend.isMuted !== _this6.isMuted) {
-            _this6.isMuted = _this6.backend.isMuted;
-
-            _this6.fireEvent('mute', _this6.isMuted);
-          }
-        });
-      }
+      });
     }
     /**
      * Create the peak cache
@@ -44330,7 +43402,7 @@ function (_util$Observer) {
      * @param {?number} start Position to start at
      * @param {?number} end Position to end at
      * @emits WaveSurfer#interaction
-     * @return {Promise} Result of the backend play method
+     * @return {Promise}
      * @example
      * // play from second 1 to 5
      * wavesurfer.play(1, 5);
@@ -44347,10 +43419,10 @@ function (_util$Observer) {
       return this.backend.play(start, end);
     }
     /**
-     * Stops and pauses playback
+     * Stops playback
      *
      * @example wavesurfer.pause();
-     * @return {Promise} Result of the backend pause method
+     * @return {Promise}
      */
 
   }, {
@@ -44364,7 +43436,7 @@ function (_util$Observer) {
      * Toggle playback
      *
      * @example wavesurfer.playPause();
-     * @return {Promise} Result of the backend play or pause method
+     * @return {Promise}
      */
 
   }, {
@@ -44461,7 +43533,7 @@ function (_util$Observer) {
 
       // return an error if progress is not a number between 0 and 1
       if (typeof progress !== 'number' || !isFinite(progress) || progress < 0 || progress > 1) {
-        throw new Error('Error calling wavesurfer.seekTo, parameter must be a number between 0 and 1!');
+        return console.error('Error calling wavesurfer.seekTo, parameter must be a number between 0 and 1!');
       }
 
       this.fireEvent('interaction', function () {
@@ -44500,12 +43572,9 @@ function (_util$Observer) {
       this.drawer.progress(0);
     }
     /**
-     * Sets the ID of the audio device to use for output and returns a Promise.
+     * Set the playback volume.
      *
-     * @param {string} deviceId String value representing underlying output
-     * device
-     * @returns {Promise} `Promise` that resolves to `undefined` when there are
-     * no errors detected.
+     * @param {string} deviceId String value representing underlying output device
      */
 
   }, {
@@ -44555,7 +43624,7 @@ function (_util$Observer) {
     /**
      * Get the playback rate.
      *
-     * @return {number} The current playback rate.
+     * @return {number}
      */
 
   }, {
@@ -44580,13 +43649,12 @@ function (_util$Observer) {
     /**
      * Enable or disable muted audio
      *
-     * @param {boolean} mute Specify `true` to mute audio.
+     * @param {boolean} mute
      * @emits WaveSurfer#volume
      * @emits WaveSurfer#mute
      * @example
      * // unmute
      * wavesurfer.setMute(false);
-     * console.log(wavesurfer.getMute()) // logs false
      */
 
   }, {
@@ -44619,7 +43687,7 @@ function (_util$Observer) {
      * Get the current mute status.
      *
      * @example const isMuted = wavesurfer.getMute();
-     * @return {boolean} Current mute status
+     * @return {boolean}
      */
 
   }, {
@@ -44628,11 +43696,23 @@ function (_util$Observer) {
       return this.isMuted;
     }
     /**
+     * Get the current ready status.
+     *
+     * @example const isReady = wavesurfer.isReady();
+     * @return {boolean}
+     */
+
+  }, {
+    key: "isReady",
+    value: function isReady() {
+      return this.isReady;
+    }
+    /**
      * Get the list of current set filters as an array.
      *
      * Filters must be set with setFilters method first
      *
-     * @return {array} List of enabled filters
+     * @return {array}
      */
 
   }, {
@@ -44859,7 +43939,7 @@ function (_util$Observer) {
      * Decode buffer and load
      *
      * @private
-     * @param {ArrayBuffer} arraybuffer Buffer to process
+     * @param {ArrayBuffer} arraybuffer
      */
 
   }, {
@@ -44877,7 +43957,7 @@ function (_util$Observer) {
      * Directly load an externally decoded AudioBuffer
      *
      * @private
-     * @param {AudioBuffer} buffer Buffer to process
+     * @param {AudioBuffer} buffer
      * @emits WaveSurfer#ready
      */
 
@@ -44886,8 +43966,8 @@ function (_util$Observer) {
     value: function loadDecodedBuffer(buffer) {
       this.backend.load(buffer);
       this.drawBuffer();
-      this.isReady = true;
       this.fireEvent('ready');
+      this.isReady = true;
     }
     /**
      * Loads audio data from a Blob or File object
@@ -44920,36 +44000,29 @@ function (_util$Observer) {
      *
      * @param {string|HTMLMediaElement} url The url of the audio file or the
      * audio element with the audio
-     * @param {number[]|Number.<Array[]>} peaks Wavesurfer does not have to decode
+     * @param {?number[]|number[][]} peaks Wavesurfer does not have to decode
      * the audio to render the waveform if this is specified
-     * @param {?string} preload (Use with backend `MediaElement` and `MediaElementWebAudio`)
+     * @param {?string} preload (Use with backend `MediaElement`)
      * `'none'|'metadata'|'auto'` Preload attribute for the media element
      * @param {?number} duration The duration of the audio. This is used to
      * render the peaks data in the correct size for the audio duration (as
-     * befits the current `minPxPerSec` and zoom value) without having to decode
+     * befits the current minPxPerSec and zoom value) without having to decode
      * the audio.
-     * @returns {void}
-     * @throws Will throw an error if the `url` argument is empty.
      * @example
-     * // uses fetch or media element to load file (depending on backend)
+     * // using ajax or media element to load (depending on backend)
      * wavesurfer.load('http://example.com/demo.wav');
      *
      * // setting preload attribute with media element backend and supplying
-     * // peaks
-     * wavesurfer.load(
+     * peaks wavesurfer.load(
      *   'http://example.com/demo.wav',
      *   [0.0218, 0.0183, 0.0165, 0.0198, 0.2137, 0.2888],
-     *   true
+     *   true,
      * );
      */
 
   }, {
     key: "load",
     value: function load(url, peaks, preload, duration) {
-      if (!url) {
-        throw new Error('url parameter cannot be empty');
-      }
-
       this.empty();
 
       if (preload) {
@@ -44958,7 +44031,7 @@ function (_util$Observer) {
         var preloadIgnoreReasons = {
           "Preload is not 'auto', 'none' or 'metadata'": ['auto', 'metadata', 'none'].indexOf(preload) === -1,
           'Peaks are not provided': !peaks,
-          "Backend is not of type 'MediaElement' or 'MediaElementWebAudio'": ['MediaElement', 'MediaElementWebAudio'].indexOf(this.params.backend) === -1,
+          'Backend is not of type MediaElement': this.params.backend !== 'MediaElement',
           'Url is not of type string': typeof url !== 'string'
         };
         var activeReasons = Object.keys(preloadIgnoreReasons).filter(function (reason) {
@@ -44966,7 +44039,6 @@ function (_util$Observer) {
         });
 
         if (activeReasons.length) {
-          // eslint-disable-next-line no-console
           console.warn('Preload parameter of wavesurfer.load will be ignored because:\n\t- ' + activeReasons.join('\n\t- ')); // stop invalid values from being used
 
           preload = null;
@@ -44978,7 +44050,6 @@ function (_util$Observer) {
           return this.loadBuffer(url, peaks, duration);
 
         case 'MediaElement':
-        case 'MediaElementWebAudio':
           return this.loadMediaElement(url, peaks, preload, duration);
       }
     }
@@ -44986,10 +44057,9 @@ function (_util$Observer) {
      * Loads audio using Web Audio buffer backend.
      *
      * @private
-     * @param {string} url URL of audio file
-     * @param {number[]|Number.<Array[]>} peaks Peaks data
-     * @param {?number} duration Optional duration of audio file
-     * @returns {void}
+     * @param {string} url
+     * @param {?number[]|number[][]} peaks
+     * @param {?number} duration
      */
 
   }, {
@@ -45021,11 +44091,11 @@ function (_util$Observer) {
      * @private
      * @param {string|HTMLMediaElement} urlOrElt Either a path to a media file, or an
      * existing HTML5 Audio/Video Element
-     * @param {number[]|Number.<Array[]>} peaks Array of peaks. Required to bypass web audio
+     * @param {number[]|number[][]} peaks Array of peaks. Required to bypass web audio
      * dependency
      * @param {?boolean} preload Set to true if the preload attribute of the
      * audio element should be enabled
-     * @param {?number} duration Optional duration of audio file
+     * @param {?number} duration
      */
 
   }, {
@@ -45046,14 +44116,11 @@ function (_util$Observer) {
       }
 
       this.tmpEvents.push(this.backend.once('canplay', function () {
-        // ignore when backend was already destroyed
-        if (!_this12.backend.destroyed) {
-          _this12.drawBuffer();
+        _this12.drawBuffer();
 
-          _this12.isReady = true;
+        _this12.fireEvent('ready');
 
-          _this12.fireEvent('ready');
-        }
+        _this12.isReady = true;
       }), this.backend.once('error', function (err) {
         return _this12.fireEvent('error', err);
       })); // If no pre-decoded peaks provided or pre-decoded peaks are
@@ -45082,8 +44149,8 @@ function (_util$Observer) {
      * Decode an array buffer and pass data to a callback
      *
      * @private
-     * @param {Object} arraybuffer The array buffer to decode
-     * @param {function} callback The function to call on complete
+     * @param {Object} arraybuffer
+     * @param {function} callback
      */
 
   }, {
@@ -45104,11 +44171,10 @@ function (_util$Observer) {
       });
     }
     /**
-     * Load an array buffer using fetch and pass the result to a callback
+     * Load an array buffer by ajax and pass to a callback
      *
-     * @param {string} url The URL of the file object
-     * @param {function} callback The function to call on complete
-     * @returns {util.fetchFile} fetch call
+     * @param {string} url
+     * @param {function} callback
      * @private
      */
 
@@ -45117,29 +44183,29 @@ function (_util$Observer) {
     value: function getArrayBuffer(url, callback) {
       var _this14 = this;
 
-      var options = util.extend({
+      var ajax = util.ajax({
         url: url,
-        responseType: 'arraybuffer'
-      }, this.params.xhr);
-      var request = util.fetchFile(options);
-      this.currentRequest = request;
-      this.tmpEvents.push(request.on('progress', function (e) {
+        responseType: 'arraybuffer',
+        xhr: this.params.xhr
+      });
+      this.currentAjax = ajax;
+      this.tmpEvents.push(ajax.on('progress', function (e) {
         _this14.onProgress(e);
-      }), request.on('success', function (data) {
+      }), ajax.on('success', function (data, e) {
         callback(data);
-        _this14.currentRequest = null;
-      }), request.on('error', function (e) {
-        _this14.fireEvent('error', e);
+        _this14.currentAjax = null;
+      }), ajax.on('error', function (e) {
+        _this14.fireEvent('error', 'XHR error: ' + e.target.statusText);
 
-        _this14.currentRequest = null;
+        _this14.currentAjax = null;
       }));
-      return request;
+      return ajax;
     }
     /**
      * Called while the audio file is loading
      *
      * @private
-     * @param {Event} e Progress event
+     * @param {Event} e
      * @emits WaveSurfer#loading
      */
 
@@ -45165,7 +44231,7 @@ function (_util$Observer) {
      * @param {number} accuracy=10000 (Integer)
      * @param {?boolean} noWindow Set to true to disable opening a new
      * window with the JSON
-     * @param {number} start Start index
+     * @param {number} start
      * @todo Update exportPCM to work with new getPeaks signature
      * @return {string} JSON of peaks
      */
@@ -45192,25 +44258,17 @@ function (_util$Observer) {
     /**
      * Save waveform image as data URI.
      *
-     * The default format is `'image/png'`. Other supported types are
-     * `'image/jpeg'` and `'image/webp'`.
+     * The default format is `image/png`. Other supported types are
+     * `image/jpeg` and `image/webp`.
      *
-     * @param {string} format='image/png' A string indicating the image format.
-     * The default format type is `'image/png'`.
-     * @param {number} quality=1 A number between 0 and 1 indicating the image
-     * quality to use for image formats that use lossy compression such as
-     * `'image/jpeg'`` and `'image/webp'`.
-     * @param {string} type Image data type to return. Either 'dataURL' (default)
-     * or 'blob'.
-     * @return {string|string[]|Promise} When using `'dataURL'` type this returns
-     * a single data URL or an array of data URLs, one for each canvas. When using
-     * `'blob'` type this returns a `Promise` resolving with an array of `Blob`
-     * instances, one for each canvas.
+     * @param {string} format='image/png'
+     * @param {number} quality=1
+     * @return {string} data URI of image
      */
 
   }, {
     key: "exportImage",
-    value: function exportImage(format, quality, type) {
+    value: function exportImage(format, quality) {
       if (!format) {
         format = 'image/png';
       }
@@ -45219,22 +44277,18 @@ function (_util$Observer) {
         quality = 1;
       }
 
-      if (!type) {
-        type = 'dataURL';
-      }
-
-      return this.drawer.getImage(format, quality, type);
+      return this.drawer.getImage(format, quality);
     }
     /**
-     * Cancel any fetch request currently in progress
+     * Cancel any ajax request currently in progress
      */
 
   }, {
     key: "cancelAjax",
     value: function cancelAjax() {
-      if (this.currentRequest && this.currentRequest.controller) {
-        this.currentRequest.controller.abort();
-        this.currentRequest = null;
+      if (this.currentAjax) {
+        this.currentAjax.xhr.abort();
+        this.currentAjax = null;
       }
     }
     /**
@@ -45262,8 +44316,7 @@ function (_util$Observer) {
 
       this.isReady = false;
       this.cancelAjax();
-      this.clearTmpEvents(); // empty drawer
-
+      this.clearTmpEvents();
       this.drawer.progress(0);
       this.drawer.setWidth(0);
       this.drawer.drawPeaks({
@@ -45290,14 +44343,8 @@ function (_util$Observer) {
         window.removeEventListener('orientationchange', this._onResize, true);
       }
 
-      if (this.backend) {
-        this.backend.destroy();
-      }
-
-      if (this.drawer) {
-        this.drawer.destroy();
-      }
-
+      this.backend.destroy();
+      this.drawer.destroy();
       this.isDestroyed = true;
       this.isReady = false;
       this.arraybuffer = null;
@@ -45308,7 +44355,7 @@ function (_util$Observer) {
 }(util.Observer);
 
 exports.default = WaveSurfer;
-WaveSurfer.VERSION = "3.2.0";
+WaveSurfer.VERSION = "2.2.1";
 WaveSurfer.util = util;
 module.exports = exports.default;
 
@@ -45331,9 +44378,7 @@ exports.default = void 0;
 
 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -45373,9 +44418,9 @@ function (_util$Observer) {
   _createClass(WebAudio, [{
     key: "supportsWebAudio",
 
-    /** scriptBufferSize: size of the processing buffer */
+    /** @private */
 
-    /** audioContext: allows to process audio with WebAudio API */
+    /** @private */
 
     /** @private */
 
@@ -45384,7 +44429,7 @@ function (_util$Observer) {
     /**
      * Does the browser support this backend
      *
-     * @return {boolean} Whether or not this browser supports this backend
+     * @return {boolean}
      */
     value: function supportsWebAudio() {
       return !!(window.AudioContext || window.webkitAudioContext);
@@ -45392,7 +44437,7 @@ function (_util$Observer) {
     /**
      * Get the audio context used by this backend or create one
      *
-     * @return {AudioContext} Existing audio context, or creates a new one
+     * @return {AudioContext}
      */
 
   }, {
@@ -45407,9 +44452,8 @@ function (_util$Observer) {
     /**
      * Get the offline audio context used by this backend or create one
      *
-     * @param {number} sampleRate The sample rate to use
-     * @return {OfflineAudioContext} Existing offline audio context, or creates
-     * a new one
+     * @param {number} sampleRate
+     * @return {OfflineAudioContext}
      */
 
   }, {
@@ -45424,7 +44468,7 @@ function (_util$Observer) {
     /**
      * Construct the backend
      *
-     * @param {WavesurferParams} params Wavesurfer parameters
+     * @param {WavesurferParams} params
      */
 
   }]);
@@ -45476,9 +44520,9 @@ function (_util$Observer) {
       }
     }), _this$stateBehaviors);
     _this.params = params;
-    /** ac: Audio Context instance */
+    /** @private */
 
-    _this.ac = params.audioContext || (_this.supportsWebAudio() ? _this.getAudioContext() : {});
+    _this.ac = params.audioContext || _this.getAudioContext();
     /**@private */
 
     _this.lastPlay = _this.ac.currentTime;
@@ -45493,11 +44537,14 @@ function (_util$Observer) {
     _this.states = (_this$states = {}, _defineProperty(_this$states, PLAYING, Object.create(_this.stateBehaviors[PLAYING])), _defineProperty(_this$states, PAUSED, Object.create(_this.stateBehaviors[PAUSED])), _defineProperty(_this$states, FINISHED, Object.create(_this.stateBehaviors[FINISHED])), _this$states);
     /** @private */
 
+    _this.analyser = null;
+    /** @private */
+
     _this.buffer = null;
     /** @private */
 
     _this.filters = [];
-    /** gainNode: allows to control audio volume */
+    /** @private */
 
     _this.gainNode = null;
     /** @private */
@@ -45512,10 +44559,10 @@ function (_util$Observer) {
     /** @private */
 
     _this.playbackRate = 1;
-    /** analyser: provides audio analysis information */
+    /** @private */
 
     _this.analyser = null;
-    /** scriptNode: allows processing audio */
+    /** @private */
 
     _this.scriptNode = null;
     /** @private */
@@ -45530,11 +44577,6 @@ function (_util$Observer) {
     /** @private */
 
     _this.explicitDuration = params.duration;
-    /**
-     * Boolean indicating if the backend was destroyed.
-     */
-
-    _this.destroyed = false;
     return _this;
   }
   /**
@@ -45566,11 +44608,7 @@ function (_util$Observer) {
         this.analyser.connect(this.gainNode);
       }
     }
-    /**
-     * @private
-     *
-     * @param {string} state The new state
-     */
+    /** @private */
 
   }, {
     key: "setState",
@@ -45583,7 +44621,7 @@ function (_util$Observer) {
     /**
      * Unpacked `setFilters()`
      *
-     * @param {...AudioNode} filters One or more filters to set
+     * @param {...AudioNode} filters
      */
 
   }, {
@@ -45621,7 +44659,7 @@ function (_util$Observer) {
         }, this.analyser).connect(this.gainNode);
       }
     }
-    /** Create ScriptProcessorNode to process audio */
+    /** @private */
 
   }, {
     key: "createScriptNode",
@@ -45666,7 +44704,7 @@ function (_util$Observer) {
     value: function removeOnAudioProcess() {
       this.scriptNode.onaudioprocess = function () {};
     }
-    /** Create analyser node to perform audio analysis */
+    /** @private */
 
   }, {
     key: "createAnalyserNode",
@@ -45677,6 +44715,7 @@ function (_util$Observer) {
     /**
      * Create the gain node needed to control the playback volume.
      *
+     * @private
      */
 
   }, {
@@ -45696,8 +44735,6 @@ function (_util$Observer) {
      * Set the sink id for the media player
      *
      * @param {string} deviceId String value representing audio device id.
-     * @returns {Promise} A Promise that resolves to `undefined` when there
-     * are no errors.
      */
 
   }, {
@@ -45747,14 +44784,7 @@ function (_util$Observer) {
     value: function getVolume() {
       return this.gainNode.gain.value;
     }
-    /**
-     * Decode an array buffer and pass data to a callback
-     *
-     * @private
-     * @param {ArrayBuffer} arraybuffer The array buffer to decode
-     * @param {function} callback The function to call on complete.
-     * @param {function} errback The function to call on error.
-     */
+    /** @private */
 
   }, {
     key: "decodeArrayBuffer",
@@ -45770,8 +44800,8 @@ function (_util$Observer) {
     /**
      * Set pre-decoded peaks
      *
-     * @param {number[]|Number.<Array[]>} peaks Peaks data
-     * @param {?number} duration Explicit duration
+     * @param {number[]|number[][]} peaks
+     * @param {?number} duration
      */
 
   }, {
@@ -45784,9 +44814,9 @@ function (_util$Observer) {
       this.peaks = peaks;
     }
     /**
-     * Set the rendered length (different from the length of the audio)
+     * Set the rendered length (different from the length of the audio).
      *
-     * @param {number} length The rendered length
+     * @param {number} length
      */
 
   }, {
@@ -45819,7 +44849,7 @@ function (_util$Observer) {
      * @param {number} length How many subranges to break the waveform into.
      * @param {number} first First sample in the required range.
      * @param {number} last Last sample in the required range.
-     * @return {number[]|Number.<Array[]>} Array of 2*<length> peaks or array of arrays of
+     * @return {number[]|number[][]} Array of 2*<length> peaks or array of arrays of
      * peaks consisting of (max, min) values for each subrange.
      */
 
@@ -45902,7 +44932,7 @@ function (_util$Observer) {
     /**
      * Get the position from 0 to 1
      *
-     * @return {number} Position
+     * @return {number}
      */
 
   }, {
@@ -45932,7 +44962,6 @@ function (_util$Observer) {
 
       this.unAll();
       this.buffer = null;
-      this.destroyed = true;
       this.disconnectFilters();
       this.disconnectSource();
       this.gainNode.disconnect();
@@ -45962,7 +44991,7 @@ function (_util$Observer) {
     /**
      * Loaded a decoded audio buffer
      *
-     * @param {Object} buffer Decoded audio buffer to load
+     * @param {Object} buffer
      */
 
   }, {
@@ -45990,7 +45019,7 @@ function (_util$Observer) {
     /**
      * Used by `wavesurfer.isPlaying()` and `wavesurfer.playPause()`
      *
-     * @return {boolean} Whether or not this backend is currently paused
+     * @return {boolean}
      */
 
   }, {
@@ -46001,7 +45030,7 @@ function (_util$Observer) {
     /**
      * Used by `wavesurfer.getDuration()`
      *
-     * @return {number} Duration of loaded buffer
+     * @return {number}
      */
 
   }, {
@@ -46022,8 +45051,7 @@ function (_util$Observer) {
      *
      * @param {number} start Position to start at in seconds
      * @param {number} end Position to end at in seconds
-     * @return {{start: number, end: number}} Object containing start and end
-     * positions
+     * @return {{start: number, end: number}}
      */
 
   }, {
@@ -46062,7 +45090,7 @@ function (_util$Observer) {
     /**
      * Get the playback position in seconds
      *
-     * @return {number} The playback position in seconds
+     * @return {number}
      */
 
   }, {
@@ -46117,7 +45145,7 @@ function (_util$Observer) {
      * Returns the current time in seconds relative to the audio-clip's
      * duration.
      *
-     * @return {number} The current time in seconds
+     * @return {number}
      */
 
   }, {
@@ -46128,7 +45156,7 @@ function (_util$Observer) {
     /**
      * Returns the current playback rate. (0=no playback, 1=normal playback)
      *
-     * @return {number} The current playback rate
+     * @return {number}
      */
 
   }, {
@@ -46139,7 +45167,7 @@ function (_util$Observer) {
     /**
      * Set the audio source playback rate.
      *
-     * @param {number} value The playback rate to use
+     * @param {number} value
      */
 
   }, {
