@@ -24124,3 +24124,34 @@ Processing by StaticPagesController#root as HTML
 Completed 200 OK in 35ms (Views: 33.2ms | ActiveRecord: 0.0ms)
 
 
+  [1m[36mSample Load (0.9ms)[0m  [1m[34mSELECT  "samples".* FROM "samples" ORDER BY "samples"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "Sample"], ["name", "file"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/" for ::1 at 2019-11-11 11:22:47 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "zLNobJK4q0_mVm36iL-1Ww"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10
+  Rendered api/users/_user.json.jbuilder (0.4ms)
+  Rendered static_pages/root.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 70ms (Views: 64.3ms | ActiveRecord: 3.3ms)
+
+
+  [1m[36mSample Load (0.6ms)[0m  [1m[34mSELECT "samples".* FROM "samples"[0m
+  [1m[36mSample Load (0.4ms)[0m  [1m[34mSELECT  "samples".* FROM "samples" ORDER BY "samples"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 2], ["record_type", "Sample"], ["name", "file"], ["LIMIT", 1]]
+[36m  S3 Storage (2927.0ms) [0m[32mUploaded file to key: SiYUtq46SH1dqx6g3A5z7tU7 (checksum: MyByjuf4GKUabgKZOEGrgQ==)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveStorage::Blob Create (0.9ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["key", "SiYUtq46SH1dqx6g3A5z7tU7"], ["filename", "lfh-guitar-loop-sweet-sultry.mp3"], ["content_type", "audio/mpeg"], ["metadata", "{\"identified\":true}"], ["byte_size", 847411], ["checksum", "MyByjuf4GKUabgKZOEGrgQ=="], ["created_at", "2019-11-11 19:32:20.413136"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveStorage::Attachment Create (1.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "file"], ["record_type", "Sample"], ["record_id", 2], ["blob_id", 2], ["created_at", "2019-11-11 19:32:20.430171"]]
+  [1m[36mSample Update (0.3ms)[0m  [1m[33mUPDATE "samples" SET "updated_at" = $1 WHERE "samples"."id" = $2[0m  [["updated_at", "2019-11-11 19:32:20.432614"], ["id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f) to Async(default) with arguments: #<GlobalID:0x00007ff32d8cfb40 @uri=#<URI::GID gid://sampler/ActiveStorage::Blob/2>>
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f] Performing ActiveStorage::AnalyzeJob (Job ID: a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f) from Async(default) with arguments: #<GlobalID:0x00007ff326e0e540 @uri=#<URI::GID gid://sampler/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f]   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f]   [1m[36mActiveStorage::Blob Update (0.7ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f]   [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f] Performed ActiveStorage::AnalyzeJob (Job ID: a3f4c042-b9fe-4f80-a1ed-7cb53bb6f86f) from Async(default) in 5.79ms
