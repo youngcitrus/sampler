@@ -51,8 +51,8 @@ const Greeting = ({ user, logoutUser}) => {
         </header>
         <div className='welcome-page'>
           <div className='welcome-banner'>
-            Welcome, {user.username}!<br/>
-            <button onClick={logoutUser}>Logout</button>
+            <div className='welcome-text'>Welcome, {user.username}!<br/>
+            Today's a great day to make music.</div><br/>
           </div>    
         </div>
       </div>

@@ -13,7 +13,6 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "wavesurfer.js": "^2.0.0-beta01",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
