@@ -3,5 +3,19 @@
 }
 
 .welcome-banner{
-    padding-top: 60px;
+    padding-top: 60px; 
+    height: 275px;
+    background-image: image-url('welcome-banner.png');
+    background-size: cover;
+}
+
+.welcome-text{
+    position: relative;
+    top: 125px;
+    left: 50px;
+    font-family: 'Roboto';
+    font-size: 40px;
+    color: white;
+    line-height: 1.25;
+    
 }
