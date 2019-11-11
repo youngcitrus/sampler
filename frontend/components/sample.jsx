@@ -44,7 +44,7 @@ class SampleTest extends React.Component{
     }
 
     render (){
-
+        
         return(
             <div className='audio-player'>
                 <div id="btn-play" className='btn-play' disabled="disabled" playing="false"/>

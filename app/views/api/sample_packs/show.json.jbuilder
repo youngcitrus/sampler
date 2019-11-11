@@ -1,0 +1,1 @@
+json.partial! 'api/sample_packs/pack', sample_pack: @sample_pack
