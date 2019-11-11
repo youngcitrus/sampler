@@ -16,4 +16,6 @@ class Sample < ApplicationRecord
     belongs_to :sample_pack,
         foreign_key: :pack_id,
         class_name: :SamplePack
+
+    has_one_attached :file
 end
