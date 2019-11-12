@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import Footer from '../footer'
 import NavBar from '../navbar';
+import NavBarUser from '../navbar_user';
+import DisplayPacksContainer from '../display_packs/display_packs_container';
 
 const Greeting = ({ user, logoutUser}) => {
     const splash = () =>(
@@ -47,14 +49,15 @@ const Greeting = ({ user, logoutUser}) => {
     const welcome = () => (
       <div>
         <header>
-          <NavBar/>
+          <NavBarUser/>
         </header>
         <div className='welcome-page'>
           <div className='welcome-banner'>
             <div className='welcome-text'>Welcome, {user.username}!<br/>
             Today's a great day to make music.</div><br/>
-          </div>    
+          </div>
         </div>
+        <DisplayPacksContainer/>
       </div>
     );
 

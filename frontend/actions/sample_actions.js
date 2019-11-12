@@ -14,10 +14,10 @@ const receivePack = pack => ({
     pack
 })
 
-// const receiveSamples = samples => ({
-//     type: RECEIVE_SAMPLES,
-//     samples
-// })
+const receiveSamples = samples => ({
+    type: RECEIVE_SAMPLES,
+    samples
+})
 
 export const requestAllPacks = () => dispatch => (
     SampleUtil.fetchAllSamplePacks()
@@ -32,6 +32,7 @@ export const requestPack = (packId) => dispatch => (
     
 );
 
-export const requestSamples = samples => dispatch => (
-    SampleUtil.fetchSamples
+export const requestSamples = packId => dispatch => (
+    SampleUtil.fetchSamples(packId)
+        .then(samples => dispatch(receiveSamples(samples)))
 )

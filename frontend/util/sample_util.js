@@ -11,3 +11,10 @@ export const fetchSamplePack = packId => {
         url: `api/sample_packs/${packId}`
     });
 }
+
+export const fetchSamples = packId => {
+    return $.ajax({
+        method: 'GET',
+        url: `api/sample_packs/${packId}/samples`
+    })
+}
