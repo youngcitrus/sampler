@@ -7,9 +7,13 @@ const mapStateToProps = ({entities}) => ({
    samples: Object.values(entities.samples)
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, ownProps) => {
+    debugger
+    return{
     requestPack: () => dispatch(requestPack(ownProps.match.params.packId)),
-    requestSamples: ()=> dispatch(requestSamples(ownProps.match.params.packId))
-})
+    requestSamples: () => dispatch(requestSamples(ownProps.match.params.packId)),
+    redirectToRoot: () => ownProps.history.push('/')
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PackShow)

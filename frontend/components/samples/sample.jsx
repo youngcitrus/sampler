@@ -26,9 +26,13 @@ class Sample extends React.Component{
             if (playButton.getAttribute('playing') === 'false'){
                 wavesurfer.play();
                 playButton.setAttribute('playing', 'true');
+                playButton.classList.remove('btn-play');
+                playButton.classList.add('btn-pause');
             } else if (playButton.getAttribute('playing') === 'true' ){
                 wavesurfer.pause();
                 playButton.setAttribute('playing', 'false');
+                playButton.classList.remove('btn-pause');
+                playButton.classList.add('btn-play');
             }
         }, false);
 
@@ -38,6 +42,8 @@ class Sample extends React.Component{
 
         wavesurfer.on('finish', ()=>{
             playButton.setAttribute('playing', 'false');
+            playButton.classList.remove('btn-pause');
+            playButton.classList.add('btn-play');
         });
 
         wavesurfer.load(this.props.sample.fileUrl);
@@ -46,11 +52,14 @@ class Sample extends React.Component{
     render(){
         return (
             <div>
-                {this.props.sample.name}
-                <div className='audio-player'>
-                    <div id={this.props.sample.name} className='btn-play' disabled="disabled" playing="false"/>
-                    <div ref={this.waveform} className='audio-container'></div> 
-                 </div>
+                <div className='sample-row'>
+                    <div className='parent-pack-icon'><img src={this.props.pack.photoUrl}/></div>
+                    <div className='audio-player'>
+                        <div id={this.props.sample.name} className='btn-play' disabled="disabled" playing="false"/>
+                        <div ref={this.waveform} className='audio-container'></div> 
+                    </div>
+                    <div className='sample-name'>{this.props.sample.name}</div>
+                </div>
             </div>
         );
     }   

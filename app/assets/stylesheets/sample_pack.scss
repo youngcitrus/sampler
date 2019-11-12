@@ -1,0 +1,102 @@
+.pack-show{
+    padding-top: 70px;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.pack-banner{
+    position: relative;
+    height: 250px;
+    font-family: 'Roboto';
+    color: white;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.pack-banner h2{
+    font-size: 50px;
+}
+
+.cover-art{
+    width: 170px;
+    height: 170px;
+    z-index: 1;
+    position: relative;
+    top: 40px;
+    left: 40px;
+}
+
+.cover-art-background{
+    position: absolute;
+    left:0;
+    top: 0;
+    z-index: -2;
+    object-fit: cover;
+    filter: blur(20px);
+}
+
+.pack-info{
+    z-index: 10;
+    position: relative;
+    left: 230px;
+    bottom: 120px;
+}
+
+.darken{
+    position: relative;
+    bottom: 300px;
+    height: 400px;
+    background: black;
+    z-index: 0;
+    opacity: 20%;
+}
+
+.sample-headers{
+    display: flex;
+    flex-direction: row;
+    font-family: 'Roboto';
+    font-size: 13px;
+    padding: 8px 0px 8px 0px;
+    color: grey;
+
+}
+
+.sh-pack{
+    position: relative;
+    left: 10px;
+}
+
+.sh-filename{
+    position: relative;
+    left: 270px;
+}
+
+.sh-key{
+    position: relative;
+    left: 500px;
+}
+.sh-bpm{
+    position: relative;
+    left: 650px;
+}
+
+.sh-like{
+    position: relative;
+    left: 765px;
+}
+
+.sh-cart{
+    position: relative;
+    left: 870px;
+}
+
+.sample-preheader{
+    font-family: 'Roboto';
+    padding: 15px;
+    color: grey;
+
+}
+
+.samples-container{
+    background: white;
+}

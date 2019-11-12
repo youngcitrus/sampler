@@ -6,6 +6,7 @@ import SignupFormContainer from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import GreetingContainer from "./greeting/greeting_container";
 import PackShowContainer from "./packs/pack_show_container";
+import NavBarContainer from "./navbar_container";
 
 const App = () => {
 return (

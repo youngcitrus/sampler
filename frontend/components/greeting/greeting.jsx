@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import Footer from '../footer'
-import NavBar from '../navbar';
-import NavBarUser from '../navbar_user';
+import NavBarContainer from '../navbar_container';
+// import NavBarUser from '../navbar_user';
 import DisplayPacksContainer from '../display_packs/display_packs_container';
 
 const Greeting = ({ user, logoutUser}) => {
     const splash = () =>(
       <div>
         <header>
-          <NavBar/>
+          <NavBarContainer/>
         </header>
         <div className='splash'>
           <section className='splash-top'>
@@ -49,7 +49,7 @@ const Greeting = ({ user, logoutUser}) => {
     const welcome = () => (
       <div>
         <header>
-          <NavBarUser/>
+          <NavBarContainer/>
         </header>
         <div className='welcome-page'>
           <div className='welcome-banner'>

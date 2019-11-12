@@ -17,4 +17,8 @@ class SamplePack < ApplicationRecord
         foreign_key: :pack_id,
         class_name: :Sample
 
+    has_one_attached :cover_art
+    
+    has_one_attached :demo
+
 end
