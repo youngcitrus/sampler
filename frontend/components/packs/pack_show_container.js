@@ -8,7 +8,6 @@ const mapStateToProps = ({entities}) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    debugger
     return{
     requestPack: () => dispatch(requestPack(ownProps.match.params.packId)),
     requestSamples: () => dispatch(requestSamples(ownProps.match.params.packId)),

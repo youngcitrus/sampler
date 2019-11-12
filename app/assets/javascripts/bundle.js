@@ -784,14 +784,16 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "pack-banner"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.pack.photoUrl,
+          src: this.props.pack.fileUrls[0],
           className: "cover-art"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.pack.photoUrl,
+          src: this.props.pack.fileUrls[0],
           className: "cover-art-background"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "pack-info"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.pack.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.pack.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play-demo"
+        }, "Play Demo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "darken"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sample-preheader"
@@ -854,7 +856,6 @@ var mapStateToProps = function mapStateToProps(_ref) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  debugger;
   return {
     requestPack: function requestPack() {
       return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_1__["requestPack"])(ownProps.match.params.packId));

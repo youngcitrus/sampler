@@ -21,4 +21,6 @@ class SamplePack < ApplicationRecord
     
     has_one_attached :demo
 
+    has_many_attached :files
+
 end

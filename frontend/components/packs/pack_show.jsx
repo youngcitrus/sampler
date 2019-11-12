@@ -20,16 +20,20 @@ class PackShow extends React.Component{
                     <NavBarContainer redirect={this.props.redirectToRoot}/>
                     <div className='pack-show'>
                         <div className='pack-banner'>
-                            <img src={this.props.pack.photoUrl} className='cover-art'/>
-                            <img src={this.props.pack.photoUrl} className='cover-art-background'/>
+                            <img src={this.props.pack.fileUrls[0]} className='cover-art'/>
+                            <img src={this.props.pack.fileUrls[0]} className='cover-art-background'/>
                             
                             <div className='pack-info'>
                                 <h2>{this.props.pack.name}</h2>
                                 <p>{this.props.pack.description}</p>
+                                <div className='play-demo' >Play Demo</div>
                             </div>
                             <div className='darken'></div>
+                            
                         </div>
-                        <div className='sample-preheader'>{this.props.samples.length} Samples</div>
+                        <div className='sample-preheader'>
+                            {this.props.samples.length} Samples
+                        </div>
                         <div className='sample-headers'>
                             <div className='sh-pack'>Pack</div>
                             <div className='sh-filename'>Filename</div>
@@ -43,8 +47,8 @@ class PackShow extends React.Component{
                         </div>
                     </div>
                 </div>
-                )
-            }
+            )
+        }
     }   
 }
 

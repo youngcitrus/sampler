@@ -54,11 +54,12 @@
 .sample-headers{
     display: flex;
     flex-direction: row;
+    // justify-content: space-between; 
     font-family: 'Roboto';
     font-size: 13px;
     padding: 8px 0px 8px 0px;
     color: grey;
-
+    min-width: 800px;
 }
 
 .sh-pack{
@@ -99,4 +100,11 @@
 
 .samples-container{
     background: white;
+}
+
+audio{
+    height: 35px;
+    color: white;
+    outline-style:none;
+    filter: drop-shadow(1px 1px 1px #B8B8BA);
 }
