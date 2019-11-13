@@ -14,9 +14,9 @@ class Sample extends React.Component{
             progressColor: '#3134FF',
             cursorWidth: 0,
             height: 30,
-            barWidth: 2,
+            barWidth: 1.2,
             barGap: 0,
-            normalize: 1,
+            normalize: 0,
             backend: 'MediaElement'
         });
 
@@ -56,7 +56,7 @@ class Sample extends React.Component{
                     <div className='parent-pack-icon'><img src={this.props.pack.photoUrl}/></div>
                     <div className='audio-player'>
                         <div id={this.props.sample.name} className='btn-play' disabled="disabled" playing="false"/>
-                        <div ref={this.waveform} className='audio-container'></div> 
+                        <div ref={this.waveform} className='audio-container'></div>
                     </div>
                     <div className='sample-name'>{this.props.sample.name}</div>
                 </div>

@@ -27,6 +27,7 @@
 }
 
 .cover-art-background{
+    width: 100%;
     position: absolute;
     left:0;
     top: 0;
@@ -34,6 +35,8 @@
     object-fit: cover;
     filter: blur(20px);
 }
+
+
 
 .pack-info{
     z-index: 10;
@@ -104,7 +107,46 @@
 
 audio{
     height: 35px;
+    width: 100%;
     color: white;
     outline-style:none;
-    filter: drop-shadow(1px 1px 1px #B8B8BA);
+}
+
+.bottom-audio-player{
+    background: #F1F3F4;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    
+}
+
+.demo-player{
+    width: 100%;
+    padding-top: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.demo-player-icon{
+    height: 35px;
+    padding-top: 7.5px;
+}
+
+.demo-player-info{
+    padding-top: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Arial';
+    color: rgb(89, 88, 88);
+    min-width: 130px;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.demo-pack-name{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
 }

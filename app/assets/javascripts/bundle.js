@@ -809,7 +809,7 @@ function (_React$Component) {
           onClick: function onClick() {
             _this.props.logoutUser();
 
-            _this.props.redirect();
+            setTimeout(_this.props.redirect, 100);
           }
         }, "Logout")));
       };
@@ -966,7 +966,24 @@ function (_React$Component) {
             sample: sample,
             pack: _this.props.pack
           });
-        }))));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "bottom-audio-player"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "demo-player"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+          controls: true,
+          controlsList: "nodownload"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+          src: this.props.pack.fileUrls[1],
+          type: "audio/mp3"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.pack.fileUrls[0],
+          className: "demo-player-icon"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "demo-player-info"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "demo-pack-name"
+        }, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sampler Originals")))));
       }
     }
   }]);
@@ -1107,9 +1124,9 @@ function (_React$Component) {
         progressColor: '#3134FF',
         cursorWidth: 0,
         height: 30,
-        barWidth: 2,
+        barWidth: 1.2,
         barGap: 0,
-        normalize: 1,
+        normalize: 0,
         backend: 'MediaElement'
       });
       var playButton = document.getElementById(this.props.sample.name);
@@ -34505,7 +34522,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -7,10 +7,12 @@
 #  pack_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  key        :string           not null
+#  bpm        :string           not null
 #
 
 class Sample < ApplicationRecord
-    validates :name, :pack_id, presence: true
+    validates :name, :pack_id, :key, :bpm, presence: true
     validates :name, uniqueness: {scope: :pack_id}
 
     belongs_to :sample_pack,

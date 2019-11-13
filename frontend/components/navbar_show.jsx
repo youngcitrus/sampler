@@ -36,7 +36,7 @@ class NavBarShow extends React.Component{
                     <div className='right-nav-div'>
                         <p className='nav-login' id='nav-logout' onClick={ ()=> {
                                                                                 this.props.logoutUser();
-                                                                                this.props.redirect();
+                                                                                setTimeout(this.props.redirect, 100);
                                                                                 }
                                                                         }>
                             Logout
