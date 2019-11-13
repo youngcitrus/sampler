@@ -1,6 +1,6 @@
 import React from 'react';
 import Sample from '../samples/sample';
-import NavBarContainer from '../navbar_container';
+import NavBarShowContainer from '../navbar_show_container';
 
 class PackShow extends React.Component{
     constructor(props){
@@ -17,7 +17,7 @@ class PackShow extends React.Component{
         } else {
             return (
                 <div className='pack-show-container'>
-                    <NavBarContainer redirect={this.props.redirectToRoot}/>
+                    <NavBarShowContainer redirect={this.props.redirectToRoot}/>
                     <div className='pack-show'>
                         <div className='pack-banner'>
                             <img src={this.props.pack.fileUrls[0]} className='cover-art'/>

@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class NavBar extends React.Component{
-
-    componentDidMount(){
-    }
+class NavBarShow extends React.Component{
 
     render(){
         
@@ -39,6 +36,7 @@ class NavBar extends React.Component{
                     <div className='right-nav-div'>
                         <p className='nav-login' id='nav-logout' onClick={ ()=> {
                                                                                 this.props.logoutUser();
+                                                                                this.props.redirect();
                                                                                 }
                                                                         }>
                             Logout
@@ -53,4 +51,4 @@ class NavBar extends React.Component{
     
 };
 
-export default NavBar;
+export default NavBarShow;
