@@ -1021,9 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var entities = _ref.entities;
-  //    debugger 
   return {
-    //    pack: (Object.values(entities.samplePacks))[0],
     pack: entities.samplePacks[ownProps.match.params.packId],
     samples: Object.values(entities.samples)
   };

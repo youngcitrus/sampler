@@ -2,10 +2,8 @@ import { connect } from 'react-redux';
 import {requestPack, requestSamples} from '../../actions/sample_actions'
 import PackShow from './pack_show';
 
-const mapStateToProps = ({entities}, ownProps) => {
-//    debugger 
+const mapStateToProps = ({entities}, ownProps) => { 
    return{
-//    pack: (Object.values(entities.samplePacks))[0],
     pack: entities.samplePacks[ownProps.match.params.packId],
     samples: Object.values(entities.samples)
     }
