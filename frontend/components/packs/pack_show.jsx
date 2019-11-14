@@ -45,30 +45,37 @@ class PackShow extends React.Component{
                             <div className='darken'></div>
                             
                         </div>
-                        <div className='sample-preheader'>
-                            {this.props.samples.length} Samples
-                        </div>
-                        <div className='sample-headers'>
-                            <div className='sh-pack'>Pack</div>
-                            <div className='sh-filename'>Filename</div>
-                            <div className='sh-key'>Key</div>
-                            <div className='sh-bpm'>BPM</div>
-                            <div className='sh-like'>Like</div>
-                            <div className='sh-cart'>Add to Cart</div>
-                        </div>
-                        <div className='samples-container'>
-                            {this.props.samples.map( sample => (<Sample key={sample.id} sample={sample} pack={this.props.pack}/>) )}
-                        </div>
-                        <div className='bottom-audio-player'>
-                            <div className='demo-player'>
-                                <audio controls controlsList="nodownload">
-                                    <source src={this.props.pack.fileUrls[1]} type="audio/mp3"/>
-                                </audio>
+                        <div className='below-banner'>
+                            <div className='sample-show-container'>
+                                <div className='sample-preheader'>
+                                    {this.props.samples.length} Samples
+                                </div>
+                                <div className='sample-headers'>
+                                    <div className='sh-pack'>Pack</div>
+                                    <div className='sh-filename'>Filename</div>
+                                    <div className='sh-key'>Key</div>
+                                    <div className='sh-bpm'>BPM</div>
+                                    <div className='sh-like'>Like</div>
+                                    <div className='sh-cart'>Add to Cart</div>
+                                </div>
+                                <div className='samples-container'>
+                                    {this.props.samples.map( sample => (<Sample key={sample.id} sample={sample} pack={this.props.pack}/>) )}
+                                </div>
+                                <div className='bottom-audio-player'>
+                                    <div className='demo-player'>
+                                        <audio controls controlsList="nodownload">
+                                            <source src={this.props.pack.fileUrls[1]} type="audio/mp3"/>
+                                        </audio>
+                                    </div>
+                                    <img src={this.props.pack.fileUrls[0]} className='demo-player-icon'/>
+                                    <div className='demo-player-info'>
+                                        <p className='demo-pack-name'>{this.props.pack.name}</p>
+                                        <p>Sampler Originals</p>
+                                    </div>
+                                </div>
                             </div>
-                            <img src={this.props.pack.fileUrls[0]} className='demo-player-icon'/>
-                            <div className='demo-player-info'>
-                                <p className='demo-pack-name'>{this.props.pack.name}</p>
-                                <p>Sampler Originals</p>
+                            <div className='recommended'>
+
                             </div>
                         </div>
                     </div>

@@ -59,9 +59,12 @@ class Sample extends React.Component{
                         <div ref={this.waveform} className='audio-container'></div>
                     </div>
                     <div className='sample-name'>{this.props.sample.name}</div>
-                    <div className='sample-key'>{this.props.sample.key}</div>
-                    <div className='sample-bpm'>{this.props.sample.bpm}</div>
-
+                    <div className='sample-info'>
+                        <div className='sample-key'>{this.props.sample.key}</div>
+                        <div className='sample-bpm'>{this.props.sample.bpm}</div>
+                        <div className='row-icon'>heart-icon</div>
+                        <div className='row-icon'>cart-icon</div>
+                    </div>
                 </div>
             </div>
         );

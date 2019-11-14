@@ -79,7 +79,7 @@
 
 .sh-key{
     position: relative;
-    left: 500px;
+    left: 480px;
 }
 .sh-bpm{
     position: relative;
@@ -151,4 +151,8 @@ audio{
     font-style: normal;
     font-size: 14px;
     font-weight: bold;
+}
+
+.sample-show-container{
+    max-width: 80%;
 }

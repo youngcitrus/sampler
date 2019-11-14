@@ -34,6 +34,7 @@
     padding: 4px;
     border-top: solid 0.5px lightgrey;
     max-height: 100%;
+
 }
 
 .sample-name{
@@ -43,9 +44,10 @@
     font-family: 'Roboto';
     font-size: 15px;
     position: relative;
-    left: 25px;
+    left: 30px;
     color: rgb(109, 109, 109);
-    width: 300px;
+    width: 320px;
+    min-width: 320px;
 }
 
 .sample-key{
@@ -54,8 +56,6 @@
     justify-content: center;
     font-family: 'Roboto';
     font-size: 15px;
-    position: relative;
-    left: 150px;
     color: rgb(109, 109, 109);
 }
 
@@ -64,12 +64,24 @@
     flex-direction: column;
     justify-content: center;
     font-family: 'Roboto';
-    font-size: 15px;
-    position: relative;
     left: 25px;
     color: rgb(109, 109, 109);
 }
 
 .parent-pack-icon img{
     height: 30px;
+}
+
+.sample-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    padding-right: 50px;
+}
+
+.row-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

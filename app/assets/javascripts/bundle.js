@@ -964,6 +964,10 @@ function (_React$Component) {
         }, "Play Demo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "darken"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "below-banner"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "sample-show-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sample-preheader"
         }, this.props.samples.length, " Samples"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sample-headers"
@@ -1004,7 +1008,9 @@ function (_React$Component) {
           className: "demo-player-info"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "demo-pack-name"
-        }, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sampler Originals")))));
+        }, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sampler Originals")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "recommended"
+        }))));
       }
     }
   }]);
@@ -1196,10 +1202,16 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-name"
       }, this.props.sample.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sample-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-key"
       }, this.props.sample.key), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-bpm"
-      }, this.props.sample.bpm)));
+      }, this.props.sample.bpm), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row-icon"
+      }, "heart-icon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row-icon"
+      }, "cart-icon"))));
     }
   }]);
 
@@ -34547,7 +34559,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
