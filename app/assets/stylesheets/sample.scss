@@ -45,6 +45,29 @@
     position: relative;
     left: 25px;
     color: rgb(109, 109, 109);
+    width: 300px;
+}
+
+.sample-key{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Roboto';
+    font-size: 15px;
+    position: relative;
+    left: 150px;
+    color: rgb(109, 109, 109);
+}
+
+.sample-bpm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Roboto';
+    font-size: 15px;
+    position: relative;
+    left: 25px;
+    color: rgb(109, 109, 109);
 }
 
 .parent-pack-icon img{

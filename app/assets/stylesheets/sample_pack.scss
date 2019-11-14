@@ -39,10 +39,11 @@
 
 
 .pack-info{
-    z-index: 10;
+    z-index: 8;
     position: relative;
     left: 230px;
     bottom: 120px;
+    width: 580px;
 }
 
 .darken{
@@ -73,6 +74,7 @@
 .sh-filename{
     position: relative;
     left: 270px;
+    width: 80px;
 }
 
 .sh-key{

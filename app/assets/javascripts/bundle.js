@@ -1182,7 +1182,11 @@ function (_React$Component) {
         className: "audio-container"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-name"
-      }, this.props.sample.name)));
+      }, this.props.sample.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sample-key"
+      }, this.props.sample.key), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sample-bpm"
+      }, this.props.sample.bpm)));
     }
   }]);
 
