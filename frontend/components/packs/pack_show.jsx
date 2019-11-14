@@ -7,14 +7,21 @@ class PackShow extends React.Component{
         super(props);
     }
     componentDidMount(){
-        this.props.requestPack(this.props.match.params.packId);
-        this.props.requestSamples(this.props.match.params.packId);
-    }
 
+        this.props.requestPack(this.props.match.params.packId)
+            .fail( (error)=> this.props.history.push('/'));;
+        this.props.requestSamples(this.props.match.params.packId)
+            .fail( (error)=> this.props.history.push('/'));
+    }
+    
     componentDidUpdate(prevProps){
         if (prevProps.match.params.packId !== this.props.match.params.packId){
-            this.props.requestPack(this.props.match.params.packId);
-            this.props.requestSamples(this.props.match.params.packId);
+            this.props.requestPack(this.props.match.params.packId)
+                .fail( (error)=> {
+                    return this.props.history.push('/');
+                })
+            this.props.requestSamples(this.props.match.params.packId)
+                .fail( (error)=> this.props.history.push('/'));
         }
     }
 

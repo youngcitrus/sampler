@@ -911,21 +911,34 @@ function (_React$Component) {
   _createClass(PackShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.requestPack(this.props.match.params.packId);
-      this.props.requestSamples(this.props.match.params.packId);
+      var _this = this;
+
+      this.props.requestPack(this.props.match.params.packId).fail(function (error) {
+        return _this.props.history.push('/');
+      });
+      ;
+      this.props.requestSamples(this.props.match.params.packId).fail(function (error) {
+        return _this.props.history.push('/');
+      });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
       if (prevProps.match.params.packId !== this.props.match.params.packId) {
-        this.props.requestPack(this.props.match.params.packId);
-        this.props.requestSamples(this.props.match.params.packId);
+        this.props.requestPack(this.props.match.params.packId).fail(function (error) {
+          return _this2.props.history.push('/');
+        });
+        this.props.requestSamples(this.props.match.params.packId).fail(function (error) {
+          return _this2.props.history.push('/');
+        });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this3 = this;
 
       if (!this.props.pack || !this.props.samples) {
         return null;
@@ -972,7 +985,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_samples_sample__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: sample.id,
             sample: sample,
-            pack: _this.props.pack
+            pack: _this3.props.pack
           });
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bottom-audio-player"
