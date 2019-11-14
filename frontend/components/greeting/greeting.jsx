@@ -57,7 +57,11 @@ const Greeting = ({ user, logoutUser}) => {
             Today's a great day to make music.</div><br/>
           </div>
         </div>
+        <h3 className='explore-packs'>Explore our latest sample packs</h3>
         <DisplayPacksContainer/>
+        <footer className='contact-footer'>
+          <Footer/>
+        </footer>
       </div>
     );
 

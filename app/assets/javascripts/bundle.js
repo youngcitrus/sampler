@@ -342,12 +342,16 @@ function (_React$Component) {
       if (!this.props.samplePacks) {
         return null;
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.samplePacks.map(function (pack, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-packs-home-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "display-packs-home"
+        }, this.props.samplePacks.map(function (pack, i) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_single_pack__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: pack.id,
             pack: pack
           });
-        }));
+        })));
       }
     }
   }]);
@@ -411,8 +415,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var SinglePack = function SinglePack(_ref) {
   var pack = _ref.pack;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/packs/".concat(pack.id)
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/packs/".concat(pack.id),
+    className: "single-pack-home"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: pack.fileUrls[0],
+    className: "pack-home-image"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "pack-home-link"
   }, pack.name));
 };
 
@@ -517,7 +527,11 @@ var Greeting = function Greeting(_ref) {
       className: "welcome-banner"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "welcome-text"
-    }, "Welcome, ", user.username, "!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Today's a great day to make music."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_packs_display_packs_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+    }, "Welcome, ", user.username, "!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Today's a great day to make music."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "explore-packs"
+    }, "Explore our latest sample packs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_packs_display_packs_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+      className: "contact-footer"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
   };
 
   return user ? welcome() : splash();
@@ -961,10 +975,16 @@ function (_React$Component) {
           className: "pack-info"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.pack.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play-demo"
-        }, "Play Demo")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play-demo-button"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "play-demo-text"
+        }, "Play Demo")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "darken"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "below-banner"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "sample-and-suggested"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sample-show-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -972,10 +992,14 @@ function (_React$Component) {
         }, this.props.samples.length, " Samples"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sample-headers"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "sh-pack-filename"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sh-pack"
         }, "Pack"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sh-filename"
-        }, "Filename"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Filename")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "sh-info"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sh-key"
         }, "Key"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sh-bpm"
@@ -983,7 +1007,7 @@ function (_React$Component) {
           className: "sh-like"
         }, "Like"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "sh-cart"
-        }, "Add to Cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Add to Cart"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "samples-container"
         }, this.props.samples.map(function (sample) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_samples_sample__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -991,6 +1015,8 @@ function (_React$Component) {
             sample: sample,
             pack: _this3.props.pack
           });
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "recommended"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bottom-audio-player"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1008,9 +1034,7 @@ function (_React$Component) {
           className: "demo-player-info"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "demo-pack-name"
-        }, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sampler Originals")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "recommended"
-        }))));
+        }, this.props.pack.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sampler Originals"))))));
       }
     }
   }]);
@@ -1204,14 +1228,22 @@ function (_React$Component) {
       }, this.props.sample.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sample-key-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-key"
-      }, this.props.sample.key), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.sample.key)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sample-bpm-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-bpm"
-      }, this.props.sample.bpm), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row-icon"
-      }, "heart-icon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row-icon"
-      }, "cart-icon"))));
+      }, this.props.sample.bpm)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "heart-icon-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "heart-icon"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cart-icon-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cart-icon"
+      })))));
     }
   }]);
 
@@ -34559,7 +34591,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

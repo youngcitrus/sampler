@@ -10,8 +10,10 @@ class DisplayPacks extends React.Component{
             return null;
         } else {
             return (
-                <div>
-                    {this.props.samplePacks.map( (pack, i)=> <SinglePack key={pack.id} pack={pack}/>)}
+                <div className='display-packs-home-container'>
+                    <div className='display-packs-home'>
+                        {this.props.samplePacks.map( (pack, i)=> <SinglePack key={pack.id} pack={pack}/>)}
+                    </div>
                 </div>
 
             );

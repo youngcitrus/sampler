@@ -34,7 +34,7 @@
     padding: 4px;
     border-top: solid 0.5px lightgrey;
     max-height: 100%;
-
+    width: 100%;
 }
 
 .sample-name{
@@ -44,28 +44,45 @@
     font-family: 'Roboto';
     font-size: 15px;
     position: relative;
-    left: 30px;
+    left: 50px;
     color: rgb(109, 109, 109);
-    width: 320px;
-    min-width: 320px;
+    width: 266px;
+    min-width: 266px;
 }
 
-.sample-key{
+.sample-key-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'Roboto';
     font-size: 15px;
     color: rgb(109, 109, 109);
+    padding-left: 0px;
+    width: 120px;
+    padding-right: 72px;
 }
 
-.sample-bpm{
+.sample-key{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.sample-bpm-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'Roboto';
     left: 25px;
     color: rgb(109, 109, 109);
+    padding-left: 0px;
+    width: 50px;
+}
+
+.sample-bpm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .parent-pack-icon img{
@@ -75,13 +92,38 @@
 .sample-info{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    // justify-content: space-between;
     width: 500px;
     padding-right: 50px;
 }
 
-.row-icon{
+
+.heart-icon-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 110px;
+    padding-left: 100px;
+}
+
+.heart-icon{
+    background-image: image-url('liked-icon');
+    background-size: cover;
+    height: 18px;
+    width: 18px;
+    
+}
+
+.cart-icon-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
+.cart-icon{
+    background-image: image-url('download-icon');
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+}
+

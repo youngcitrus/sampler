@@ -17,5 +17,44 @@
     font-size: 40px;
     color: white;
     line-height: 1.25;
-    
+}
+
+.pack-home-image{
+    height: 200px;
+    border-radius: 25px;
+}
+
+.single-pack-home{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 5px;
+    text-decoration: none;
+}
+
+.display-packs-home{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.display-packs-home-container{
+    margin: 0 auto;
+}
+
+.pack-home-link{
+    margin: 0 auto;
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+.contact-footer{
+    position: relative;
+    top: 100px;
+}
+
+.explore-packs{
+    padding: 10px 10px 5px 50px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    color: rgb(65, 65, 65);
 }

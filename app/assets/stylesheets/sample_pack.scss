@@ -42,13 +42,43 @@
     z-index: 8;
     position: relative;
     left: 230px;
-    bottom: 120px;
-    width: 580px;
+    bottom: 135px;
+    width: 600px;
+}
+
+.pack-info p{
+    position: relative;
+    top: 8px;
+    line-height: 1.2;
+}
+
+.play-demo{
+    position: relative;
+    top: 15px;
+    display: flex;
+    
+}
+
+.play-demo-button{
+    background-color: white;
+    color: black;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.play-demo-button:hover{
+    cursor: pointer;
+}
+
+.play-demo-text{
+    font-size: 12px;
+    padding: 5px;
+    font-weight: bold;
 }
 
 .darken{
     position: relative;
-    bottom: 300px;
+    bottom: 350px;
     height: 400px;
     background: black;
     z-index: 0;
@@ -58,12 +88,19 @@
 .sample-headers{
     display: flex;
     flex-direction: row;
-    // justify-content: space-between; 
     font-family: 'Roboto';
     font-size: 13px;
     padding: 8px 0px 8px 0px;
     color: grey;
+    width: 100%;
     min-width: 800px;
+}
+
+.sh-pack-filename{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 20px;
 }
 
 .sh-pack{
@@ -74,26 +111,31 @@
 .sh-filename{
     position: relative;
     left: 270px;
-    width: 80px;
+    width: 83px;
+    min-width: 80px;
+}
+
+.sh-info{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 475px;
 }
 
 .sh-key{
-    position: relative;
-    left: 480px;
+    width: 152px;
 }
 .sh-bpm{
-    position: relative;
-    left: 650px;
+   width: 137px;
 }
 
 .sh-like{
-    position: relative;
-    left: 765px;
+   padding-right: 72px;
 }
 
 .sh-cart{
-    position: relative;
-    left: 870px;
+    // position: relative;
+    // left: 870px;
 }
 
 .sample-preheader{
@@ -105,6 +147,8 @@
 
 .samples-container{
     background: white;
+    height: 250px;
+    overflow: scroll;
 }
 
 audio{
@@ -120,7 +164,11 @@ audio{
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0px;
+    width: 90%;
+    margin-bottom: 10px;
 }
 
 .demo-player{
@@ -129,6 +177,9 @@ audio{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 3px;
+    position: relative;
+    bottom: 0px;
 }
 
 .demo-player-icon{
@@ -137,7 +188,7 @@ audio{
 }
 
 .demo-player-info{
-    padding-top: 14px;
+    padding-top: 8px;
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Arial';
@@ -149,10 +200,11 @@ audio{
 
 .demo-pack-name{
     font-style: normal;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
 }
 
 .sample-show-container{
     max-width: 80%;
 }
+
