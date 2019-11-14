@@ -53,7 +53,7 @@ class Sample extends React.Component{
         return (
             <div>
                 <div className='sample-row'>
-                    <div className='parent-pack-icon'><img src={this.props.pack.photoUrl}/></div>
+                    <div className='parent-pack-icon'><img src={this.props.pack.fileUrls[0]}/></div>
                     <div className='audio-player'>
                         <div id={this.props.sample.name} className='btn-play' disabled="disabled" playing="false"/>
                         <div ref={this.waveform} className='audio-container'></div>

@@ -911,8 +911,16 @@ function (_React$Component) {
   _createClass(PackShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.requestPack();
-      this.props.requestSamples();
+      this.props.requestPack(this.props.match.params.packId);
+      this.props.requestSamples(this.props.match.params.packId);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.packId !== this.props.match.params.packId) {
+        this.props.requestPack(this.props.match.params.packId);
+        this.props.requestSamples(this.props.match.params.packId);
+      }
     }
   }, {
     key: "render",
@@ -1011,21 +1019,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(_ref) {
+var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var entities = _ref.entities;
+  //    debugger 
   return {
-    pack: Object.values(entities.samplePacks)[0],
+    //    pack: (Object.values(entities.samplePacks))[0],
+    pack: entities.samplePacks[ownProps.match.params.packId],
     samples: Object.values(entities.samples)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
-    requestPack: function requestPack() {
-      return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_1__["requestPack"])(ownProps.match.params.packId));
+    requestPack: function requestPack(packId) {
+      return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_1__["requestPack"])(packId));
     },
-    requestSamples: function requestSamples() {
-      return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_1__["requestSamples"])(ownProps.match.params.packId));
+    requestSamples: function requestSamples(packId) {
+      return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_1__["requestSamples"])(packId));
     },
     redirectToRoot: function redirectToRoot() {
       return ownProps.history.push('/');
@@ -1161,7 +1171,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "parent-pack-icon"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.props.pack.photoUrl
+        src: this.props.pack.fileUrls[0]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "audio-player"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -34522,7 +34532,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
