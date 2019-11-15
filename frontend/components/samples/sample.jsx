@@ -67,7 +67,7 @@ class Sample extends React.Component{
                             <div className='sample-bpm'>{this.props.sample.bpm}</div>
                         </div>
                         <div className='heart-icon-container'>
-                            <div className='heart-icon'></div>
+                            <i className="far fa-heart"></i>
                         </div>
                         <div className='cart-icon-container'>
                             <div className='cart-icon'></div>

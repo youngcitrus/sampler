@@ -105,7 +105,7 @@
 
 .sh-pack{
     position: relative;
-    left: 10px;
+    left: -12px;
 }
 
 .sh-filename{
@@ -124,6 +124,8 @@
 
 .sh-key{
     width: 152px;
+    position: relative;
+    left: -5px;
 }
 .sh-bpm{
    width: 137px;
@@ -147,7 +149,7 @@
 
 .samples-container{
     background: white;
-    height: 250px;
+    height: 450px;
     overflow: scroll;
 }
 
@@ -169,6 +171,7 @@ audio{
     bottom: 0px;
     width: 90%;
     margin-bottom: 10px;
+    border-radius: 8px;
 }
 
 .demo-player{
@@ -188,14 +191,17 @@ audio{
 }
 
 .demo-player-info{
-    padding-top: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
+
     font-family: 'Arial';
     color: rgb(89, 88, 88);
     min-width: 130px;
     font-size: 10px;
     font-style: italic;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 5px;
 }
 
 .demo-pack-name{

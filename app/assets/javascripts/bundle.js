@@ -1237,8 +1237,8 @@ function (_React$Component) {
         className: "sample-bpm"
       }, this.props.sample.bpm)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "heart-icon-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "heart-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-heart"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cart-icon-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
