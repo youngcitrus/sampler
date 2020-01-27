@@ -899,9 +899,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -917,42 +917,63 @@ function (_React$Component) {
   _inherits(PackShow, _React$Component);
 
   function PackShow(props) {
+    var _this;
+
     _classCallCheck(this, PackShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(PackShow).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PackShow).call(this, props));
+    _this.playDemo = _this.playDemo.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PackShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this = this;
+      var _this2 = this;
 
       this.props.requestPack(this.props.match.params.packId).fail(function (error) {
-        return _this.props.history.push('/');
+        return _this2.props.history.push('/');
       });
       ;
       this.props.requestSamples(this.props.match.params.packId).fail(function (error) {
-        return _this.props.history.push('/');
+        return _this2.props.history.push('/');
       });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (prevProps.match.params.packId !== this.props.match.params.packId) {
         this.props.requestPack(this.props.match.params.packId).fail(function (error) {
-          return _this2.props.history.push('/');
+          return _this3.props.history.push('/');
         });
         this.props.requestSamples(this.props.match.params.packId).fail(function (error) {
-          return _this2.props.history.push('/');
+          return _this3.props.history.push('/');
         });
+      }
+    }
+  }, {
+    key: "playDemo",
+    value: function playDemo() {
+      var player = document.getElementById('demo-player');
+
+      if (player.paused) {
+        player.play();
+        player.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        this.playing = true;
+      } else {
+        document.getElementById('demo-player').pause();
+        this.playing = false;
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.props.pack || !this.props.samples) {
         return null;
@@ -978,7 +999,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "play-demo-button"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "play-demo-text"
+          className: "play-demo-text",
+          onClick: this.playDemo
         }, "Play Demo")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "darken"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1013,7 +1035,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_samples_sample__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: sample.id,
             sample: sample,
-            pack: _this3.props.pack
+            pack: _this4.props.pack
           });
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "recommended"
@@ -1023,7 +1045,8 @@ function (_React$Component) {
           className: "demo-player"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
           controls: true,
-          controlsList: "nodownload"
+          controlsList: "nodownload",
+          id: "demo-player"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
           src: this.props.pack.fileUrls[1],
           type: "audio/mp3"
@@ -34591,7 +34614,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

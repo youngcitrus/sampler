@@ -5,6 +5,7 @@ import NavBarShowContainer from '../navbar_show_container';
 class PackShow extends React.Component{
     constructor(props){
         super(props);
+        this.playDemo = this.playDemo.bind(this);
     }
     componentDidMount(){
 
@@ -25,11 +26,23 @@ class PackShow extends React.Component{
         }
     }
 
+    playDemo(){
+        let player = document.getElementById('demo-player');
+        if (player.paused) {
+            player.play();
+            player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            this.playing = true;
+        } else {
+            document.getElementById('demo-player').pause();
+            this.playing = false;
+        }
+    }
+
     render(){
         if (!this.props.pack || !this.props.samples) {
             return null;
         } else {
-            
+
             return (
                 <div className='pack-show-container'>
                     <NavBarShowContainer redirect={this.props.redirectToRoot}/>
@@ -43,7 +56,7 @@ class PackShow extends React.Component{
                                 <p>{this.props.pack.description}</p>
                                 <div className='play-demo'>
                                     <div className='play-demo-button'>
-                                        <div className='play-demo-text'>Play Demo</div>
+                                        <div className='play-demo-text' onClick={this.playDemo}>Play Demo</div>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +94,7 @@ class PackShow extends React.Component{
                             </div>
                             <div className='bottom-audio-player'>
                                 <div className='demo-player'>
-                                    <audio controls controlsList="nodownload">
+                                    <audio controls controlsList="nodownload" id='demo-player'>
                                         <source src={this.props.pack.fileUrls[1]} type="audio/mp3"/>
                                     </audio>
                                 </div>
