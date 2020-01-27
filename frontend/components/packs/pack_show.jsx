@@ -29,6 +29,7 @@ class PackShow extends React.Component{
         if (!this.props.pack || !this.props.samples) {
             return null;
         } else {
+            
             return (
                 <div className='pack-show-container'>
                     <NavBarShowContainer redirect={this.props.redirectToRoot}/>

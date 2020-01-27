@@ -148,9 +148,11 @@
 }
 
 .samples-container{
+    // display: flex;
+    // flex-direction: column;
     background: white;
-    height: 450px;
-    overflow: scroll;
+    // height: 350px;
+    // overflow: auto;
 }
 
 audio{
@@ -167,11 +169,12 @@ audio{
     flex-direction: row;
     justify-content: stretch;
     margin-top: 10px;
-    position: absolute;
-    bottom: 0px;
+    // position: absolute;
+    // bottom: 0px;
     width: 90%;
     margin-bottom: 10px;
     border-radius: 8px;
+    z-index: 10;
 }
 
 .demo-player{
@@ -213,4 +216,5 @@ audio{
 .sample-show-container{
     max-width: 80%;
 }
+
 
