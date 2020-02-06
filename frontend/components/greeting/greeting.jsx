@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import Footer from '../footer'
 import NavBarContainer from '../navbar_container';
-// import NavBarUser from '../navbar_user';
+
 import DisplayPacksContainer from '../display_packs/display_packs_container';
 
 const Greeting = ({ user, logoutUser}) => {
