@@ -1,0 +1,2 @@
+class PackLike < ApplicationRecord
+end
