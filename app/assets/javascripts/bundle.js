@@ -471,7 +471,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import NavBarUser from '../navbar_user';
 
 
 
@@ -966,7 +965,8 @@ function (_React$Component) {
         });
         this.playing = true;
       } else {
-        document.getElementById('demo-player').pause();
+        // document.getElementById('demo-player').pause();
+        player.pause();
         this.playing = false;
       }
     }
@@ -34614,7 +34614,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
