@@ -17,6 +17,14 @@ class SamplePack < ApplicationRecord
         foreign_key: :pack_id,
         class_name: :Sample
 
+    has_many :pack_likes,
+        foreign_key: :pack_id,
+        class_name: :PackLike
+
+    has_many :liked_users,
+        through: :pack_likes,
+        source: :user
+
     has_one_attached :cover_art
     
     has_one_attached :demo
