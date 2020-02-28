@@ -598,9 +598,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -628,19 +628,43 @@ function (_React$Component) {
     _this.state = {
       liked: props.pack.liked
     };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(PackLike, [{
+    key: "handleClick",
+    value: function handleClick() {
+      if (this.state.liked) {
+        _util_pack_like_util__WEBPACK_IMPORTED_MODULE_1__["unlikePack"](this.packLike);
+        this.setState({
+          liked: false
+        });
+      } else {
+        _util_pack_like_util__WEBPACK_IMPORTED_MODULE_1__["likePack"](this.packLike);
+        this.setState({
+          liked: true
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: function onClick() {
-          return _util_pack_like_util__WEBPACK_IMPORTED_MODULE_1__["likePack"](_this2.packLike);
-        }
-      }, " Click me ");
+      var likeButton = function likeButton() {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          onClick: _this2.handleClick
+        }, " like pack ");
+      };
+
+      var unlikeButton = function unlikeButton() {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          onClick: _this2.handleClick
+        }, " unlike pack ");
+      };
+
+      return this.state.liked ? unlikeButton() : likeButton();
     }
   }]);
 
@@ -2194,16 +2218,26 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/pack_like_util.js ***!
   \*****************************************/
-/*! exports provided: likePack */
+/*! exports provided: likePack, unlikePack */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likePack", function() { return likePack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlikePack", function() { return unlikePack; });
 var likePack = function likePack(packLike) {
   return $.ajax({
     method: 'POST',
     url: 'api/pack_likes',
+    data: {
+      pack_like: packLike
+    }
+  });
+};
+var unlikePack = function unlikePack(packLike) {
+  return $.ajax({
+    method: 'DELETE',
+    url: 'api/pack_likes/',
     data: {
       pack_like: packLike
     }

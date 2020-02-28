@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :samples, only:[:index]
     end
     resources :pack_likes, only: [:create]
+    delete 'pack_likes', :to => 'pack_likes#destroy'
     resource :session, only: [:create, :destroy]
     
   end
