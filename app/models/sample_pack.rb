@@ -31,5 +31,13 @@ class SamplePack < ApplicationRecord
 
     has_many_attached :files
 
+    def liked_by_user?(user)
+        self.liked_users.each do |liked_user|
+            return true if user.id == liked_user.id
+        end
+
+        return false;
+    end
+
 end
 

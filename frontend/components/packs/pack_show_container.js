@@ -5,6 +5,7 @@ import PackShow from './pack_show';
 const mapStateToProps = ({entities}, ownProps) => { 
    return{
     pack: entities.samplePacks[ownProps.match.params.packId],
+    userId: parseInt(Object.keys(entities.users)[0]),
     samples: Object.values(entities.samples)
     }
 };
