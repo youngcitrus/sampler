@@ -1,6 +1,8 @@
 import React from 'react';
 import Sample from '../samples/sample';
 import NavBarShowContainer from '../navbar_show_container';
+import PackLike from '../likes/pack_like';
+
 
 class PackShow extends React.Component{
     constructor(props){
@@ -59,6 +61,9 @@ class PackShow extends React.Component{
                                     <div className='play-demo-button'>
                                         <div className='play-demo-text' onClick={this.playDemo}>Play Demo</div>
                                     </div>
+                                </div>
+                                <div className='pack-like-container'>
+                                    <PackLike pack={this.props.pack} userId={this.props.userId}/>
                                 </div>
                             </div>
 

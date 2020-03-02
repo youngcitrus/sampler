@@ -21,6 +21,13 @@ class User < ApplicationRecord
     before_validation :ensure_session_token
 
     #associations go here
+    has_many :pack_likes,
+        foreign_key: :user_id,
+        class_name: :PackLike
+
+    has_many :liked_packs,
+        through: :pack_likes,
+        source: :sample_pack
 
     has_one_attached :profile_photo
 
