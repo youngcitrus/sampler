@@ -1307,6 +1307,7 @@ function (_React$Component) {
         height: 30,
         barWidth: 1.2,
         barGap: 0,
+        barMinHeight: 1.5,
         normalize: 0,
         backend: 'MediaElement'
       });
@@ -40764,7 +40765,7 @@ function valueEqual(a, b) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * wavesurfer.js 3.2.0 (2019-10-25)
+ * wavesurfer.js 3.3.1 (2020-01-14)
  * https://github.com/katspaugh/wavesurfer.js
  * @license BSD-3-Clause
  */
@@ -41032,6 +41033,13 @@ function () {
      */
 
     this.id = (0, _getId.default)(this.constructor.name.toLowerCase() + '_');
+    /**
+     * Canvas 2d context attributes
+     *
+     * @type {object}
+     */
+
+    this.canvasContextAttributes = {};
   }
   /**
    * Store the wave canvas element and create the 2D rendering context
@@ -41044,7 +41052,7 @@ function () {
     key: "initWave",
     value: function initWave(element) {
       this.wave = element;
-      this.waveCtx = this.wave.getContext('2d');
+      this.waveCtx = this.wave.getContext('2d', this.canvasContextAttributes);
     }
     /**
      * Store the progress wave canvas element and create the 2D rendering
@@ -41057,7 +41065,7 @@ function () {
     key: "initProgress",
     value: function initProgress(element) {
       this.progress = element;
-      this.progressCtx = this.progress.getContext('2d');
+      this.progressCtx = this.progress.getContext('2d', this.canvasContextAttributes);
     }
     /**
      * Update the dimensions
@@ -41354,7 +41362,7 @@ var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -41525,7 +41533,7 @@ function (_util$Observer) {
       });
       this.wrapper.addEventListener('dblclick', function (e) {
         if (_this2.params.interact) {
-          _this2.fireEvent('dblclick', e);
+          _this2.fireEvent('dblclick', e, _this2.handleEvent(e));
         }
       });
       this.wrapper.addEventListener('scroll', function (e) {
@@ -41850,7 +41858,7 @@ var _drawer2 = _interopRequireDefault(__webpack_require__(/*! ./drawer.canvasent
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41942,6 +41950,14 @@ function (_Drawer) {
      */
 
     _this.EntryClass = _drawer2.default;
+    /**
+     * Canvas 2d context attributes.
+     *
+     * @private
+     * @type {object}
+     */
+
+    _this.canvasContextAttributes = params.drawingContextAttributes;
     /**
      * Overlap added between entries to prevent vertical white stripes
      * between `canvas` elements.
@@ -42051,6 +42067,7 @@ function (_Drawer) {
     key: "addCanvas",
     value: function addCanvas() {
       var entry = new this.EntryClass();
+      entry.canvasContextAttributes = this.canvasContextAttributes;
       entry.hasProgressCanvas = this.hasProgressCanvas;
       entry.halfPixel = this.halfPixel;
       var leftOffset = this.maxCanvasElementWidth * this.canvases.length; // wave
@@ -42181,6 +42198,10 @@ function (_Drawer) {
         for (i; i < last; i += step) {
           var peak = peaks[Math.floor(i * scale * peakIndexScale)] || 0;
           var h = Math.round(peak / absmax * halfH);
+          /* in case of silences, allow the user to specify that we
+           * always draw *something* (normally a 1px high bar) */
+
+          if (h == 0 && _this3.params.barMinHeight) h = _this3.params.barMinHeight;
 
           _this3.fillRect(i + _this3.halfPixel, halfH - h + offsetY, bar + _this3.halfPixel, h * 2, _this3.barRadius);
         }
@@ -42574,7 +42595,7 @@ var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42977,7 +42998,6 @@ function (_WebAudio) {
     /**
      * Set the play end
      *
-     * @private
      * @param {number} end Where to end
      */
 
@@ -42985,6 +43005,8 @@ function (_WebAudio) {
     key: "setPlayEnd",
     value: function setPlayEnd(end) {
       var _this4 = this;
+
+      this.clearPlayEnd();
 
       this._onPlayEnd = function (time) {
         if (time >= end) {
@@ -43410,8 +43432,11 @@ exports.default = extend;
  * @param {Object[]} sources The objects to use for extending
  *
  * @return {Object} Merged object
+ * @deprecated since version 3.3.0
  */
 function extend(dest) {
+  console.warn('util.extend is deprecated; use Object.assign instead');
+
   for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
     sources[_key - 1] = arguments[_key];
   }
@@ -44270,7 +44295,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -44339,6 +44364,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * @property {number} barGap=null The optional spacing between bars of the wave,
  * if not provided will be calculated in legacy format.
  * @property {number} barWidth=null Draw the waveform using bars.
+ * @property {number} barMinHeight=null If specified, draw at least a bar of this height,
+ * eliminating waveform gaps
  * @property {boolean} closeAudioContext=false Close and nullify all audio
  * contexts when the destroy method is called.
  * @property {!string|HTMLElement} container CSS selector or HTML element where
@@ -44346,6 +44373,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * @property {string} cursorColor='#333' The fill color of the cursor indicating
  * the playhead position.
  * @property {number} cursorWidth=1 Measured in pixels.
+ * @property {object} drawingContextAttributes={desynchronized: true} Drawing context
+ * attributes.
  * @property {number} duration=null Optional audio length so pre-rendered peaks
  * can be display immediately for example.
  * @property {boolean} fillParent=true Whether to fill the entire container or
@@ -44587,10 +44616,17 @@ function (_util$Observer) {
       barHeight: 1,
       barRadius: 0,
       barGap: null,
+      barMinHeight: null,
       container: null,
       cursorColor: '#333',
       cursorWidth: 1,
       dragSelection: true,
+      drawingContextAttributes: {
+        // Boolean that hints the user agent to reduce the latency
+        // by desynchronizing the canvas paint cycle from the event
+        // loop
+        desynchronized: true
+      },
       duration: null,
       fillParent: true,
       forceDecode: false,
@@ -44624,7 +44660,7 @@ function (_util$Observer) {
       MediaElementWebAudio: _mediaelementWebaudio.default
     };
     _this.util = util;
-    _this.params = util.extend({}, _this.defaultParams, params);
+    _this.params = Object.assign({}, _this.defaultParams, params);
     /** @private */
 
     _this.container = 'string' == typeof params.container ? document.querySelector(_this.params.container) : _this.params.container;
@@ -45104,6 +45140,18 @@ function (_util$Observer) {
         return _this7.play(start, end);
       });
       return this.backend.play(start, end);
+    }
+    /**
+     * Set a point in seconds for playback to stop at.
+     *
+     * @param {number} position Position (in seconds) to stop at
+     * @version 3.3.0
+     */
+
+  }, {
+    key: "setPlayEnd",
+    value: function setPlayEnd(position) {
+      this.backend.setPlayEnd(position);
     }
     /**
      * Stops and pauses playback
@@ -45876,7 +45924,7 @@ function (_util$Observer) {
     value: function getArrayBuffer(url, callback) {
       var _this14 = this;
 
-      var options = util.extend({
+      var options = Object.assign({
         url: url,
         responseType: 'arraybuffer'
       }, this.params.xhr);
@@ -45920,33 +45968,35 @@ function (_util$Observer) {
     /**
      * Exports PCM data into a JSON array and opens in a new window.
      *
-     * @param {number} length=1024 The scale in which to export the peaks. (Integer)
-     * @param {number} accuracy=10000 (Integer)
+     * @param {number} length=1024 The scale in which to export the peaks
+     * @param {number} accuracy=10000
      * @param {?boolean} noWindow Set to true to disable opening a new
      * window with the JSON
      * @param {number} start Start index
-     * @todo Update exportPCM to work with new getPeaks signature
-     * @return {string} JSON of peaks
+     * @param {number} end End index
+     * @return {Promise} Promise that resolves with array of peaks
      */
 
   }, {
     key: "exportPCM",
-    value: function exportPCM(length, accuracy, noWindow, start) {
+    value: function exportPCM(length, accuracy, noWindow, start, end) {
       length = length || 1024;
       start = start || 0;
       accuracy = accuracy || 10000;
       noWindow = noWindow || false;
-      var peaks = this.backend.getPeaks(length, start);
+      var peaks = this.backend.getPeaks(length, start, end);
       var arr = [].map.call(peaks, function (val) {
         return Math.round(val * accuracy) / accuracy;
       });
-      var json = JSON.stringify(arr);
+      return new Promise(function (resolve, reject) {
+        var json = JSON.stringify(arr);
 
-      if (!noWindow) {
-        window.open('data:application/json;charset=utf-8,' + encodeURIComponent(json));
-      }
+        if (!noWindow) {
+          window.open('data:application/json;charset=utf-8,' + encodeURIComponent(json));
+        }
 
-      return json;
+        resolve(json);
+      });
     }
     /**
      * Save waveform image as data URI.
@@ -46067,7 +46117,7 @@ function (_util$Observer) {
 }(util.Observer);
 
 exports.default = WaveSurfer;
-WaveSurfer.VERSION = "3.2.0";
+WaveSurfer.VERSION = "3.3.1";
 WaveSurfer.util = util;
 module.exports = exports.default;
 
@@ -46092,7 +46142,7 @@ var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -46244,7 +46294,7 @@ function (_util$Observer) {
     /** @private */
 
     _this.startPosition = 0;
-    /** @private  */
+    /** @private */
 
     _this.scheduledPause = null;
     /** @private */
@@ -46850,7 +46900,7 @@ function (_util$Observer) {
       start = adjustedTime.start;
       end = adjustedTime.end;
       this.scheduledPause = end;
-      this.source.start(0, start, end - start);
+      this.source.start(0, start);
 
       if (this.ac.state == 'suspended') {
         this.ac.resume && this.ac.resume();
@@ -46913,6 +46963,18 @@ function (_util$Observer) {
         this.playbackRate = value;
         this.play();
       }
+    }
+    /**
+     * Set a point in seconds for playback to stop at.
+     *
+     * @param {number} end Position to end at
+     * @version 3.3.0
+     */
+
+  }, {
+    key: "setPlayEnd",
+    value: function setPlayEnd(end) {
+      this.scheduledPause = end;
     }
   }]);
 

@@ -16,6 +16,7 @@ class Sample extends React.Component{
             height: 30,
             barWidth: 1.2,
             barGap: 0,
+            barMinHeight: 1.5,
             normalize: 0,
             backend: 'MediaElement'
         });
