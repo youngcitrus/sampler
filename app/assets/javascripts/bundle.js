@@ -655,13 +655,21 @@ function (_React$Component) {
       var likeButton = function likeButton() {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           onClick: _this2.handleClick
-        }, " like pack ");
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "far fa-heart"
+        }));
       };
 
       var unlikeButton = function unlikeButton() {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           onClick: _this2.handleClick
-        }, " unlike pack ");
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "far fa-heart",
+          id: "temp-heart"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-heart",
+          id: "liked-heart"
+        }));
       };
 
       return this.state.liked ? unlikeButton() : likeButton();

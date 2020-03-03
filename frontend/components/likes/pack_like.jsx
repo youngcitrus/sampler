@@ -23,11 +23,16 @@ class PackLike extends React.Component{
 
     render(){
         const likeButton = () => (
-            <div onClick={this.handleClick}> like pack </div>
+            <div onClick={this.handleClick}>
+                <i className="far fa-heart"></i>
+            </div>
         );
 
         const unlikeButton = () => (
-            <div onClick={this.handleClick}> unlike pack </div>
+            <div onClick={this.handleClick}>
+                <i className="far fa-heart" id="temp-heart"></i>
+                <i className="fas fa-heart" id="liked-heart"></i>
+            </div>
         )
 
         return this.state.liked ? unlikeButton() : likeButton();
