@@ -29,4 +29,5 @@ class Sample < ApplicationRecord
         through: :sample_likes,
         source: :user
 
+
 end

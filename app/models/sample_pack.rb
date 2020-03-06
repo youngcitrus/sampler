@@ -31,13 +31,21 @@ class SamplePack < ApplicationRecord
 
     has_many_attached :files
 
-    def liked_by_user?(user)
-        self.liked_users.each do |liked_user|
-            return true if user.id == liked_user.id
-        end
-
-        return false;
+    def liked_user_ids
+        @liked_user_ids ||= liked_users.pluck(:id)
     end
+
+    def liked_by_user?(user)
+        liked_user_ids.include?(user.id)
+    end
+
+    # def liked_by_user?(user)
+    #     self.liked_users.each do |liked_user|
+    #         return true if user.id == liked_user.id
+    #     end
+
+    #     return false;
+    # end
 
 end
 
