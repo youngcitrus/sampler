@@ -29,6 +29,14 @@ class User < ApplicationRecord
         through: :pack_likes,
         source: :sample_pack
 
+    has_many :sample_likes,
+        foreign_key: :user_id,
+        class_name: :SampleLike
+    
+    has_many :liked_samples,
+        through: :sample_likes,
+        source: :sample
+
     has_one_attached :profile_photo
 
     def self.find_by_credentials(input, password)

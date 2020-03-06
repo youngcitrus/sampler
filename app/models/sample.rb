@@ -20,4 +20,13 @@ class Sample < ApplicationRecord
         class_name: :SamplePack
 
     has_one_attached :file
+
+    has_many :sample_likes,
+        foreign_key: :sample_id,
+        class_name: :SampleLike
+
+    has_many :liked_users,
+        through: :sample_likes,
+        source: :user
+
 end
