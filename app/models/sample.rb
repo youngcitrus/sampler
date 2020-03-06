@@ -29,5 +29,12 @@ class Sample < ApplicationRecord
         through: :sample_likes,
         source: :user
 
+    def liked_user_ids
+        @liked_user_ids ||= liked_users.pluck(:id)
+    end
+
+    def liked_by_user?(user)
+        liked_user_ids.include?(user.id)
+    end
 
 end
