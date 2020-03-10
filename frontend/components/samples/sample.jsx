@@ -1,4 +1,5 @@
 import React from 'react';
+import SampleLike from '../likes/sample_like';
 import WaveSurfer from 'wavesurfer.js';
 
 class Sample extends React.Component{
@@ -68,7 +69,7 @@ class Sample extends React.Component{
                             <div className='sample-bpm'>{this.props.sample.bpm}</div>
                         </div>
                         <div className='heart-icon-container'>
-                            <i className="far fa-heart"></i>
+                            <SampleLike userId={this.props.userId} sample={this.props.sample}/>
                         </div>
                         <div className='cart-icon-container'>
                             <div className='cart-icon'></div>

@@ -20,7 +20,7 @@ class Api::SampleLikesController < ApplicationController
 
     private
     def sample_like_params
-        params.require(:sample_like).permit(:user_id, :pack_id)
+        params.require(:sample_like).permit(:user_id, :sample_id)
     end
 
 end

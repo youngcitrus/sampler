@@ -65,6 +65,7 @@ class PackShow extends React.Component{
                                 <div className='pack-like-container'>
                                     <PackLike pack={this.props.pack} userId={this.props.userId}/>
                                 </div>
+
                             </div>
 
                             <div className='darken'></div>
@@ -89,7 +90,7 @@ class PackShow extends React.Component{
                                         </div>
                                     </div>
                                     <div className='samples-container'>
-                                        {this.props.samples.map( sample => (<Sample key={sample.id} sample={sample} pack={this.props.pack}/>) )}
+                                        {this.props.samples.map( sample => (<Sample key={sample.id} sample={sample} pack={this.props.pack} userId={this.props.userId}/>) )}
                                     </div>
                                     
                                 </div>

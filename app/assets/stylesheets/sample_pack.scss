@@ -218,13 +218,20 @@ audio{
 }
 
 .pack-like-container {
-    padding-top: 25px;
+    padding-left: 85px;
+    position: relative;
+    bottom: 7px;
 }
 
 #liked-heart {
     color: white;
 }
 
+#liked-heart-grey {
+    color: grey;
+}
+
 #temp-heart {
     position: absolute;
 }
+
