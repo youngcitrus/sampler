@@ -4,6 +4,7 @@ import Footer from '../footer';
 import NavBarContainer from '../navbar_container';
 
 import DisplayPacksContainer from '../display_packs/display_packs_container';
+import LikedSamplesContainer from '../liked_samples_container';
 
 const Greeting = ({ user, logoutUser}) => {
     const splash = () =>(
@@ -59,6 +60,7 @@ const Greeting = ({ user, logoutUser}) => {
         </div>
         <h3 className='explore-packs'>Explore our latest sample packs</h3>
         <DisplayPacksContainer/>
+        {/* <LikedSamplesContainer/> */}
         <footer className='contact-footer'>
           <Footer/>
         </footer>

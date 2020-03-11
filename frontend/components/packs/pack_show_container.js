@@ -3,7 +3,7 @@ import {requestPack, requestSamples} from '../../actions/sample_actions'
 import PackShow from './pack_show';
 
 const mapStateToProps = ({entities}, ownProps) => { 
-   return{
+   return {
     pack: entities.samplePacks[ownProps.match.params.packId],
     userId: parseInt(Object.keys(entities.users)[0]),
     samples: Object.values(entities.samples)
@@ -11,7 +11,7 @@ const mapStateToProps = ({entities}, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return{
+    return {
     requestPack: (packId) => dispatch(requestPack(packId)),
     requestSamples: (packId) => dispatch(requestSamples(packId)),
     redirectToRoot: () => ownProps.history.push('/')
