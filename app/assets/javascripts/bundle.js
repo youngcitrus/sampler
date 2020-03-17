@@ -2638,6 +2638,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSamples", function() { return fetchSamples; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikedSamples", function() { return fetchLikedSamples; });
 var fetchAllSamplePacks = function fetchAllSamplePacks() {
+  debugger;
   return $.ajax({
     method: 'GET',
     url: 'api/sample_packs'

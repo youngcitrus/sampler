@@ -1,4 +1,5 @@
 export const fetchAllSamplePacks = () => {
+    debugger
     return $.ajax({
         method: 'GET',
         url: 'api/sample_packs'
