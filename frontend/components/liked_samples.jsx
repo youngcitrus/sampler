@@ -7,7 +7,6 @@ class LikedSamples extends React.Component{
     }
 
     componentDidMount(){
-        // debugger
         this.props.requestLikedSamples();
     }
 
@@ -18,7 +17,6 @@ class LikedSamples extends React.Component{
             return null;
 
         } else {
-
             return (
                 <div className="liked-samples-container"> 
                     { this.props.likedSamples.map( sample => {

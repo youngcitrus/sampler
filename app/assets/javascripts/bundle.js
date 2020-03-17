@@ -642,7 +642,6 @@ function (_React$Component) {
   _createClass(LikedSamples, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       this.props.requestLikedSamples();
     }
   }, {
@@ -693,10 +692,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities;
-  // debugger
   return {
     userId: parseInt(Object.keys(entities.users)[0]),
-    likedSamples: null,
+    likedSamples: Object.values(entities.likedSamples),
     samplePacks: entities.samplePacks
   };
 };
@@ -704,7 +702,7 @@ var mapStateToProps = function mapStateToProps(_ref) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     requestLikedSamples: function requestLikedSamples() {
-      return dispatch(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_2__["requestLikedSamples"]);
+      return dispatch(Object(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_2__["requestLikedSamples"])());
     }
   };
 };
@@ -2206,8 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKED_SAMPLES"]:
-      var newState = Object.assign({}.state);
-      return Object.assign(newState, action.likedSamples);
+      return Object.assign({}, action.likedSamples);
 
     default:
       return state;
@@ -2638,7 +2635,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSamples", function() { return fetchSamples; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikedSamples", function() { return fetchLikedSamples; });
 var fetchAllSamplePacks = function fetchAllSamplePacks() {
-  debugger;
   return $.ajax({
     method: 'GET',
     url: 'api/sample_packs'

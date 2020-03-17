@@ -5,8 +5,7 @@ export default (state = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_LIKED_SAMPLES:
-            let newState = Object.assign({}. state)
-            return Object.assign(newState, action.likedSamples);
+            return Object.assign({}, action.likedSamples);
         default:
             return state;
     }
