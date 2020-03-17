@@ -6,9 +6,14 @@ class LikedSamples extends React.Component{
         super(props);
     }
 
+    componentDidMount(){
+        debugger
+        this.props.requestLikedSamples();
+    }
+
     render() {
 
-        if (Object.keys(this.props.samplePacks).length < 1) {
+        if (Object.keys(this.props.samplePacks).length < 1 || !this.props.likedSamples) {
 
             return null;
 

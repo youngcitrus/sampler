@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :sample_likes, only: [:create]
     delete 'sample_likes', :to => 'sample_likes#destroy'
 
+    get 'liked_samples', :to => 'liked_samples#index'
+
     resource :session, only: [:create, :destroy]
     
   end

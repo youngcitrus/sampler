@@ -60,7 +60,7 @@ const Greeting = ({ user, logoutUser}) => {
         </div>
         <h3 className='explore-packs'>Explore our latest sample packs</h3>
         <DisplayPacksContainer/>
-        {/* <LikedSamplesContainer/> */}
+        <LikedSamplesContainer/>
         <footer className='contact-footer'>
           <Footer/>
         </footer>

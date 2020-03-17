@@ -90,7 +90,7 @@
 /*!********************************************!*\
   !*** ./frontend/actions/sample_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_ALL_PACKS, RECEIVE_PACK, RECEIVE_SAMPLES, requestAllPacks, requestPack, requestSamples */
+/*! exports provided: RECEIVE_ALL_PACKS, RECEIVE_PACK, RECEIVE_SAMPLES, RECEIVE_LIKED_SAMPLES, requestAllPacks, requestPack, requestSamples, requestLikedSamples */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,14 +98,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_PACKS", function() { return RECEIVE_ALL_PACKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PACK", function() { return RECEIVE_PACK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SAMPLES", function() { return RECEIVE_SAMPLES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKED_SAMPLES", function() { return RECEIVE_LIKED_SAMPLES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAllPacks", function() { return requestAllPacks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestPack", function() { return requestPack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestSamples", function() { return requestSamples; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestLikedSamples", function() { return requestLikedSamples; });
 /* harmony import */ var _util_sample_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/sample_util */ "./frontend/util/sample_util.js");
 
 var RECEIVE_ALL_PACKS = "RECEIVE_ALL_PACKS";
 var RECEIVE_PACK = "RECEIVE_PACK";
 var RECEIVE_SAMPLES = "RECEIVE_SAMPLES";
+var RECEIVE_LIKED_SAMPLES = "RECEIVE_LIKED_SAMPLES";
 
 var receiveAllPacks = function receiveAllPacks(packs) {
   return {
@@ -128,6 +131,13 @@ var receiveSamples = function receiveSamples(samples) {
   };
 };
 
+var receiveLikedSamples = function receiveLikedSamples(likedSamples) {
+  return {
+    type: RECEIVE_LIKED_SAMPLES,
+    likedSamples: likedSamples
+  };
+};
+
 var requestAllPacks = function requestAllPacks() {
   return function (dispatch) {
     return _util_sample_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllSamplePacks"]().then(function (packs) {
@@ -146,6 +156,13 @@ var requestSamples = function requestSamples(packId) {
   return function (dispatch) {
     return _util_sample_util__WEBPACK_IMPORTED_MODULE_0__["fetchSamples"](packId).then(function (samples) {
       return dispatch(receiveSamples(samples));
+    });
+  };
+};
+var requestLikedSamples = function requestLikedSamples() {
+  return function (dispatch) {
+    return _util_sample_util__WEBPACK_IMPORTED_MODULE_0__["fetchLikedSamples"]().then(function (likedSamples) {
+      dispatch(receiveLikedSamples(likedSamples));
     });
   };
 };
@@ -530,7 +547,7 @@ var Greeting = function Greeting(_ref) {
       className: "welcome-text"
     }, "Welcome, ", user.username, "!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Today's a great day to make music."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
       className: "explore-packs"
-    }, "Explore our latest sample packs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_packs_display_packs_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+    }, "Explore our latest sample packs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_packs_display_packs_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_liked_samples_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
       className: "contact-footer"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
   };
@@ -623,11 +640,17 @@ function (_React$Component) {
   }
 
   _createClass(LikedSamples, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      debugger;
+      this.props.requestLikedSamples();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      if (Object.keys(this.props.samplePacks).length < 1) {
+      if (Object.keys(this.props.samplePacks).length < 1 || !this.props.likedSamples) {
         return null;
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -663,19 +686,30 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _liked_samples__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./liked_samples */ "./frontend/components/liked_samples.jsx");
+/* harmony import */ var _actions_sample_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/sample_actions */ "./frontend/actions/sample_actions.js");
+
 
 
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities;
+  debugger;
   return {
     userId: parseInt(Object.keys(entities.users)[0]),
-    likedSamples: entities.users[Object.keys(entities.users)[0]].liked_samples,
+    likedSamples: null,
     samplePacks: entities.samplePacks
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_liked_samples__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    requestLikedSamples: function requestLikedSamples() {
+      return dispatch(_actions_sample_actions__WEBPACK_IMPORTED_MODULE_2__["requestLikedSamples"]);
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_liked_samples__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -2118,6 +2152,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _sample_pack_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sample_pack_reducer */ "./frontend/reducers/sample_pack_reducer.js");
 /* harmony import */ var _samples_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./samples_reducer */ "./frontend/reducers/samples_reducer.js");
+/* harmony import */ var _liked_samples_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./liked_samples_reducer */ "./frontend/reducers/liked_samples_reducer.js");
+
 
 
 
@@ -2125,7 +2161,8 @@ __webpack_require__.r(__webpack_exports__);
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   samplePacks: _sample_pack_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  samples: _samples_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  samples: _samples_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  likedSamples: _liked_samples_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -2148,6 +2185,34 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/liked_samples_reducer.js":
+/*!****************************************************!*\
+  !*** ./frontend/reducers/liked_samples_reducer.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/sample_actions */ "./frontend/actions/sample_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_sample_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKED_SAMPLES"]:
+      var newState = Object.assign({}.state);
+      return Object.assign(newState, action.likedSamples);
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 
@@ -2563,7 +2628,7 @@ var unlikeSample = function unlikeSample(sampleLike) {
 /*!**************************************!*\
   !*** ./frontend/util/sample_util.js ***!
   \**************************************/
-/*! exports provided: fetchAllSamplePacks, fetchSamplePack, fetchSamples */
+/*! exports provided: fetchAllSamplePacks, fetchSamplePack, fetchSamples, fetchLikedSamples */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2571,6 +2636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllSamplePacks", function() { return fetchAllSamplePacks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSamplePack", function() { return fetchSamplePack; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSamples", function() { return fetchSamples; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikedSamples", function() { return fetchLikedSamples; });
 var fetchAllSamplePacks = function fetchAllSamplePacks() {
   return $.ajax({
     method: 'GET',
@@ -2587,6 +2653,12 @@ var fetchSamples = function fetchSamples(packId) {
   return $.ajax({
     method: 'GET',
     url: "api/sample_packs/".concat(packId, "/samples")
+  });
+};
+var fetchLikedSamples = function fetchLikedSamples() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/liked_samples'
   });
 };
 
