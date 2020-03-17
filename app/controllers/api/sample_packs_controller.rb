@@ -1,6 +1,7 @@
 class Api::SamplePacksController < ApplicationController
     def index
         @sample_packs = SamplePack.all
+        debugger
     end
 
     def show

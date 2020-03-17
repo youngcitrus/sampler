@@ -642,7 +642,7 @@ function (_React$Component) {
   _createClass(LikedSamples, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
+      // debugger
       this.props.requestLikedSamples();
     }
   }, {
@@ -693,7 +693,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities;
-  debugger;
+  // debugger
   return {
     userId: parseInt(Object.keys(entities.users)[0]),
     likedSamples: null,

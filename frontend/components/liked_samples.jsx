@@ -7,7 +7,7 @@ class LikedSamples extends React.Component{
     }
 
     componentDidMount(){
-        debugger
+        // debugger
         this.props.requestLikedSamples();
     }
 

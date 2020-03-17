@@ -23,5 +23,5 @@ export const fetchLikedSamples = () => {
     return $.ajax({
         method: 'GET',
         url: 'api/liked_samples'
-    })
+    });
 }
