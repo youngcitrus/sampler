@@ -17,7 +17,6 @@ class LikedSamples extends React.Component{
             return null;
 
         } else {
-            debugger;
             return (
                 <div className="liked-samples-container"> 
                     { this.props.likedSamples.map( sample => {

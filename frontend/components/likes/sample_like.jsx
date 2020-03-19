@@ -7,6 +7,7 @@ class SampleLike extends React.Component {
         this.sampleLike = { user_id: props.userId, sample_id: props.sample.id }
         this.state = { liked: props.sample.liked };
         this.handleClick = this.handleClick.bind(this);
+        debugger;
     }
 
     handleClick() {

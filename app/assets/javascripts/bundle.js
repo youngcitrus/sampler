@@ -652,7 +652,6 @@ function (_React$Component) {
       if (Object.keys(this.props.samplePacks).length <= 1 || !this.props.likedSamples) {
         return null;
       } else {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "liked-samples-container"
         }, this.props.likedSamples.map(function (sample) {
@@ -870,6 +869,7 @@ function (_React$Component) {
       liked: props.sample.liked
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    debugger;
     return _this;
   }
 
