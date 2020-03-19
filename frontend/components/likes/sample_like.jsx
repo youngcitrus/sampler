@@ -14,6 +14,8 @@ class SampleLike extends React.Component {
         if (this.state.liked){
             SampleLikeUtil.unlikeSample(this.sampleLike);
             this.setState({liked: false});
+            debugger;
+            if (this.props.page === "home") this.props.refresh();
         } else {
             SampleLikeUtil.likeSample(this.sampleLike);
             this.setState({liked: true});

@@ -617,9 +617,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -634,9 +634,13 @@ function (_React$Component) {
   _inherits(LikedSamples, _React$Component);
 
   function LikedSamples(props) {
+    var _this;
+
     _classCallCheck(this, LikedSamples);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(LikedSamples).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(LikedSamples).call(this, props));
+    _this.rerenderParentCallback = _this.rerenderParentCallback.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(LikedSamples, [{
@@ -645,9 +649,19 @@ function (_React$Component) {
       this.props.requestLikedSamples();
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.props.requestLikedSamples();
+    }
+  }, {
+    key: "rerenderParentCallback",
+    value: function rerenderParentCallback() {
+      this.forceUpdate();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       if (Object.keys(this.props.samplePacks).length <= 1 || !this.props.likedSamples) {
         return null;
@@ -658,8 +672,10 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_samples_sample__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: sample.id,
             sample: sample,
-            pack: _this.props.samplePacks[sample.pack_id],
-            userId: _this.props.userId
+            pack: _this2.props.samplePacks[sample.pack_id],
+            userId: _this2.props.userId,
+            refresh: _this2.rerenderParentCallback,
+            page: "home"
           });
         }, this));
       }
@@ -881,6 +897,8 @@ function (_React$Component) {
         this.setState({
           liked: false
         });
+        debugger;
+        if (this.props.page === "home") this.props.refresh();
       } else {
         _util_sample_like_util__WEBPACK_IMPORTED_MODULE_1__["likeSample"](this.sampleLike);
         this.setState({
@@ -1623,7 +1641,9 @@ function (_React$Component) {
         className: "heart-icon-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_sample_like__WEBPACK_IMPORTED_MODULE_1__["default"], {
         userId: this.props.userId,
-        sample: this.props.sample
+        sample: this.props.sample,
+        page: this.props.page,
+        refresh: this.props.refresh
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cart-icon-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

@@ -69,7 +69,7 @@ class Sample extends React.Component{
                             <div className='sample-bpm'>{this.props.sample.bpm}</div>
                         </div>
                         <div className='heart-icon-container'>
-                            <SampleLike userId={this.props.userId} sample={this.props.sample}/>
+                            <SampleLike userId={this.props.userId} sample={this.props.sample} page={this.props.page} refresh={this.props.refresh}/>
                         </div>
                         <div className='cart-icon-container'>
                             <div className='cart-icon'></div>
