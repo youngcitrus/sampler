@@ -47,11 +47,11 @@ class Sample extends React.Component{
             playButton.classList.remove('btn-pause');
             playButton.classList.add('btn-play');
         });
-
         wavesurfer.load(this.props.sample.fileUrl);
     }
 
     render(){
+        // debugger;
         return (
             <div>
                 <div className='sample-row'>

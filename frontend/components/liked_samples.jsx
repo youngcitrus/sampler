@@ -12,11 +12,12 @@ class LikedSamples extends React.Component{
 
     render() {
 
-        if (Object.keys(this.props.samplePacks).length < 1 || !this.props.likedSamples) {
+        if (Object.keys(this.props.samplePacks).length <= 1 || !this.props.likedSamples) {
 
             return null;
 
         } else {
+            debugger;
             return (
                 <div className="liked-samples-container"> 
                     { this.props.likedSamples.map( sample => {

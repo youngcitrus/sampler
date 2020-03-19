@@ -649,9 +649,10 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      if (Object.keys(this.props.samplePacks).length < 1 || !this.props.likedSamples) {
+      if (Object.keys(this.props.samplePacks).length <= 1 || !this.props.likedSamples) {
         return null;
       } else {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "liked-samples-container"
         }, this.props.likedSamples.map(function (sample) {
@@ -1589,6 +1590,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sample-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
