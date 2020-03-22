@@ -38,6 +38,7 @@ class SampleLike extends React.Component {
 
         return this.state.liked ? unlikeButton() : likeButton();
     }
+    
 }
 
 export default SampleLike;
