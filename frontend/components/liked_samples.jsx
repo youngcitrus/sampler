@@ -23,12 +23,26 @@ class LikedSamples extends React.Component{
 
         } else {
             return (
-                <div className="liked-samples-container"> 
-                    { this.props.likedSamples.map( sample => {
+                <div className="liked-samples-container">
+                    <div className='sample-headers'>
+                        <div className='sh-pack-filename'>
+                            <div className='sh-pack'>Pack</div>
+                            <div className='sh-filename'>Filename</div>
+                        </div>
+                        <div className='sh-info'>
+                            <div className='sh-key'>Key</div>
+                            <div className='sh-bpm'>BPM</div>
+                            <div className='sh-like'>Like</div>
+                            <div className='sh-cart'>Download</div>
+                        </div>
+                    </div>
+                    <div className="liked-samples"> 
+                        { this.props.likedSamples.map( sample => {
+                            
+                            return (<Sample key={sample.id} sample={sample} pack={this.props.samplePacks[sample.pack_id]} userId={this.props.userId} refresh={this.rerenderParentCallback} page="home"/>)
+                        }, this)}
                         
-                        return (<Sample key={sample.id} sample={sample} pack={this.props.samplePacks[sample.pack_id]} userId={this.props.userId} refresh={this.rerenderParentCallback} page="home"/>)
-                    }, this)}
-                    
+                    </div>
                 </div>
             )
         }

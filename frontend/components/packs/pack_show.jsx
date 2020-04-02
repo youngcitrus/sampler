@@ -86,7 +86,7 @@ class PackShow extends React.Component{
                                             <div className='sh-key'>Key</div>
                                             <div className='sh-bpm'>BPM</div>
                                             <div className='sh-like'>Like</div>
-                                            <div className='sh-cart'>Add to Cart</div>
+                                            <div className='sh-cart'>Download</div>
                                         </div>
                                     </div>
                                     <div className='samples-container'>
