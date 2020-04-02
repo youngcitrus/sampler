@@ -649,11 +649,6 @@ function (_React$Component) {
       this.props.requestLikedSamples();
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.props.requestLikedSamples();
-    }
-  }, {
     key: "rerenderParentCallback",
     value: function rerenderParentCallback() {
       this.forceUpdate();

@@ -11,10 +11,6 @@ class LikedSamples extends React.Component{
         this.props.requestLikedSamples();
     }
 
-    componentDidUpdate(){
-        this.props.requestLikedSamples();
-    }
-
     rerenderParentCallback(){
         this.forceUpdate();
     }
