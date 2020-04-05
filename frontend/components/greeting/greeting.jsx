@@ -4,7 +4,7 @@ import Footer from '../footer';
 import NavBarContainer from '../navbar_container';
 
 import DisplayPacksContainer from '../display_packs/display_packs_container';
-import LikedSamplesContainer from '../liked_samples_container';
+// import LikedSamplesContainer from '../liked_samples_container';
 
 const Greeting = ({ user, logoutUser}) => {
     const splash = () =>(
