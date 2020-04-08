@@ -11,7 +11,9 @@ const mapStateToProps = ({entities}) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    requestLikedSamples: () => dispatch(requestLikedSamples())
+    requestLikedSamples: () => dispatch(requestLikedSamples()),
+    redirectToRoot: () => ownProps.history.push('/'),
+    requestAllPacks: ()=>dispatch(requestAllPacks())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikedSamples);

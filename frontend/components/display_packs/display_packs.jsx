@@ -1,6 +1,7 @@
 import React from "react";
+import SinglePack from './single_pack';
+import FavoritesLink from './favorites_link';
 
-import SinglePack from './single_pack'
 class DisplayPacks extends React.Component{
     componentDidMount(){
         this.props.requestAllPacks();
@@ -12,6 +13,7 @@ class DisplayPacks extends React.Component{
             return (
                 <div className='display-packs-home-container'>
                     <div className='display-packs-home'>
+                        <FavoritesLink/>
                         {this.props.samplePacks.map( (pack, i)=> <SinglePack key={pack.id} pack={pack}/>)}
                     </div>
                 </div>

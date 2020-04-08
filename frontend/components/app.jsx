@@ -7,6 +7,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import GreetingContainer from "./greeting/greeting_container";
 import PackShowContainer from "./packs/pack_show_container";
 import NavBarContainer from "./navbar_container";
+import LikedSamplesContainer from './liked_samples_container';
 
 const App = () => {
 return (
@@ -16,6 +17,7 @@ return (
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <Route exact path="/" component={GreetingContainer}/>
+      <Route exact path ="/favorites" component={LikedSamplesContainer} />
       <Redirect to="/" />
     </Switch>
   </div>

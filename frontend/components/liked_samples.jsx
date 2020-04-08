@@ -8,6 +8,7 @@ class LikedSamples extends React.Component{
     }
 
     componentDidMount(){
+        this.props.requestAllPacks();
         this.props.requestLikedSamples();
     }
 
