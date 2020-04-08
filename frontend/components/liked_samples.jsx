@@ -38,6 +38,9 @@ class LikedSamples extends React.Component{
 
                             <div className='darken'></div>
                         </div>
+                        <div className='sample-preheader'>
+                            {this.props.likedSamples.length} Samples
+                        </div>
                         <div className='sample-headers'>
                             <div className='sh-pack-filename'>
                                 <div className='sh-pack'>Pack</div>
