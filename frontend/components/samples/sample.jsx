@@ -6,6 +6,7 @@ class Sample extends React.Component{
     
     constructor(props){
         super(props);
+        this.download = this.download.bind(this);
         this.waveform = React.createRef();
     }
 
@@ -50,6 +51,14 @@ class Sample extends React.Component{
         wavesurfer.load(this.props.sample.fileUrl);
     }
 
+    download(){
+        const link = document.createElement('a');
+        link.href = this.props.sample.fileUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
     render(){
         // debugger;
         return (
@@ -72,7 +81,7 @@ class Sample extends React.Component{
                             <SampleLike userId={this.props.userId} sample={this.props.sample} page={this.props.page} refresh={this.props.refresh}/>
                         </div>
                         <div className='cart-icon-container'>
-                            <div className='cart-icon'></div>
+                            <div className='cart-icon' onClick={this.download}></div>
                         </div>
                     </div>
                 </div>
