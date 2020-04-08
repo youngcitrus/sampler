@@ -6,6 +6,7 @@ class LikedSamples extends React.Component{
     constructor(props) {
         super(props);
         this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+        this.refresh = false;
     }
 
     componentDidMount(){
@@ -13,12 +14,12 @@ class LikedSamples extends React.Component{
         this.props.requestLikedSamples();
     }
 
+
     rerenderParentCallback(){
-        this.forceUpdate();
+        this.props.requestLikedSamples();
     }
 
     render() {
-
         if (Object.keys(this.props.samplePacks).length <= 1 || !this.props.likedSamples) {
 
             return null;
@@ -56,7 +57,7 @@ class LikedSamples extends React.Component{
                         <div className="liked-samples"> 
                             { this.props.likedSamples.map( sample => {
                                 
-                                return (<Sample key={sample.id} sample={sample} pack={this.props.samplePacks[sample.pack_id]} userId={this.props.userId} refresh={this.rerenderParentCallback} page="home"/>)
+                                return (<Sample key={sample.id} sample={sample} pack={this.props.samplePacks[sample.pack_id]} userId={this.props.userId} refresh={this.rerenderParentCallback} page="favorites"/>)
                             }, this)}
                             
                         </div>

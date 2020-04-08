@@ -12,10 +12,12 @@ class SampleLike extends React.Component {
 
     handleClick() {
         if (this.state.liked){
-            SampleLikeUtil.unlikeSample(this.sampleLike);
-            this.setState({liked: false});
-            // debugger;
-            // if (this.props.page === "home") this.props.refresh();
+            SampleLikeUtil.unlikeSample(this.sampleLike)
+                .then(()=>{
+                    debugger
+                    this.setState({liked: false});
+                    if (this.props.page === "favorites") this.props.refresh();
+                });
         } else {
             SampleLikeUtil.likeSample(this.sampleLike);
             this.setState({liked: true});
