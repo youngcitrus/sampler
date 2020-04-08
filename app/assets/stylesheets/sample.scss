@@ -106,6 +106,10 @@
     padding-left: 100px;
 }
 
+.fa-heart{
+    cursor: pointer;
+}
+
 .cart-icon-container{
     display: flex;
     flex-direction: column;
@@ -117,5 +121,6 @@
     background-size: cover;
     height: 20px;
     width: 20px;
+    cursor: pointer;
 }
 
