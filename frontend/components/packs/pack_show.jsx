@@ -13,7 +13,7 @@ class PackShow extends React.Component{
     componentDidMount(){
 
         this.props.requestPack(this.props.match.params.packId)
-            .fail( (error)=> this.props.history.push('/'));;
+            .fail( (error)=> this.props.history.push('/'));
         this.props.requestSamples(this.props.match.params.packId)
             .fail( (error)=> this.props.history.push('/'));
     }
