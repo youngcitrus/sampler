@@ -36,7 +36,7 @@ class PackShow extends React.Component{
             player.scrollIntoView({ behavior: 'smooth', block: 'center' });
             this.playing = true;
         } else {
-            // document.getElementById('demo-player').pause();
+            
             player.pause();
             this.playing = false;
         }
