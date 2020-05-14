@@ -10,3 +10,11 @@
 * Wavesurfer.js and HTML5 Audio for generating audio waveform players
 
 ## Features
+
+## Large Library of Samples
+![screenshot](https://sampler-pro.s3-us-west-1.amazonaws.com/Screenshots/sampler-screenshot-2.jpg)
+Samples are organized into sample packs, each with their own genre and style for any kind of project users may be interested in
+
+## User Authentication and Login
+
+## Likes
