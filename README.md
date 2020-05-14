@@ -31,15 +31,6 @@ export const fetchSamples = packId => {
     })
 };
 ```
-```
-componentDidMount(){
-
-        this.props.requestPack(this.props.match.params.packId)
-            .fail( (error)=> this.props.history.push('/'));
-        this.props.requestSamples(this.props.match.params.packId)
-            .fail( (error)=> this.props.history.push('/'));
-}
-```
 
 Each sample is rendered as a React component that displays a record in our databased linked to an audio file stored in AWS. React refs are used to create a reference to render our waveform audio player. Simple Javascript is used to handle our audio player logic.
 ```
@@ -124,3 +115,8 @@ handleClick() {
     }
 }
 ```
+
+## Future Features
+* Search by BPM, Key, Instrument
+* Create user collections/playlists
+* More content & sample packs
