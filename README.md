@@ -21,6 +21,26 @@ Samples are organized into sample packs, each with their own genre and style for
 
 ## Code Snippets
 
+Every sample belongs to a parent Sample Pack, which is displayed as a React component that fetches each of its samples from our database.
+
+```
+export const fetchSamples = packId => {
+    return $.ajax({
+        method: 'GET',
+        url: `api/sample_packs/${packId}/samples`
+    })
+};
+```
+```
+componentDidMount(){
+
+        this.props.requestPack(this.props.match.params.packId)
+            .fail( (error)=> this.props.history.push('/'));
+        this.props.requestSamples(this.props.match.params.packId)
+            .fail( (error)=> this.props.history.push('/'));
+}
+```
+
 Each sample is rendered as a React component that displays a record in our databased linked to an audio file stored in AWS. React refs are used to create a reference to render our waveform audio player. Simple Javascript is used to handle our audio player logic.
 ```
 constructor(props){
@@ -70,7 +90,6 @@ componentDidMount(){
     wavesurfer.load(this.props.sample.fileUrl);
 }
 ```
-
 
 Liking samples and sample packs are handled by AJAX requests which link users to samples by creating 'like' objects in the backend.
 ```
