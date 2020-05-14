@@ -18,3 +18,38 @@ Samples are organized into sample packs, each with their own genre and style for
 ## User Authentication and Login
 
 ## Likes
+
+## Code Snippets
+Liking samples and sample packs are handled by AJAX requests which link users to samples by creating 'like' objects in the backend.
+```
+export const likeSample = (sampleLike) => {
+    return $.ajax({
+        method: 'POST',
+        url: 'api/sample_likes',
+        data: { sample_like: sampleLike }
+    });
+};
+
+export const unlikeSample = (sampleLike) => {
+    return $.ajax({
+        method: 'DELETE',
+        url: 'api/sample_likes/',
+        data: { sample_like: sampleLike }
+    });
+}
+```
+These functions are invoked when clicking on a heart icon next to an individual sample.
+```
+    handleClick() {
+        if (this.state.liked){
+            SampleLikeUtil.unlikeSample(this.sampleLike)
+                .then(()=>{
+                    if (this.props.page === "favorites") this.props.refresh();
+                    this.setState({liked: false});
+                });
+        } else {
+            SampleLikeUtil.likeSample(this.sampleLike);
+            this.setState({liked: true});
+        }
+    }
+```
