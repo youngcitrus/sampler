@@ -1,24 +1,12 @@
-# README
+# Sampler
+[Sampler site](https://music-samplr.herokuapp.com)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+`Sampler` is an online e-commerce site where users can browse, stream, and download original audio samples created by independent musicians. The mission of this project is allow users and creators to use audio samples for their own creative projects (ie, music, film, and videos).
 
-Things you may want to cover:
+## Technology used:
+* React/Redux for frontend rendering
+* Ruby on Rails for backend MVC framework and API routing
+* PostgreSQL and AWS for database
+* Wavesurfer.js and HTML5 Audio for generating audio waveform players
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Features
