@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
         redirect_to new_session_url unless logged_in?
     end
 
-    # def require_logged_out
-    #     redirect_to user_url(current_user) if logged_in?
-    # end
-
     def login(user)
         @current_user = user
         session[:session_token] = user.reset_session_token!
@@ -30,7 +26,6 @@ class ApplicationController < ActionController::Base
     def logout
         current_user.reset_session_token!
         session[:session_token] = nil
-        # redirect_to new_session_url
     end
 
 end
